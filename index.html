@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+</head>
+
+<body>
+  <!-- splash 시작 -->
+  <div id="root">
+    <article>
+      <h1>
+        <img src="" alt="로고">
+      </h1>
+    </article>
+  </div>
+  <!-- // splash 끝 -->
+
+  <!-- nav 시작 -->
+  <nav>
+    <ul>
+      <li>
+        <img src="" alt="내비게이션 아이콘">
+        <p>Home</p>
+      </li>
+      <li>
+        <img src="" alt="내비게이션 아이콘">
+        <p>Chart</p>
+      </li>
+      <li>
+        <img src="" alt="내비게이션 아이콘">
+        <p>Play List</p>
+      </li>
+      <li>
+        <img src="" alt="내비게이션 아이콘">
+        <p>Search</p>
+      </li>
+    </ul>
+  </nav>
+  <!-- // nav 끝 -->
+
+  <!-- Home 시작 -->
+  <section>
+    <h2 class="sr-only">홈 화면</h2>
+    <aside>우리광고</aside>
+    <section class="cont-category">
+      <h3>최신곡</h3>
+      <div class="cont-album">
+        <img src="" alt="앨범커버">
+        <img src="" alt="재생하기">
+      </div>
+    </section>
+
+    <section class="cont-category">
+      <h3>오늘의 Best</h3>
+      <div class="cont-album">
+        <img src="" alt="앨범커버">
+        <img src="" alt="재생하기">
+      </div>
+    </section>
+
+    <section class="cont-category">
+      <h3>오늘의 선곡</h3>
+      <div class="cont-album">
+        <img src="" alt="앨범커버">
+        <img src="" alt="재생하기">
+      </div>
+    </section>
+  </section>
+  <!-- // Home 끝 -->
+
+  <!-- 차트 페이지 시작 -->
+  <section>
+    <h2 class="sr-only">차트화면</h2>
+    <ul>
+      <li>TOP 20</li>
+      <li>장르미정</li>
+      <li>장르미정</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>TOP 20</h3>
+    <ol>
+      <li>
+        <span>1</span>
+        <figure>
+          <img src="" alt="앨범 타이틀">
+          <figcaption>
+            <span>19th Floor</span>
+            <span>Bobby Richards</span>
+          </figcaption>
+        </figure>
+        <button type="button"><img src="" alt="재생버튼"></button>
+        <button type="button"><img src="" alt="추가버튼"></button>
+      </li>
+      <li>
+        <span>2</span>
+        <figure>
+          <img src="" alt="앨범 타이틀">
+          <figcaption>
+            <span>Sunny Travel</span>
+            <span>Nico Staf</span>
+          </figcaption>
+        </figure>
+        <button type="button"><img src="" alt="재생버튼"></button>
+        <button type="button"><img src="" alt="추가버튼"></button>
+      </li>
+      <li>
+        <span>3</span>
+        <figure>
+          <img src="" alt="앨범 타이틀">
+          <figcaption>
+            <span>Where We Wanna Go</span>
+            <span>Partrick Patrikias</span>
+          </figcaption>
+        </figure>
+        <button type="button"><img src="" alt="재생버튼"></button>
+        <button type="button"><img src="" alt="추가버튼"></button>
+      </li>
+      <li>
+        <span>4</span>
+        <figure>
+          <img src="" alt="앨범 타이틀">
+          <figcaption>
+            <span>All the Fixings</span>
+            <span>Zachariah HickMan</span>
+          </figcaption>
+        </figure>
+        <button type="button"><img src="" alt="재생버튼"></button>
+        <button type="button"><img src="" alt="추가버튼"></button>
+      </li>
+    </ol>
+  </section>
+  <!-- //차트 페이지 끝 -->
+
+  <!-- MY PLAYLIST 시작 -->
+  <section>
+    <h2>MY PLAYLIST</h2>
+    <ul>
+      <li>
+        <figure>
+          <img src="" alt="앨범 타이틀">
+          <figcaption>
+            <span>19th Floor</span>
+            <span>Bobby Richards</span>
+          </figcaption>
+        </figure>
+        <button type="button"><img src="" alt="삭제버튼"></button>
+      </li>
+      <li>
+        <figure>
+          <img src="" alt="앨범 타이틀">
+          <figcaption>
+            <span>19th Floor</span>
+            <span>Bobby Richards</span>
+          </figcaption>
+        </figure>
+        <button type="button"><img src="" alt="삭제버튼"></button>
+      </li>
+      <li>
+        <figure>
+          <img src="" alt="앨범 타이틀">
+          <figcaption>
+            <span>19th Floor</span>
+            <span>Bobby Richards</span>
+          </figcaption>
+        </figure>
+        <button type="button"><img src="" alt="삭제버튼"></button>
+      </li>
+    </ul>
+  </section>
+  <!-- //MY PLAYLIST 끝 -->
+
+  <!-- 재생 화면 시작 -->
+  <section>
+    <h2 class="sr-only">재생 화면</h2>
+    <button>
+      <img src="" alt="뒤로가기">
+    </button>
+    <figure>
+      <img src="" alt="앨범 타이틀">
+      <figcaption>
+        <span>19th Floor</span>
+        <span>Bobby Richards</span>
+      </figcaption>
+    </figure>
+    <div class="controller">
+      <button type="button"><img src="" alt="랜덤 재생버튼"></button>
+      <div>
+        <button type="button"><img src="" alt="이전곡 재생버튼"></button>
+        <!-- 재생버튼 클릭하면 정지버튼으로 변경 -->
+        <button type="button"><img src="" alt="재생버튼"></button>
+        <button type="button"><img src="" alt="다음곡 재생버튼"></button>
+      </div>
+      <button type="button"><img src="" alt="한곡 반복 재생버튼"></button>
+      <div class="progress-bar">
+        <div></div>
+        <span>1:43</span>
+        <span>3:16</span>
+      </div>
+    </div>
+  </section>
+  <!-- //재생 화면 끝 -->
+  <!-- search 화면 시작 -->
+  <section>
+    <h2 class="sr-only">검색 화면</h2>
+    <div>
+      <label for="" class="sr-only"></label>
+      <input type="text" placeholder="검색">
+      <button type="button"><img src="" alt="검색 버튼"></button>
+    </div>
+    <ul>
+      <li>
+        <figure>
+          <img src="" alt="앨범 타이틀">
+          <figcaption>
+            <span>19th Floor</span>
+            <span>Bobby Richards</span>
+          </figcaption>
+        </figure>
+        <button type="button"><img src="" alt="재생버튼"></button>
+        <button type="button"><img src="" alt="추가버튼"></button>
+      </li>
+      <li>
+        <figure>
+          <img src="" alt="앨범 타이틀">
+          <figcaption>
+            <span>19th Floor</span>
+            <span>Bobby Richards</span>
+          </figcaption>
+        </figure>
+        <button type="button"><img src="" alt="재생버튼"></button>
+        <button type="button"><img src="" alt="추가버튼"></button>
+      </li>
+    </ul>
+  </section>
+  <!-- // search 화면 끝 -->
+</body>
+
+</html>
