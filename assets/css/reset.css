@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-weight: 400;
+  --font: 'Noto Sans KR', sans-serif;
+  --font-500: 500;
+  --main-color: #04BFBF;
+  --sub-color: #FFFBE4;
+}
+
+html, body, div, span, h1, h2, h3, p, a, img, strong, ol, ul, li, fieldset, form, label, legend, article, aside, figure, figcaption, nav, section, audio {
+  margin: 0;
+  padding: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+.sr-only {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  font-size: 100%;
+	font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+input {
+  font-family: var(--font);
+  border: none;
+}
+
+input::placeholder {
+  font-family: var(--font);
+}
+
+input:focus {
+  outline: none;
+}
+
+img {
+  display: block;
+}
