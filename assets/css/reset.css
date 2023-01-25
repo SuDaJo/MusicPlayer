@@ -16,9 +16,12 @@
 html, body, div, span, h1, h2, h3, p, a, img, strong, ol, ul, li, fieldset, form, label, legend, article, aside, figure, figcaption, nav, section, audio {
   margin: 0;
   padding: 0;
-	font-size: 100%;
-	font: inherit;
+	font-family: var(--font);
 	vertical-align: baseline;
+}
+
+html {
+  font-size: 10px;
 }
 
 .sr-only {
@@ -45,6 +48,7 @@ h3 {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 a:visited {
