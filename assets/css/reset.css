@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
 
 /* Reset */
 * {
@@ -7,17 +7,42 @@
 
 :root {
   font-weight: 400;
-  --font: 'Noto Sans KR', sans-serif;
+  --font: "Noto Sans KR", sans-serif;
   --font-500: 500;
-  --main-color: #04BFBF;
-  --sub-color: #FFFBE4;
+  --font-700: 700;
+  --main-color: #04bfbf;
+  --sub-color: #fffbe4;
 }
 
-html, body, div, span, h1, h2, h3, p, a, img, strong, ol, ul, li, fieldset, form, label, legend, article, aside, figure, figcaption, nav, section, audio {
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+p,
+a,
+img,
+strong,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+article,
+aside,
+figure,
+figcaption,
+nav,
+section,
+audio {
   margin: 0;
   padding: 0;
-	font-family: var(--font);
-	vertical-align: baseline;
+  font-family: var(--font);
+  vertical-align: baseline;
 }
 
 html {
@@ -43,10 +68,11 @@ h1,
 h2,
 h3 {
   font-size: 100%;
-	font: inherit;
+  font: inherit;
 }
 
 a {
+  display: inline-block;
   text-decoration: none;
   color: black;
 }
@@ -59,6 +85,8 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
 }
 
 input {
