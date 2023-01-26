@@ -1,170 +1,131 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Music Player</title>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
-  </head>
 
-  <body>
-    <!-- splash 시작 -->
-    <!-- <div id="root">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Player</title>
+  <link rel="stylesheet" href="./assets/css/reset.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+
+<body>
+  <!-- splash 시작 -->
+  <!-- <div id="root">
     <main class="wrapper splash-wrapper">
         <h1 class="logo-wrapper">
           <img class="logo" src="./assets/image/logo-title.png" alt="로고">
         </h1>
     </main>
   </div> -->
-    <!-- // splash 끝 -->
+  <!-- // splash 끝 -->
 
-    <!-- Home 시작 -->
-    <main class="wrapper home-wrapper">
-      <section>
-        <h2 class="sr-only">홈 화면</h2>
-        <aside>우리광고</aside>
-        <section class="cont-category">
-          <h3 class="tit-category">최신곡</h3>
-          <div class="cont-album">
-            <a class="cont-album-link" href="#">
-              <img class="cover-album" src="./assets/image/album-img.png" alt="앨범커버" />
-            </a>
-            <a class="cont-album-link" href="#">
-              <img class="cover-album" src="./assets/image/album-img.png" alt="앨범커버" />
-            </a>
-            <a class="cont-album-link" href="#">
-              <img class="cover-album" src="./assets/image/album-img.png" alt="앨범커버" />
-            </a>
-            <a class="cont-album-link" href="#">
-              <img class="cover-album" src="./assets/image/album-img.png" alt="앨범커버" />
-            </a>
-            <a class="cont-album-link" href="#">
-              <img class="cover-album" src="./assets/image/album-img.png" alt="앨범커버" />
-            </a>
-            <a class="cont-album-link" href="#">
-              <img class="cover-album" src="./assets/image/album-img.png" alt="앨범커버" />
-            </a>
-          </div>
-        </section>
-
-        <section class="cont-category">
-          <h3 class="tit-category">오늘의 Best</h3>
-          <div class="cont-album">
-            <img src="./assets/image/album-img.png" alt="앨범커버" />
-            <img src="./assets/image/icon-play-white.svg" alt="재생하기" />
-          </div>
-        </section>
-
-        <section class="cont-category">
-          <h3 class="tit-category">오늘의 선곡</h3>
-          <div class="cont-album">
-            <img src="" alt="앨범커버" />
-            <img src="./assets/image/icon-play-white.svg" alt="재생하기" />
-          </div>
-        </section>
+  <!-- Home 시작 -->
+  <!-- <main class="wrapper home-wrapper">
+    <section>
+      <h2 class="sr-only">홈 화면</h2>
+      <aside>우리광고</aside>
+      <section class="cont-category">
+        <h3 class="tit-category">최신곡</h3>
+        <div class="cont-album">
+          <a class="cont-album-link" href="#">
+            <img class="cover-album" src="./assets/image/album-img.png" alt="앨범커버" />
+          </a>
+        </div>
       </section>
-    </main>
-    <!-- nav 시작 -->
-    <nav class="nav-bar">
-      <ul>
-        <li class="nav-list-item">
-          <a href="#">
-            <img src="./assets/image/icon-home.svg" alt="내비게이션 아이콘" />
-            <p>Home</p>
+
+      <section class="cont-category">
+        <h3 class="tit-category">오늘의 Best</h3>
+        <div class="cont-album">
+          <a class="cont-album-link" href="#">
+            <img class="cover-album" src="./assets/image/album-img.png" alt="앨범커버" />
           </a>
-        </li>
-        <li class="nav-list-item">
-          <a href="#">
-            <img src="./assets/image/icon-music.svg" alt="내비게이션 아이콘" />
-            <p>Chart</p>
+        </div>
+      </section>
+
+      <section class="cont-category">
+        <h3 class="tit-category">오늘의 선곡(추천)</h3>
+        <div class="cont-album">
+          <a class="cont-album-link" href="#">
+            <img class="cover-album" src="./assets/image/album-img.png" alt="앨범커버" />
           </a>
-        </li>
-        <li class="nav-list-item">
-          <a href="#">
-            <img src="./assets/image/icon-playList.svg" alt="내비게이션 아이콘" />
-            <p>Play List</p>
-          </a>
-        </li>
-        <li class="nav-list-item">
-          <a href="#"> 
-            <img src="./assets/image/icon-search.svg" alt="내비게이션 아이콘" />
-            <p>Search</p>
-          </a>
-        </li>
+        </div>
+      </section>
+    </section>
+  </main> -->
+
+  <!-- // Home 끝 -->
+
+  <!-- 차트 페이지 시작 -->
+  <main class="wrapper chart-wrapper">
+    <section>
+      <h2 class="sr-only">차트화면</h2>
+      <ul class="chart-header">
+        <li class="chart-header-item header-active"><a href="#">TOP 20</a></li>
+        <li class="chart-header-item"><a href="#">장르 미정</a></li>
+        <li class="chart-header-item"><a href="#">장르 미정</a></li>
       </ul>
-    </nav>
-    <!-- // nav 끝 -->
-    <!-- // Home 끝 -->
+    </section>
 
-    <!-- 차트 페이지 시작 -->
-    <!-- <section>
-    <h2 class="sr-only">차트화면</h2>
-    <ul>
-      <li>TOP 20</li>
-      <li>장르미정</li>
-      <li>장르미정</li>
-    </ul>
-  </section>
+    <section class="chart-main">
+      <h3 class="sr-only">TOP 20</h3>
+      <ol>
+        <li class="chart-list-item">
+          <span class="chart-top-rank">1</span>
+          <figure class="chart-album-info">
+            <img src="./assets/image/album-img.png" alt="앨범 타이틀">
+            <figcaption class="chart-item-info">
+              <span class="chart-item-title">19th Floor</span>
+              <span class="chart-item-artist">Bobby Richards</span>
+            </figcaption>
+          </figure>
+          <button class="chart-btn-play" type="button"><img src="./assets/image/icon-play.svg" alt="재생버튼"></button>
+          <button type="button"><img src="./assets/image/icon-plus.svg" alt="추가버튼"></button>
+        </li>
+        <li class="chart-list-item">
+          <span class="chart-top-rank">2</span>
+          <figure class="chart-album-info">
+            <img src="./assets/image/album-img.png" alt="앨범 타이틀">
+            <figcaption class="chart-item-info">
+              <span class="chart-item-title">Sunny Travel</span>
+              <span class="chart-item-artist">Nico Staf</span>
+            </figcaption>
+          </figure>
+          <button class="chart-btn-play" type="button"><img src="./assets/image/icon-play.svg" alt="재생버튼"></button>
+          <button type="button"><img src="./assets/image/icon-plus.svg" alt="추가버튼"></button>
+        </li>
+        <li class="chart-list-item">
+          <span class="chart-top-rank">3</span>
+          <figure class="chart-album-info">
+            <img src="./assets/image/album-img.png" alt="앨범 타이틀">
+            <figcaption class="chart-item-info">
+              <span class="chart-item-title">Where We Wanna Gofffffffffffffffffffffffffffffff</span>
+              <span class="chart-item-artist">Partrick Patrikias</span>
+            </figcaption>
+          </figure>
+          <button class="chart-btn-play" type="button"><img src="./assets/image/icon-play.svg" alt="재생버튼"></button>
+          <button type="button"><img src="./assets/image/icon-plus.svg" alt="추가버튼"></button>
+        </li>
+        <li class="chart-list-item">
+          <span class="chart-rank">4</span>
+          <figure class="chart-album-info">
+            <img src="./assets/image/album-img.png" alt="앨범 타이틀">
+            <figcaption class="chart-item-info">
+              <span class="chart-item-title">All the Fixings</span>
+              <span class="chart-item-artist">Zachariah HickMan</span>
+            </figcaption>
+          </figure>
+          <button class="chart-btn-play" type="button"><img src="./assets/image/icon-play.svg" alt="재생버튼"></button>
+          <button type="button"><img src="./assets/image/icon-plus.svg" alt="추가버튼"></button>
+        </li>
+      </ol>
+    </section>
+  </main>
+  <!-- //차트 페이지 끝 -->
 
-  <section>
-    <h3>TOP 20</h3>
-    <ol>
-      <li>
-        <span>1</span>
-        <figure>
-          <img src="" alt="앨범 타이틀">
-          <figcaption>
-            <span>19th Floor</span>
-            <span>Bobby Richards</span>
-          </figcaption>
-        </figure>
-        <button type="button"><img src="" alt="재생버튼"></button>
-        <button type="button"><img src="" alt="추가버튼"></button>
-      </li>
-      <li>
-        <span>2</span>
-        <figure>
-          <img src="" alt="앨범 타이틀">
-          <figcaption>
-            <span>Sunny Travel</span>
-            <span>Nico Staf</span>
-          </figcaption>
-        </figure>
-        <button type="button"><img src="" alt="재생버튼"></button>
-        <button type="button"><img src="" alt="추가버튼"></button>
-      </li>
-      <li>
-        <span>3</span>
-        <figure>
-          <img src="" alt="앨범 타이틀">
-          <figcaption>
-            <span>Where We Wanna Go</span>
-            <span>Partrick Patrikias</span>
-          </figcaption>
-        </figure>
-        <button type="button"><img src="" alt="재생버튼"></button>
-        <button type="button"><img src="" alt="추가버튼"></button>
-      </li>
-      <li>
-        <span>4</span>
-        <figure>
-          <img src="" alt="앨범 타이틀">
-          <figcaption>
-            <span>All the Fixings</span>
-            <span>Zachariah HickMan</span>
-          </figcaption>
-        </figure>
-        <button type="button"><img src="" alt="재생버튼"></button>
-        <button type="button"><img src="" alt="추가버튼"></button>
-      </li>
-    </ol>
-  </section> -->
-    <!-- //차트 페이지 끝 -->
-
-    <!-- MY PLAYLIST 시작 -->
-    <!-- <section>
+  <!-- MY PLAYLIST 시작 -->
+  <!-- <section>
     <h2>MY PLAYLIST</h2>
     <ul>
       <li>
@@ -199,10 +160,10 @@
       </li>
     </ul>
   </section> -->
-    <!-- //MY PLAYLIST 끝 -->
+  <!-- //MY PLAYLIST 끝 -->
 
-    <!-- 재생 화면 시작 -->
-    <!-- <section>
+  <!-- 재생 화면 시작 -->
+  <!-- <section>
     <h2 class="sr-only">재생 화면</h2>
     <button>
       <img src="" alt="뒤로가기">
@@ -218,8 +179,8 @@
       <button type="button"><img src="" alt="랜덤 재생버튼"></button>
       <div>
         <button type="button"><img src="" alt="이전곡 재생버튼"></button> -->
-    <!-- 재생버튼 클릭하면 정지버튼으로 변경 -->
-    <!-- <button type="button"><img src="" alt="재생버튼"></button>
+  <!-- 재생버튼 클릭하면 정지버튼으로 변경 -->
+  <!-- <button type="button"><img src="" alt="재생버튼"></button>
         <button type="button"><img src="" alt="다음곡 재생버튼"></button>
       </div>
       <button type="button"><img src="" alt="한곡 반복 재생버튼"></button>
@@ -230,10 +191,10 @@
       </div>
     </div>
   </section> -->
-    <!-- //재생 화면 끝 -->
+  <!-- //재생 화면 끝 -->
 
-    <!-- search 화면 시작 -->
-    <!-- <section>
+  <!-- search 화면 시작 -->
+  <!-- <section>
     <h2 class="sr-only">검색 화면</h2>
     <div>
       <label for="" class="sr-only"></label>
@@ -265,6 +226,38 @@
       </li>
     </ul>
   </section> -->
-    <!-- // search 화면 끝 -->
-  </body>
+  <!-- // search 화면 끝 -->
+
+  <!-- nav 시작 -->
+  <nav class="nav-bar">
+    <ul>
+      <li class="nav-list-item">
+        <a href="#">
+          <img src="./assets/image/icon-home.svg" alt="내비게이션 아이콘" />
+          <p>Home</p>
+        </a>
+      </li>
+      <li class="nav-list-item">
+        <a href="#">
+          <img src="./assets/image/icon-music.svg" alt="내비게이션 아이콘" />
+          <p>Chart</p>
+        </a>
+      </li>
+      <li class="nav-list-item">
+        <a href="#">
+          <img src="./assets/image/icon-playList.svg" alt="내비게이션 아이콘" />
+          <p>Play List</p>
+        </a>
+      </li>
+      <li class="nav-list-item">
+        <a href="#">
+          <img src="./assets/image/icon-search.svg" alt="내비게이션 아이콘" />
+          <p>Search</p>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- // nav 끝 -->
+</body>
+
 </html>
