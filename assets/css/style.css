@@ -31,12 +31,14 @@
   height: 0.5rem;
 }
 .home-wrapper::-webkit-scrollbar,
-.chart-main::-webkit-scrollbar {
+.chart-main::-webkit-scrollbar,
+.playlist-main::-webkit-scrollbar {
   width: 0.6rem;
 }
 .cont-album::-webkit-scrollbar-thumb,
 .home-wrapper::-webkit-scrollbar-thumb,
-.chart-main::-webkit-scrollbar-thumb {
+.chart-main::-webkit-scrollbar-thumb,
+.playlist-main::-webkit-scrollbar-thumb {
   border-radius: 3px;
   background-color: var(--main-color);
   background-clip: padding-box;
@@ -44,7 +46,8 @@
 }
 .cont-album::-webkit-scrollbar-track,
 .home-wrapper::-webkit-scrollbar-track,
-.chart-main::-webkit-scrollbar-track {
+.chart-main::-webkit-scrollbar-track,
+.playlist-main::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
@@ -102,7 +105,8 @@
 
 /* chart 페이지 시작 */
 
-.chart-wrapper {
+.chart-wrapper,
+.playlist-wrapper {
   height: calc(100vh - 7.8rem);
 }
 
@@ -138,11 +142,9 @@
   height: calc(100vh - 13.2rem);
 }
 
-.chart-list-item {
+.chart-list-item, .playlist-item {
   display: flex;
   align-items: center;
-  /* flex-shrink: 1; */
-  /* width: 100%; */
 }
 .chart-list-item + .chart-list-item {
   margin-top: 1rem;
@@ -158,7 +160,8 @@
   font-size: 1.4rem;
 }
 
-.chart-album-info {
+.chart-album-info,
+.playlist-info {
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -166,12 +169,16 @@
   gap: 1.6rem;
 }
 
-.chart-item-info {
+.chart-item-info,
+.playlist-item-info {
   display: flex;
   flex-direction: column;
+  max-width: 18rem;
 }
 
-.chart-item-title {
+.chart-item-title,
+.playlist-title,
+.music-title {
   font-size: 1.4rem;
   font-weight: var(--font-500);
   display: block;
@@ -180,7 +187,9 @@
   text-overflow: ellipsis;
 }
 
-.chart-item-artist {
+.chart-item-artist,
+.playlist-artist,
+.music-artist {
   font-size: 1rem;
   color: #828282;
   white-space: nowrap;
@@ -191,11 +200,106 @@
 .chart-btn-play {
   width: 2.2rem;
   margin-right: 0.8rem;
+  flex-shrink: 0;
 }
 
 .chart-btn-play img {
   width: 100%;
 }
+/* chart 페이지 끝 */
+
+/* MY PLAYLIST 시작 */
+.tit-playlist {
+  background-color: var(--main-color);
+  color: #FFFBE4;
+  font-size: 1.4rem;
+  font-weight: var(--font-700);
+  text-align: center;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+}
+
+.playlist-main {
+  padding: 2rem;
+  overflow-y: auto;
+  height: calc(100vh - 13.2rem);
+}
+
+.playlist-item {
+  border-bottom: 1px solid #D9D9D9;
+  padding-bottom: 1.2rem;
+}
+
+.playlist-item + .playlist-item {
+  margin-top: 1.2rem;
+}
+
+.playlist-info {
+  margin-left: 0;
+}
+/* MY PLAYLIST 끝 */
+
+/*  재생화면 시작 */
+.play-control-wrap {
+  padding: 2rem;
+  height: calc(100vh - 9.2rem)
+}
+
+.play-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem;
+  width: 100%;
+  height: 100%;
+}
+
+.play-control figure {
+  width: 100%;
+}
+
+.album-title-img{
+  width: 100%;
+  border-radius: 1.5rem;
+  object-fit: cover;
+  margin: 2rem auto 2.6rem;
+}
+
+.play-control-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+/*  재생화면 끝 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* nav시작 */
 
