@@ -7,7 +7,12 @@
 
 /* splash 시작 */
 .splash-wrapper {
-  background: linear-gradient(180deg, #faf9f4 0%, rgba(255, 251, 228, 0.65) 25%, var(--main-color) 100%);
+  background: linear-gradient(
+    180deg,
+    #faf9f4 0%,
+    rgba(255, 251, 228, 0.65) 25%,
+    var(--main-color) 100%
+  );
 }
 
 .logo-wrapper {
@@ -142,7 +147,8 @@
   height: calc(100vh - 13.2rem);
 }
 
-.chart-list-item, .playlist-item {
+.chart-list-item,
+.playlist-item {
   display: flex;
   align-items: center;
 }
@@ -211,7 +217,7 @@
 /* MY PLAYLIST 시작 */
 .tit-playlist {
   background-color: var(--main-color);
-  color: #FFFBE4;
+  color: #fffbe4;
   font-size: 1.4rem;
   font-weight: var(--font-700);
   text-align: center;
@@ -227,7 +233,7 @@
 }
 
 .playlist-item {
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid #d9d9d9;
   padding-bottom: 1.2rem;
 }
 
@@ -243,7 +249,7 @@
 /*  재생화면 시작 */
 .play-control-wrap {
   padding: 2rem;
-  height: calc(100vh - 9.2rem)
+  height: calc(100vh - 9.2rem);
 }
 
 .play-control {
@@ -260,46 +266,91 @@
   width: 100%;
 }
 
-.album-title-img{
+.play-control .album-title-img {
   width: 100%;
   border-radius: 1.5rem;
   object-fit: cover;
   margin: 2rem auto 2.6rem;
 }
 
-.play-control-info {
+.play-control .play-control-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
 }
 
+.play-control .controller {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 2.6rem;
+}
 
+.play-control .controller-btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controller-btn-wrapper .controller-btns-play {
+  display: flex;
+  align-items: center;
+  gap: 2.6rem;
+}
+
+input[type="range"] {
+  overflow: hidden;
+  width: 100%;
+  height: 0.5rem;
+  appearance: none;
+  margin: 1.6rem 0 0.8rem;
+  background: transparent;
+  border-radius: 0.5rem;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  background-color: #d9d9d9;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 0;
+  height: 1rem;
+  background: var(--main-color);
+  box-shadow: 1px 1px 7px var(--main-color);
+  cursor: pointer;
+  box-shadow: -100vw 0 0 100vw var(--main-color);
+  border-radius: 50%;
+}
+
+.progress-bar-time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #d9d9d9;
+}
+
+.progress-bar-time .progress-time {
+  color: var(--main-color);
+}
 /*  재생화면 끝 */
 
+/* search 화면 시작 */
+.search-input-bar {
+  background-color: #d9d9d9;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* search 화면 끝 */
 
 /* nav시작 */
 
