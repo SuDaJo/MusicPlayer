@@ -7,12 +7,7 @@
 
 /* splash 시작 */
 .splash-wrapper {
-  background: linear-gradient(
-    180deg,
-    #faf9f4 0%,
-    rgba(255, 251, 228, 0.65) 25%,
-    var(--main-color) 100%
-  );
+  background: linear-gradient(180deg, #faf9f4 0%, rgba(255, 251, 228, 0.65) 25%, var(--main-color) 100%);
 }
 
 .logo-wrapper {
@@ -37,13 +32,15 @@
 }
 .home-wrapper::-webkit-scrollbar,
 .chart-main::-webkit-scrollbar,
-.playlist-main::-webkit-scrollbar {
+.playlist-main::-webkit-scrollbar,
+.searchlist-main::-webkit-scrollbar {
   width: 0.6rem;
 }
 .cont-album::-webkit-scrollbar-thumb,
 .home-wrapper::-webkit-scrollbar-thumb,
 .chart-main::-webkit-scrollbar-thumb,
-.playlist-main::-webkit-scrollbar-thumb {
+.playlist-main::-webkit-scrollbar-thumb,
+.searchlist-main::-webkit-scrollbar-thumb {
   border-radius: 3px;
   background-color: var(--main-color);
   background-clip: padding-box;
@@ -52,7 +49,8 @@
 .cont-album::-webkit-scrollbar-track,
 .home-wrapper::-webkit-scrollbar-track,
 .chart-main::-webkit-scrollbar-track,
-.playlist-main::-webkit-scrollbar-track {
+.playlist-main::-webkit-scrollbar-track,
+.searchlist-main::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
@@ -345,10 +343,38 @@ input[type="range"]::-webkit-slider-thumb {
 /*  재생화면 끝 */
 
 /* search 화면 시작 */
-.search-input-bar {
-  background-color: #d9d9d9;
+
+.search-wrapper {
+  padding-top: 2rem;
 }
 
+.search-input-bar {
+  background-color: #f2f2f2;
+  border-radius: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 1.6rem;
+  margin: 0 2rem 1rem;
+}
+
+.search-input-bar input {
+  font-size: 1.4rem;
+}
+
+.search-btn {
+  width: 2rem;
+  height: 2rem;
+}
+
+.search-btn img {
+  width: 100%;
+}
+
+.searchlist-main {
+  padding: 2rem;
+  overflow-y: auto;
+  height: calc(100vh - 14.4rem);
+}
 
 /* search 화면 끝 */
 

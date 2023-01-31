@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Music Player</title>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
-  </head>
 
-  <body>
-    <!-- splash 시작 -->
-    <!-- <div id="root">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Player</title>
+  <link rel="stylesheet" href="./assets/css/reset.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+
+<body>
+  <!-- splash 시작 -->
+  <!-- <div id="root">
     <main class="wrapper splash-wrapper">
         <h1 class="logo-wrapper">
           <img class="logo" src="./assets/image/logo-title.png" alt="로고">
         </h1>
     </main>
   </div> -->
-    <!-- // splash 끝 -->
+  <!-- // splash 끝 -->
 
-    <!-- Home 시작 -->
-    <!-- <main class="wrapper home-wrapper">
+  <!-- Home 시작 -->
+  <!-- <main class="wrapper home-wrapper">
     <section>
       <h2 class="sr-only">홈 화면</h2>
       <aside>우리광고</aside>
@@ -54,10 +55,10 @@
     </section>
   </main> -->
 
-    <!-- // Home 끝 -->
+  <!-- // Home 끝 -->
 
-    <!-- 차트 페이지 시작 -->
-    <!-- <main class="wrapper chart-wrapper">
+  <!-- 차트 페이지 시작 -->
+  <!-- <main class="wrapper chart-wrapper">
     <section>
       <h2 class="sr-only">차트화면</h2>
       <ul class="chart-header">
@@ -121,10 +122,10 @@
       </ol>
     </section>
   </main> -->
-    <!-- //차트 페이지 끝 -->
+  <!-- //차트 페이지 끝 -->
 
-    <!-- MY PLAYLIST 시작 -->
-    <!-- <main class="wrapper playlist-wrapper">
+  <!-- MY PLAYLIST 시작 -->
+  <!-- <main class="wrapper playlist-wrapper">
     <section>
       <h2 class="tit-playlist">MY PLAYLIST</h2>
       <section class="playlist-main">
@@ -146,10 +147,10 @@
       </section>
     </section>
   </main> -->
-    <!-- //MY PLAYLIST 끝 -->
+  <!-- //MY PLAYLIST 끝 -->
 
-    <!-- 재생 화면 시작 -->
-    <!-- <main class="wrapper">
+  <!-- 재생 화면 시작 -->
+  <!-- <main class="wrapper">
       <section class="play-control-wrap">
         <h2 class="sr-only">재생 화면</h2>
         <button>
@@ -163,8 +164,8 @@
               alt="앨범 타이틀"
             />
             <figcaption class="play-control-info"> -->
-    <!-- text slide 적용해야됨 -->
-    <!-- <span class="music-title">19th Floor</span>
+  <!-- text slide 적용해야됨 -->
+  <!-- <span class="music-title">19th Floor</span>
               <span class="music-artist">Bobby Richards</span>
             </figcaption>
           </figure>
@@ -180,8 +181,8 @@
                     alt="이전곡 재생버튼"
                   />
                 </button> -->
-    <!-- 재생버튼 클릭하면 정지버튼으로 변경 -->
-    <!-- <button type="button">
+  <!-- 재생버튼 클릭하면 정지버튼으로 변경 -->
+  <!-- <button type="button">
                   <img src="./assets/image/icon-play.svg" alt="재생버튼" />
                 </button>
                 <button type="button">
@@ -207,81 +208,71 @@
         </div>
       </section>
     </main> -->
-    <!-- //재생 화면 끝 -->
+  <!-- //재생 화면 끝 -->
 
-    <!-- search 화면 시작 -->
+  <!-- search 화면 시작 -->
 
-    <main class="wrapper">
-      <section>
-        <h2 class="sr-only">검색 화면</h2>
-        <fieldset class="search-input-bar">
-          <legend class="sr-only">검색</legend>
-          <label for="" class="sr-only"></label>
-          <input type="text" placeholder="검색" />
-          <button type="button">
-            <img src="./assets/image/icon-search.svg" alt="검색 버튼" />
-          </button>
-        </fieldset>
+  <main class="wrapper search-wrapper">
+    <section>
+      <h2 class="sr-only">검색 화면</h2>
+      <fieldset class="search-input-bar">
+        <legend class="sr-only">검색</legend>
+        <label for="searchInpValue" class="sr-only"></label>
+        <input id="searchInpValue" type="text" placeholder="검색" />
+        <button class="search-btn" type="button">
+          <img src="./assets/image/icon-search.svg" alt="검색 버튼" />
+        </button>
+      </fieldset>
+      <section class="searchlist-main">
         <ul>
-          <li>
-            <figure>
-              <img src="" alt="앨범 타이틀" />
-              <figcaption>
-                <span>19th Floor</span>
-                <span>Bobby Richards</span>
+          <li class="playlist-item">
+            <figure class="playlist-info">
+              <img src="./assets/image/album-img.png" alt="앨범 타이틀">
+              <figcaption class="playlist-item-info">
+                <span class="playlist-title">19th Floor</span>
+                <span class="playlist-artist">Bobby Richards</span>
               </figcaption>
             </figure>
-            <button type="button"><img src="" alt="재생버튼" /></button>
-            <button type="button"><img src="" alt="추가버튼" /></button>
-          </li>
-          <li>
-            <figure>
-              <img src="" alt="앨범 타이틀" />
-              <figcaption>
-                <span>19th Floor</span>
-                <span>Bobby Richards</span>
-              </figcaption>
-            </figure>
-            <button type="button"><img src="" alt="재생버튼" /></button>
-            <button type="button"><img src="" alt="추가버튼" /></button>
+            <button class="chart-btn-play" type="button"><img src="./assets/image/icon-play.svg" alt="재생버튼"></button>
+            <button type="button"><img src="./assets/image/icon-plus.svg" alt="추가버튼"></button>
+            </button>
           </li>
         </ul>
       </section>
-    </main>
-    <!-- // search 화면 끝 -->
+    </section>
+  </main>
+  <!-- // search 화면 끝 -->
 
-    <!-- nav 시작 -->
-    <nav class="nav-bar">
-      <ul>
-        <li class="nav-list-item">
-          <a href="#">
-            <img src="./assets/image/icon-home.svg" alt="내비게이션 아이콘" />
-            <p>Home</p>
-          </a>
-        </li>
-        <li class="nav-list-item">
-          <a href="#">
-            <img src="./assets/image/icon-music.svg" alt="내비게이션 아이콘" />
-            <p>Chart</p>
-          </a>
-        </li>
-        <li class="nav-list-item">
-          <a href="#">
-            <img
-              src="./assets/image/icon-playList.svg"
-              alt="내비게이션 아이콘"
-            />
-            <p>Play List</p>
-          </a>
-        </li>
-        <li class="nav-list-item">
-          <a href="#">
-            <img src="./assets/image/icon-search.svg" alt="내비게이션 아이콘" />
-            <p>Search</p>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <!-- // nav 끝 -->
-  </body>
+  <!-- nav 시작 -->
+  <nav class="nav-bar">
+    <ul>
+      <li class="nav-list-item">
+        <a href="#">
+          <img src="./assets/image/icon-home.svg" alt="내비게이션 아이콘" />
+          <p>Home</p>
+        </a>
+      </li>
+      <li class="nav-list-item">
+        <a href="#">
+          <img src="./assets/image/icon-music.svg" alt="내비게이션 아이콘" />
+          <p>Chart</p>
+        </a>
+      </li>
+      <li class="nav-list-item">
+        <a href="#">
+          <img src="./assets/image/icon-playList.svg" alt="내비게이션 아이콘" />
+          <p>Play List</p>
+        </a>
+      </li>
+      <li class="nav-list-item">
+        <a href="#">
+          <img src="./assets/image/icon-search.svg" alt="내비게이션 아이콘" />
+          <p>Search</p>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- // nav 끝 -->
+</body>
+
 </html>

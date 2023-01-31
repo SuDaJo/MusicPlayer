@@ -93,6 +93,7 @@ button {
 input {
   font-family: var(--font);
   border: none;
+  background: transparent;
 }
 
 input::placeholder {
