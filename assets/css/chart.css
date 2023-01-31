@@ -1,0 +1,102 @@
+.chart-wrapper,
+.playlist-wrapper {
+  height: calc(100vh - 7.8rem);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  background-color: azure;
+  font-size: 1.6rem;
+}
+
+.chart-header-item {
+  flex-basis: 100%;
+  text-align: center;
+}
+
+.header-active {
+  border-bottom: 2.5px solid #007d85;
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.chart-header-item a {
+  padding: 1.5rem 0;
+  width: 100%;
+}
+
+.chart-main {
+  padding: 2.8rem;
+  overflow-y: auto;
+  height: calc(100vh - 13.2rem);
+}
+
+.chart-list-item,
+.playlist-item {
+  display: flex;
+  align-items: center;
+}
+.chart-list-item + .chart-list-item {
+  margin-top: 1rem;
+}
+
+.chart-top-rank {
+  font-size: 1.4rem;
+  color: var(--main-color);
+  font-weight: var(--font-700);
+}
+
+.chart-rank {
+  font-size: 1.4rem;
+}
+
+.chart-album-info,
+.playlist-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 1.6rem;
+  gap: 1.6rem;
+}
+
+.chart-item-info,
+.playlist-item-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 18rem;
+}
+
+.chart-item-title,
+.playlist-title,
+.music-title {
+  font-size: 1.4rem;
+  font-weight: var(--font-500);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart-item-artist,
+.playlist-artist,
+.music-artist {
+  font-size: 1rem;
+  color: #828282;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart-btn-play {
+  width: 2.2rem;
+  margin-right: 0.8rem;
+  flex-shrink: 0;
+}
+
+.chart-btn-play img {
+  width: 100%;
+}

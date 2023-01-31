@@ -1,0 +1,31 @@
+.search-wrapper {
+  padding-top: 2rem;
+}
+
+.search-input-bar {
+  background-color: #f2f2f2;
+  border-radius: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 1.6rem;
+  margin: 0 2rem 1rem;
+}
+
+.search-input-bar input {
+  font-size: 1.4rem;
+}
+
+.search-btn {
+  width: 2rem;
+  height: 2rem;
+}
+
+.search-btn img {
+  width: 100%;
+}
+
+.searchlist-main {
+  padding: 2rem;
+  overflow-y: auto;
+  height: calc(100vh - 14.4rem);
+}
