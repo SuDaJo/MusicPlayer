@@ -1,0 +1,26 @@
+{
+  "name": "musicplayer",
+  "version": "1.0.0",
+  "description": ":sparkles: Feat: 새로운 기능 추가<br />\r :label: MarkUp: 마크업<br />\r :lipstick: Design : CSS, 사용자 UI 디자인 변경<br />\r :memo: Docs : 문서 수정<br />\r :art: Style : 코드포맷, 세미콜론, 개행, 코드 구조, 형태<br />\r :thinking: Test : 테스트 코드<br />\r :recycle: Refactor: 코드 리팩토링<br />\r :bug: Fix : 버그 및 오류 수정<br />\r :fire: Remove : 불필요한 파일 삭제<br />\r :hammer: Chore : 빌드 업무, 패키지매니저, 폴더트리, 세팅 수정<br />\r :bulb: Comment : 필요한 주석 추가 및 변경<br />",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuDaJo/MusicPlayer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SuDaJo/MusicPlayer/issues"
+  },
+  "homepage": "https://github.com/SuDaJo/MusicPlayer#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
