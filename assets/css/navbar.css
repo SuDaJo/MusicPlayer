@@ -1,0 +1,33 @@
+.nav-bar {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: 40rem;
+  width: 40rem;
+  background-color: #fff;
+  box-shadow: 0px -1px 7px rgba(0, 0, 0, 0.09);
+}
+
+.nav-bar ul {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-around;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: var(--font-500);
+  padding: 1.5rem 0;
+}
+
+.nav-bar ul li {
+  flex-basis: 100%;
+}
+
+.nav-list-item a {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}

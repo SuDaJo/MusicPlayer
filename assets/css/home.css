@@ -1,0 +1,46 @@
+.home-wrapper {
+  padding: 2rem;
+  overflow-y: auto;
+  height: calc(100vh - 7.8rem);
+}
+
+.wrapper aside {
+  background-color: antiquewhite;
+  height: 14rem;
+  margin-bottom: 2.2rem;
+}
+
+.cont-category + .cont-category {
+  margin-top: 2.2rem;
+}
+
+.tit-category {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.cont-album {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.cont-album-link {
+  position: relative;
+}
+
+.cont-album-link::after {
+  content: "";
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: url(../image/icon-play-white.svg) no-repeat center / cover;
+  filter: drop-shadow(0px 0px 2px rgba(53, 53, 53, 0.5));
+}
+
+.cover-album {
+  width: 12rem;
+}
