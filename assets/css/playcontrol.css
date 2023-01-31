@@ -1,0 +1,95 @@
+.play-control-wrap {
+  padding: 2rem;
+  height: calc(100vh - 9.2rem);
+}
+
+.play-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem;
+  width: 100%;
+  height: 100%;
+}
+
+.play-control figure {
+  width: 100%;
+}
+
+.play-control .album-title-img {
+  width: 100%;
+  border-radius: 1.5rem;
+  object-fit: cover;
+  margin: 2rem auto 2.6rem;
+}
+
+.play-control .play-control-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.play-control .controller {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 2.6rem;
+}
+
+.play-control .controller-btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controller-btn-wrapper .controller-btns-play {
+  display: flex;
+  align-items: center;
+  gap: 2.6rem;
+}
+
+input[type="range"] {
+  overflow: hidden;
+  width: 100%;
+  height: 0.5rem;
+  appearance: none;
+  margin: 1.6rem 0 0.8rem;
+  background: transparent;
+  border-radius: 0.5rem;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  background-color: #d9d9d9;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 0;
+  height: 1rem;
+  background: var(--main-color);
+  box-shadow: 1px 1px 7px var(--main-color);
+  cursor: pointer;
+  box-shadow: -100vw 0 0 100vw var(--main-color);
+  border-radius: 50%;
+}
+
+.progress-bar-time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #d9d9d9;
+}
+
+.progress-bar-time .progress-time {
+  color: var(--main-color);
+}
