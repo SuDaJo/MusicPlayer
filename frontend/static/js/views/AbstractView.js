@@ -1,6 +1,6 @@
-export default class {
-  constructor() {
-
+export default class AbstractView {
+  constructor($target) {
+    this.$target = $target;
   }
 
   setTitle(title) {
