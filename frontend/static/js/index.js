@@ -11,6 +11,8 @@ const navigateTo = url => {
 }
 
 const router = async () => {
+  const $root = document.querySelector('#root');
+
   const routes = [
     { path: "/", view: Home },
     { path: "/chart", view: Chart },
@@ -36,9 +38,11 @@ const router = async () => {
     }
   }
 
-  const viewHtml = new match.route.view();
+  const viewHtml = new match.route.view($root);
 
-  document.querySelector("#root").innerHTML = await viewHtml.getHtml();
+  await viewHtml.getHtml();
+
+  // $root.innerHTML = await viewHtml.getHtml();
 
 }
 
