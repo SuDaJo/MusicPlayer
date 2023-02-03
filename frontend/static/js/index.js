@@ -5,14 +5,12 @@ import Search from "./views/Search.js";
 import PlayControl from "./views/PlayControl.js";
 import NotFound from "./views/NotFound.js";
 
-const navigateTo = url => {
+const navigateTo = (url) => {
   history.pushState(null, null, url);
   router();
-}
+};
 
 const router = async () => {
-  const $root = document.querySelector('#root');
-
   const routes = [
     { path: "/", view: Home },
     { path: "/chart", view: Chart },
@@ -22,34 +20,33 @@ const router = async () => {
     { path: "/notfound", view: NotFound },
   ];
 
-  const potentialMatches = routes.map(route => {
+  const potentialMatches = routes.map((route) => {
     return {
       route: route,
-      isMatch: location.pathname === route.path
+      isMatch: location.pathname === route.path,
     };
   });
 
-  let match = potentialMatches.find(potentialMatch => potentialMatch.isMatch);
+  let match = potentialMatches.find((potentialMatch) => potentialMatch.isMatch);
 
   if (!match) {
     match = {
       route: routes[routes.length - 1],
-      isMatch: true
-    }
+      isMatch: true,
+    };
   }
 
+  const $root = document.querySelector("#root");
   const viewHtml = new match.route.view($root);
 
   await viewHtml.getHtml();
 
   // $root.innerHTML = await viewHtml.getHtml();
-
-}
+};
 
 window.addEventListener("popstate", router);
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const $navBar = document.querySelector(".nav-bar");
   const $home = $navBar.querySelector("#goHome");
   const $chart = $navBar.querySelector("#goChart");
@@ -58,12 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const urlList = [$home, $chart, $playList, $search];
 
-  urlList.forEach(url => {
+  urlList.forEach((url) => {
     url.addEventListener("click", (e) => {
       e.preventDefault();
       navigateTo(e.currentTarget.href);
-    })
-  })
+    });
+  });
 
   router();
-})
+});
