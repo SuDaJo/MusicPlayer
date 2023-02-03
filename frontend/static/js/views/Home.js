@@ -7,6 +7,14 @@ export default class Home extends AbstractView {
   }
 
   async getHtml() {
+    const $wrapper = this.$target.querySelector(".wrapper");
+
+    if (!$wrapper) {
+      this.createHtml();
+    }
+  }
+
+  createHtml() {
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper");
     this.$target.appendChild(wrapper);
@@ -24,40 +32,40 @@ export default class Home extends AbstractView {
     // advertise.classList.add("");
     contCategory.classList.add("cont-category");
     homeWrapper.append(homeTitle, advertise, contCategory);
-
-    // return `
-    //   <main class="wrapper">
-    //   <section class="home-wrapper">
-    //     <h2 class="sr-only">홈 화면</h2>
-    //     <aside>우리광고</aside>
-    //     <section class="cont-category">
-    //       <h3 class="tit-category">최신곡</h3>
-    //       <div class="cont-album">
-    //         <a class="cont-album-link" href="#">
-    //           <img class="cover-album" src="/static/image/album-img.png" alt="앨범커버" />
-    //         </a>
-    //       </div>
-    //     </section>
-
-    //     <section class="cont-category">
-    //       <h3 class="tit-category">오늘의 Best</h3>
-    //       <div class="cont-album">
-    //         <a class="cont-album-link" href="#">
-    //           <img class="cover-album" src="/static/image/album-img.png" alt="앨범커버" />
-    //         </a>
-    //       </div>
-    //     </section>
-
-    //     <section class="cont-category">
-    //       <h3 class="tit-category">오늘의 선곡(추천)</h3>
-    //       <div class="cont-album">
-    //         <a class="cont-album-link" href="#">
-    //           <img class="cover-album" src="/static/image/album-img.png" alt="앨범커버" />
-    //         </a>
-    //       </div>
-    //     </section>
-    //   </section>
-    // </main>
-    // `;
   }
 }
+
+// return `
+//   <main class="wrapper">
+//   <section class="home-wrapper">
+//     <h2 class="sr-only">홈 화면</h2>
+//     <aside>우리광고</aside>
+//     <section class="cont-category">
+//       <h3 class="tit-category">최신곡</h3>
+//       <div class="cont-album">
+//         <a class="cont-album-link" href="#">
+//           <img class="cover-album" src="/static/image/album-img.png" alt="앨범커버" />
+//         </a>
+//       </div>
+//     </section>
+
+//     <section class="cont-category">
+//       <h3 class="tit-category">오늘의 Best</h3>
+//       <div class="cont-album">
+//         <a class="cont-album-link" href="#">
+//           <img class="cover-album" src="/static/image/album-img.png" alt="앨범커버" />
+//         </a>
+//       </div>
+//     </section>
+
+//     <section class="cont-category">
+//       <h3 class="tit-category">오늘의 선곡(추천)</h3>
+//       <div class="cont-album">
+//         <a class="cont-album-link" href="#">
+//           <img class="cover-album" src="/static/image/album-img.png" alt="앨범커버" />
+//         </a>
+//       </div>
+//     </section>
+//   </section>
+// </main>
+// `;
