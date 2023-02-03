@@ -7,9 +7,10 @@ export default class Home extends AbstractView {
   }
 
   async getHtml() {
-    const $wrapper = this.$target.querySelector(".wrapper");
+    this.$target.classList.add("domainHome");
+    const $wrapper = document.querySelector(".wrapper");
 
-    if (!$wrapper) {
+    if (!$wrapper && this.$target.classList.contains("domainHome")) {
       this.createHtml();
     }
   }
