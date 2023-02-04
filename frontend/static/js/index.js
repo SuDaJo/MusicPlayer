@@ -58,7 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
   urlList.forEach((url) => {
     url.addEventListener("click", (e) => {
       e.preventDefault();
-      navigateTo(e.currentTarget.href);
+      if (window.location.href !== e.currentTarget.href) {
+        navigateTo(e.currentTarget.href);
+      }
     });
   });
 
