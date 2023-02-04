@@ -7,12 +7,11 @@ export default class AbstractView {
     document.title = title;
   }
 
-  removeClass() {
-    this.$target.classList.remove("domainHome", "domainChart", "domainMyPlayList", "domainSearch");
-  }
+  // removeClass() {
+  //   this.$target.classList.remove("domainHome", "domainChart", "domainMyPlayList", "domainSearch");
+  // }
 
   async getHtml() {
-    this.removeClass();
     return "";
   }
 }
