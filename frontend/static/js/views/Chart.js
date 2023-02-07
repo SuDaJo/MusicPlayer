@@ -1,5 +1,4 @@
 import AbstractView from "./AbstractView.js";
-import ChartTop from "./ChartTop.js";
 
 export default class Chart extends AbstractView {
   constructor($target) {
@@ -26,19 +25,12 @@ export default class Chart extends AbstractView {
     chartWrapper.append(chartTitle, chartHeader);
     wrapper.append(chartWrapper, chartMain);
 
-    const chartHeaderItemList = [
-      { top20: "TOP 20" },
-      { genre1: "장르1" },
-      { genre2: "장르2" },
-    ];
+    const chartHeaderItemList = [{ top20: "TOP 20" }, { genre1: "장르1" }, { genre2: "장르2" }];
 
     chartHeaderItemList.forEach((listTitle) => {
       const chartHeaderItem = document.createElement("li");
       const chartHeaderItemLink = document.createElement("a");
-      chartHeaderItemLink.setAttribute(
-        "href",
-        `/chart/${Object.keys(listTitle)[0]}`
-      );
+      chartHeaderItemLink.setAttribute("href", `/chart/${Object.keys(listTitle)[0]}`);
       chartHeaderItem.appendChild(chartHeaderItemLink);
       chartHeaderItem.classList.add("chart-header-item");
       chartHeaderItemLink.textContent = Object.values(listTitle)[0];
