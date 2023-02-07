@@ -34,8 +34,21 @@ export default class Home extends AbstractView {
     homeTitle.classList.add("sr-only");
     homeTitle.textContent = "홈 화면";
     advertise.textContent = "우리 광고";
-    // advertise.classList.add("");
     contCategory.classList.add("cont-category");
+
+    const categoryTitle = document.createElement("h3");
+    const contAlbum = document.createElement("div");
+    categoryTitle.classList.add("tit-category");
+    contAlbum.classList.add("cont-album");
+
+    categoryTitle.textContent = "최신곡";
+    contAlbum.innerHTML = `
+      <a class="cont-album-link" href="/playcontrol">
+        <img class="cover-album" src="/static/image/album-img.png" alt="앨범커버" />
+      </a>
+    `;
+
+    contCategory.append(categoryTitle, contAlbum);
     homeWrapper.append(homeTitle, advertise, contCategory);
   }
 }
