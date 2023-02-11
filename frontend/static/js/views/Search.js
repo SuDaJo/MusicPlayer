@@ -13,7 +13,7 @@ export default class Search extends AbstractView {
   createHtml() {
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper", "search-wrapper");
-    this.$target.appendChild(wrapper);
+    this.$target.replaceChildren(wrapper);
 
     const searchWrapper = document.createElement("section");
     const searchTitle = document.createElement("h2");

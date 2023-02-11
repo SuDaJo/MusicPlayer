@@ -8,21 +8,12 @@ export default class Home extends AbstractView {
 
   async getHtml() {
     this.createHtml();
-    // this.removeClass();
-    // this.$target.classList.add("domainHome");
-    // const $wrapper = document.querySelector(".wrapper");
-
-    // if (!$wrapper && this.$target.classList.contains("domainHome")) {
-    //   this.createHtml();
-    // } else if ($wrapper && !this.$target.classList.contains("domainHome")) {
-    //   $wrapper.remove();
-    // }
   }
 
   createHtml() {
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper");
-    this.$target.appendChild(wrapper);
+    this.$target.replaceChildren(wrapper);
 
     const homeWrapper = document.createElement("section");
     homeWrapper.classList.add("home-wrapper");

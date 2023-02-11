@@ -13,7 +13,7 @@ export default class MyplayList extends AbstractView {
   createHtml() {
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper", "playlist-wrapper");
-    this.$target.appendChild(wrapper);
+    this.$target.replaceChildren(wrapper);
 
     const playlistWrapper = document.createElement("section");
     const playlistTitle = document.createElement("h2");
