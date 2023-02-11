@@ -5,14 +5,8 @@ import Search from "./views/Search.js";
 import PlayControl from "./views/PlayControl.js";
 import NotFound from "./views/NotFound.js";
 
-const removeElement = () => {
-  const $wrapper = document.querySelector(".wrapper");
-  $wrapper.remove();
-}
-
 const navigateTo = (url) => {
   history.pushState(null, null, url);
-  removeElement();
   router();
 };
 
