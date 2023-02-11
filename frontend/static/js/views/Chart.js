@@ -56,14 +56,14 @@ export default class Chart extends AbstractView {
     <li class="chart-list-item">
       <span class="chart-top-rank">1</span>
       <figure class="chart-album-info">
-        <img src="./static/image/album-img.png" alt="앨범 타이틀">
+        <img src="/static/image/album-img.png" alt="앨범 타이틀">
         <figcaption class="chart-item-info">
           <span class="chart-item-title">19th Floor</span>
           <span class="chart-item-artist">Bobby Richards</span>
         </figcaption>
       </figure>
-      <button class="chart-btn-play" type="button"><img src="./static/image/icon-play.svg" alt="재생버튼"></button>
-      <button type="button"><img src="./static/image/icon-plus.svg" alt="추가버튼"></button>
+      <button class="chart-btn-play" type="button"><img src="/static/image/icon-play.svg" alt="재생버튼"></button>
+      <button type="button"><img src="/static/image/icon-plus.svg" alt="추가버튼"></button>
     </li>
   `;
   }
