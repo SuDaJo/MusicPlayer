@@ -40,8 +40,24 @@ const router = async () => {
   const viewHtml = new match.route.view($root);
 
   await viewHtml.getHtml();
+  
+  // console.log(viewHtml.$target.baseURI);
+  const $navBar = document.querySelector(".nav-bar");
+  if(viewHtml.$target.baseURI.includes("playcontrol")) {
+    $navBar.style.display = "none";
+  } else {
+    $navBar.style.display = "block";
+  }
 
   // $root.innerHTML = await viewHtml.getHtml();
+
+  const $playControl = document.querySelectorAll(".cont-album-link");
+  $playControl.forEach((url) => {
+    url.addEventListener("click", (e) => {
+      e.preventDefault();
+      navigateTo(e.currentTarget.href);
+    })
+  })
 };
 
 window.addEventListener("popstate", router);
@@ -58,9 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   urlList.forEach((url) => {
     url.addEventListener("click", (e) => {
       e.preventDefault();
-      if (window.location.href !== e.currentTarget.href) {
-        navigateTo(e.currentTarget.href);
-      }
+      navigateTo(e.currentTarget.href);
     });
   });
 
