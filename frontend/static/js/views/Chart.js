@@ -13,7 +13,7 @@ export default class Chart extends AbstractView {
   createHtml() {
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper", "chart-wrapper");
-    this.$target.appendChild(wrapper);
+    this.$target.replaceChildren(wrapper);
 
     const chartWrapper = document.createElement("section");
     const chartMain = document.createElement("section");
