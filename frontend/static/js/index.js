@@ -40,10 +40,10 @@ const router = async () => {
   const viewHtml = new match.route.view($root);
 
   await viewHtml.getHtml();
-  
+
   // console.log(viewHtml.$target.baseURI);
   const $navBar = document.querySelector(".nav-bar");
-  if(viewHtml.$target.baseURI.includes("playcontrol")) {
+  if (viewHtml.$target.baseURI.includes("playcontrol")) {
     $navBar.style.display = "none";
   } else {
     $navBar.style.display = "block";
@@ -56,8 +56,11 @@ const router = async () => {
     url.addEventListener("click", (e) => {
       e.preventDefault();
       navigateTo(e.currentTarget.href);
-    })
-  })
+    });
+  });
+
+  const newPlayControl = new PlayControl();
+  newPlayControl.goBack();
 };
 
 window.addEventListener("popstate", router);

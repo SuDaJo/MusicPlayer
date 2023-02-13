@@ -21,6 +21,7 @@ export default class PlayControl extends AbstractView {
 
     const playControlTitle = document.createElement("h2");
     const backButton = document.createElement("button");
+    backButton.classList.add("back-button");
     const playControl = document.createElement("div");
     const controller = document.createElement("div");
     playControlTitle.classList.add("sr-only");
@@ -92,7 +93,7 @@ export default class PlayControl extends AbstractView {
     progressBar.classList.add("progress-bar");
     const progressBarTime = document.createElement("div");
     progressBarTime.classList.add("progress-bar-time");
-    progressBarTime.innerHTML =`
+    progressBarTime.innerHTML = `
       <span class="progress-time">1:43</span>
       <span>3:16</span>
     `;
@@ -101,17 +102,19 @@ export default class PlayControl extends AbstractView {
     controllerBtnWrapper.append(randomPlayButton, controllerBtnsPlay, repeatPlayButton);
     controller.append(controllerBtnWrapper, progressBar, progressBarTime);
     playControl.append(playControlFigure, controller);
-    playControlWrapper.append(
-      playControlTitle,
-      backButton,
-      playControl
-    );
+    playControlWrapper.append(playControlTitle, backButton, playControl);
+  }
+
+  goBack() {
+    document.querySelector(".back-button").addEventListener("click", () => {
+      history.back();
+    });
   }
 }
 
 // return `
-{
-  /* <main class="wrapper">
+
+/* <main class="wrapper">
   <section class="play-control-wrap">
     <h2 class="sr-only">재생 화면</h2>
     <button>
@@ -169,5 +172,4 @@ export default class PlayControl extends AbstractView {
     </div>
   </section>
 </main> */
-}
 //     `;
