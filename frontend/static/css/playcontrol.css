@@ -6,7 +6,7 @@
 .play-control {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 1.4rem;
   width: 100%;
