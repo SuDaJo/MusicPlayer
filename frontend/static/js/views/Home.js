@@ -1,4 +1,5 @@
 import AbstractView from "./AbstractView.js";
+import useFetch from "../API/API.js";
 
 export default class Home extends AbstractView {
   constructor($target) {
@@ -8,6 +9,7 @@ export default class Home extends AbstractView {
 
   async getHtml() {
     this.createHtml();
+    useFetch("track/1109739");
   }
 
   createHtml() {
