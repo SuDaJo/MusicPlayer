@@ -9,7 +9,6 @@ export default class Home extends AbstractView {
 
   async getHtml() {
     this.createHtml();
-    useFetch("track/1109739");
   }
 
   createHtml() {
@@ -33,6 +32,8 @@ export default class Home extends AbstractView {
     const contAlbum = document.createElement("div");
     categoryTitle.classList.add("tit-category");
     contAlbum.classList.add("cont-album");
+    
+    this.getArtistData();
 
     categoryTitle.textContent = "최신곡";
     contAlbum.innerHTML = `
@@ -44,6 +45,35 @@ export default class Home extends AbstractView {
     contCategory.append(categoryTitle, contAlbum);
     homeWrapper.append(homeTitle, advertise, contCategory);
   }
+
+  pickArtistData() {
+    const koreanArtist = ["아이유", "BTS", "성시경", "뉴진스", "임영웅", "태연", "세븐틴", "블랙핑크"];
+    const foreignArtist = ["Ariana Grande", "eminem", "Justin Bieber", "Charlie Puth", "Taylor Swift", "Rihanna", "Beyonce"];
+    const femaleArtist = ["소녀시대", "마마무", "청하", "Lady Gaga", "Alicia Keys", "Kesha", "Kelly Clarkson", "Billie Eilish"]
+    const maleArtist = ["싸이", "폴킴", "박재범", "케이윌", "Sam Smith", "Ed Sheeran", "Maroon5"];
+
+    const artistListGroup = [koreanArtist, foreignArtist, femaleArtist, maleArtist]
+
+    let artistRandomPick = [];
+
+    artistListGroup.map((artistList) => {
+      artistRandomPick.push(artistList[Math.floor(Math.random() * artistList.length)]);
+    })
+
+    return artistRandomPick
+  }
+
+  async getArtistData() {
+    let randomArtistArr = this.pickArtistData();
+
+    randomArtistArr.map((artist) => {
+      useFetch(`search?q=${artist}`).then((data) => {
+        console.log(data);
+      });
+    })
+  }
+
+
 }
 
 // return `
