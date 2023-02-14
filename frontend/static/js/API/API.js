@@ -11,10 +11,10 @@ const options = {
   },
 };
 
-const useFetch = (name) => {
-  fetch(`${baseURI}${name}`, options)
+const useFetch = async (name) => {
+  return fetch(`${baseURI}${name}`, options)
     .then((response) => response.json())
-    .then((response) => console.log(response))
+    .then((response) => {return response.data})
     .catch((err) => console.error(err));
 };
 
