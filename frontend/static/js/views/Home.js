@@ -32,15 +32,15 @@ export default class Home extends AbstractView {
     const contAlbum = document.createElement("div");
     categoryTitle.classList.add("tit-category");
     contAlbum.classList.add("cont-album");
-    
+
     this.getArtistData();
 
-    categoryTitle.textContent = "최신곡";
-    contAlbum.innerHTML = `
-      <a class="cont-album-link" href="/playcontrol">
-        <img class="cover-album" src="/static/image/album-img.png" alt="앨범커버" />
-      </a>
-    `;
+    // categoryTitle.textContent = "최신곡";
+    // contAlbum.innerHTML = `
+    //   <a class="cont-album-link" href="/playcontrol">
+    //     <img class="cover-album" src="/static/image/album-img.png" alt="앨범커버" />
+    //   </a>
+    // `;
 
     contCategory.append(categoryTitle, contAlbum);
     homeWrapper.append(homeTitle, advertise, contCategory);
@@ -49,31 +49,64 @@ export default class Home extends AbstractView {
   pickArtistData() {
     const koreanArtist = ["아이유", "BTS", "성시경", "뉴진스", "임영웅", "태연", "세븐틴", "블랙핑크"];
     const foreignArtist = ["Ariana Grande", "eminem", "Justin Bieber", "Charlie Puth", "Taylor Swift", "Rihanna", "Beyonce"];
-    const femaleArtist = ["소녀시대", "마마무", "청하", "Lady Gaga", "Alicia Keys", "Kesha", "Kelly Clarkson", "Billie Eilish"]
+    const femaleArtist = ["소녀시대", "마마무", "청하", "Lady Gaga", "Alicia Keys", "Kesha", "Kelly Clarkson", "Billie Eilish"];
     const maleArtist = ["싸이", "폴킴", "박재범", "케이윌", "Sam Smith", "Ed Sheeran", "Maroon5"];
 
-    const artistListGroup = [koreanArtist, foreignArtist, femaleArtist, maleArtist]
+    const artistListGroup = [koreanArtist, foreignArtist, femaleArtist, maleArtist];
 
     let artistRandomPick = [];
 
     artistListGroup.map((artistList) => {
-      artistRandomPick.push(artistList[Math.floor(Math.random() * artistList.length)]);
-    })
+      artistRandomPick.push(
+        artistList[Math.floor(Math.random() * artistList.length)]
+      );
+    console.log("artistList", artistRandomPick)
+    });
 
-    return artistRandomPick
+    return artistRandomPick;
   }
 
-  async getArtistData() {
+  getArtistData() {
     let randomArtistArr = this.pickArtistData();
-
+    
+    let tempData = [];
     randomArtistArr.map((artist) => {
-      useFetch(`search?q=${artist}`).then((data) => {
-        console.log(data);
+      useFetch(`search?q=${artist}`)
+        .then((data) => {
+          tempData.push(data)
+        // console.log(data);
+        if(tempData.length === 4){
+          this.repeatCreate(tempData);
+        }
       });
-    })
+    });
+
   }
 
+  repeatCreate(musicData) {
+    // let data = [];
+    let data = musicData;
+    // data.push(musicData);
+    console.log("musicData", data);
 
+    const $categoryTitle = document.querySelector(".tit-category");
+    console.log($categoryTitle)
+    $categoryTitle.textContent = "최신곡";
+    const $contAlbum = document.querySelector(".cont-album");
+    let albumLink = data[0].map((item) => {
+      // console.log(item)
+      return `
+      <a class="cont-album-link" href="/playcontrol">
+        <img
+          class="cover-album"
+          src=${item.album.cover_medium}
+          alt="앨범커버"
+        />
+      </a>
+      `;
+    }).join("");
+    $contAlbum.innerHTML = albumLink;
+  }
 }
 
 // return `
