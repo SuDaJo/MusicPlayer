@@ -45,6 +45,8 @@ const router = async () => {
   const $navBar = document.querySelector(".nav-bar");
   if (viewHtml.$target.baseURI.includes("playcontrol")) {
     $navBar.style.display = "none";
+    const newPlayControl = new PlayControl();
+    newPlayControl.goBack();
   } else {
     $navBar.style.display = "block";
   }
@@ -58,9 +60,6 @@ const router = async () => {
       navigateTo(e.currentTarget.href);
     });
   });
-
-  const newPlayControl = new PlayControl();
-  newPlayControl.goBack();
 };
 
 window.addEventListener("popstate", router);

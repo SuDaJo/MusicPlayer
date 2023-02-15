@@ -106,9 +106,12 @@ export default class PlayControl extends AbstractView {
   }
 
   goBack() {
-    document.querySelector(".back-button").addEventListener("click", () => {
-      history.back();
-    });
+    const backButton = document.querySelector(".back-button");
+    if(backButton){
+      backButton.addEventListener("click", () => {
+        history.back();
+      });
+    }
   }
 }
 
