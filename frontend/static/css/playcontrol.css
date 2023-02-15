@@ -6,7 +6,6 @@
 .play-control {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
   padding: 1.4rem;
   width: 100%;
@@ -21,7 +20,7 @@
   width: 100%;
   border-radius: 1.5rem;
   object-fit: cover;
-  margin: 2rem auto 2.6rem;
+  margin: 3rem auto;
 }
 
 .play-control .play-control-info {
@@ -35,7 +34,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  margin-top: 2.6rem;
+  margin-top: 3rem;
 }
 
 .play-control .controller-btn-wrapper {
