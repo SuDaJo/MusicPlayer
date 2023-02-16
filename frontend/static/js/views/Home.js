@@ -85,7 +85,7 @@ export default class Home extends AbstractView {
     const category = ["이 노래 어때요?", "나만 알고 싶은 노래", "20대 취향저격", "오늘의 인기 가수"];
     const $homeWrapper = document.querySelector(".home-wrapper");
 
-    const test = data
+    const contCategory = data
       .map((list, idx) => {
         return `
       <section class="cont-category">
@@ -108,6 +108,6 @@ export default class Home extends AbstractView {
       })
       .join("");
 
-    $homeWrapper.innerHTML += test;
+    $homeWrapper.innerHTML += contCategory;
   }
 }
