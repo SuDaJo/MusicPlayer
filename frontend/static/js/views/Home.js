@@ -94,7 +94,7 @@ export default class Home extends AbstractView {
           ${list
             .map((item) => {
               return `
-                <a class="cont-album-link" href="#">
+                <a class="cont-album-link" href="/playcontrol">
                   <img class="cover-album" src=${item.album.cover_medium} alt="앨범커버" />
                   <p class="album-title">${item.title}</p>
                   <p>${item.artist.name}</p>
