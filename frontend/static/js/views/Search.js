@@ -1,4 +1,5 @@
 import AbstractView from "./AbstractView.js";
+import useFetch from "../API/API.js";
 
 export default class Search extends AbstractView {
   constructor($target) {
@@ -18,9 +19,11 @@ export default class Search extends AbstractView {
     const searchWrapper = document.createElement("section");
     const searchTitle = document.createElement("h2");
     searchTitle.textContent = "검색 화면";
+    const searchForm = document.createElement("form");
     const searchInputBar = document.createElement("fieldset");
     const searchListMain = document.createElement("section");
 
+    searchForm.classList.add("search-form");
     searchTitle.classList.add("sr-only");
     searchInputBar.classList.add("search-input-bar");
     searchListMain.classList.add("searchlist-main");
@@ -33,6 +36,7 @@ export default class Search extends AbstractView {
     searchInput.setAttribute("placeholder", "검색");
 
     searchInputTitle.classList.add("sr-only");
+    searchInputTitle.textContent = "검색";
     searchInpLabel.setAttribute("for", "searchInpValue");
     searchInpLabel.classList.add("sr-only");
 
@@ -49,56 +53,47 @@ export default class Search extends AbstractView {
     searchMainTitle.classList.add("sr-only");
 
     const searchMainUl = document.createElement("ul");
-    searchMainUl.innerHTML = `
-      <li class="playlist-item">
-        <figure class="playlist-info">
-          <img src="./static/image/album-img.png" alt="앨범 타이틀">
-          <figcaption class="playlist-item-info">
-            <span class="playlist-title">19th Floor</span>
-            <span class="playlist-artist">Bobby Richards</span>
-          </figcaption>
-        </figure>
-        <button class="chart-btn-play" type="button"><img src="./static/image/icon-play.svg" alt="재생버튼"></button>
-        <button type="button"><img src="./static/image/icon-plus.svg" alt="추가버튼"></button>
-        </button>
-      </li>
-    `;
 
     searchInputBar.append(searchInputTitle, searchInpLabel, searchInput, searchButton);
     searchListMain.append(searchMainTitle, searchMainUl);
-    searchWrapper.append(searchTitle, searchInputBar, searchListMain);
+    searchForm.append(searchInputBar);
+    searchWrapper.append(searchTitle, searchForm, searchListMain);
     wrapper.appendChild(searchWrapper);
+
+    this.getSearchData();
+  }
+
+  getSearchData() {
+    const $searchForm = document.querySelector(".search-form");
+    const $searchMainUl = document.querySelector("ul");
+    $searchForm.addEventListener("submit", (event) => {
+      let $inputValue = document.querySelector("#searchInpValue");
+
+      event.preventDefault();
+
+      useFetch(`search?q=${$inputValue.value}`).then((data) => {
+        console.log(data);
+        const searchItem = data
+          .map((item) => {
+            return `
+              <li class="playlist-item">
+                <figure class="playlist-info">
+                  <img src=${item.album.cover_small} alt="앨범 타이틀">
+                  <figcaption class="playlist-item-info">
+                    <span class="playlist-title">${item.title}</span>
+                    <span class="playlist-artist">${item.artist.name}</span>
+                  </figcaption>
+                </figure>
+                <button class="chart-btn-play" type="button"><img src="/static/image/icon-play.svg" alt="재생버튼"></button>
+                <button type="button"><img src="/static/image/icon-plus.svg" alt="추가버튼"></button>
+                </button>
+              </li>
+          `;
+          })
+          .join("");
+        $searchMainUl.innerHTML = searchItem;
+      });
+      $inputValue.value = "";
+    });
   }
 }
-
-// return `
-// <main class="wrapper search-wrapper">
-// <section>
-//   <h2 class="sr-only">검색 화면</h2>
-//   <fieldset class="search-input-bar">
-//     <legend class="sr-only">검색</legend>
-//     <label for="searchInpValue" class="sr-only"></label>
-//     <input id="searchInpValue" type="text" placeholder="검색" />
-//     <button class="search-btn" type="button">
-//       <img src="./static/image/icon-search.svg" alt="검색 버튼" />
-//     </button>
-//   </fieldset>
-//   <section class="searchlist-main">
-//     <ul>
-//       <li class="playlist-item">
-//         <figure class="playlist-info">
-//           <img src="./static/image/album-img.png" alt="앨범 타이틀">
-//           <figcaption class="playlist-item-info">
-//             <span class="playlist-title">19th Floor</span>
-//             <span class="playlist-artist">Bobby Richards</span>
-//           </figcaption>
-//         </figure>
-//         <button class="chart-btn-play" type="button"><img src="./static/image/icon-play.svg" alt="재생버튼"></button>
-//         <button type="button"><img src="./static/image/icon-plus.svg" alt="추가버튼"></button>
-//         </button>
-//       </li>
-//     </ul>
-//   </section>
-// </section>
-// </main>
-// `
