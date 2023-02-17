@@ -31,3 +31,7 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.hidden-navbar {
+  display: none;
+}
