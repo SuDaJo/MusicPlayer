@@ -15,7 +15,12 @@
 
 /* splash 시작 */
 .splash-wrapper {
-  background: linear-gradient(180deg, #faf9f4 0%, rgba(255, 251, 228, 0.65) 25%, var(--main-color) 100%);
+  background: linear-gradient(180deg, #faf9f4 0%, rgb(255, 251, 228) 25%, var(--main-color) 100%);
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+  z-index: 50;
 }
 
 .logo-wrapper {
@@ -30,6 +35,11 @@
 .logo {
   width: 20rem;
   height: 19rem;
+}
+
+.fade-out {
+  opacity: 0;
+  transition : 0.5s;
 }
 /* splash 끝 */
 
@@ -61,5 +71,4 @@
 .searchlist-main::-webkit-scrollbar-track {
   background-color: transparent;
 }
-
 /* Scroll Bar 디자인 끝 */

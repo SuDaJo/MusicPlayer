@@ -4,6 +4,7 @@ import MyplayList from "./views/MyplayList.js";
 import Search from "./views/Search.js";
 import PlayControl from "./views/PlayControl.js";
 import NotFound from "./views/NotFound.js";
+import Splash from "./views/Splash.js";
 
 const navigateTo = (url) => {
   history.pushState(null, null, url);
@@ -60,6 +61,8 @@ const router = async () => {
       navigateTo(e.currentTarget.href);
     });
   });
+
+
 };
 
 window.addEventListener("popstate", router);
@@ -79,6 +82,18 @@ document.addEventListener("DOMContentLoaded", () => {
       navigateTo(e.currentTarget.href);
     });
   });
+
+  const splash = new Splash();
+  splash.getSplash();
+
+  setTimeout(() => {
+    const $splash = document.querySelector(".splash-wrapper");
+    $splash.classList.add("fade-out");
+    $navBar.classList.remove("hidden-navbar");
+    setTimeout(() => {
+      $splash.style.display = "none";
+    }, 500)
+  }, 2000);
 
   router();
 });
