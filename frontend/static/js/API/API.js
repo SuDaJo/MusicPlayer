@@ -14,7 +14,7 @@ const options = {
 const useFetch = async (name) => {
   return fetch(`${baseURI}${name}`, options)
     .then((response) => response.json())
-    .then((response) => {return response.data})
+    .then((response) => {return response})
     .catch((err) => console.error(err));
 };
 

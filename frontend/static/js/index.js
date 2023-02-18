@@ -6,6 +6,14 @@ import PlayControl from "./views/PlayControl.js";
 import NotFound from "./views/NotFound.js";
 import Splash from "./views/Splash.js";
 
+const pathToRegex = (path) => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
+
+const getParams = (match) => {
+    const values = match.isMatch.slice(1);
+    const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(result => result[1]);
+    return Object.fromEntries(keys.map((key, i) => [key, values[i]]));
+};
+
 const navigateTo = (url) => {
   history.pushState(null, null, url);
   router();
@@ -17,18 +25,18 @@ const router = async () => {
     { path: "/chart", view: Chart },
     { path: "/myplaylist", view: MyplayList },
     { path: "/search", view: Search },
-    { path: "/playcontrol", view: PlayControl },
+    { path: "/playcontrol/:id", view: PlayControl },
     { path: "/notfound", view: NotFound },
   ];
 
   const potentialMatches = routes.map((route) => {
     return {
       route: route,
-      isMatch: location.pathname === route.path,
+      isMatch: location.pathname.match(pathToRegex(route.path)),
     };
   });
 
-  let match = potentialMatches.find((potentialMatch) => potentialMatch.isMatch);
+  let match = potentialMatches.find((potentialMatch) => potentialMatch.isMatch !== null);
 
   if (!match) {
     match = {
@@ -38,7 +46,7 @@ const router = async () => {
   }
 
   const $root = document.querySelector("#root");
-  const viewHtml = new match.route.view($root);
+  const viewHtml = new match.route.view($root, getParams(match));
 
   await viewHtml.getHtml();
 

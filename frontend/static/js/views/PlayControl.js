@@ -1,8 +1,9 @@
 import AbstractView from "./AbstractView.js";
+import useFetch from "../API/API.js";
 
 export default class PlayControl extends AbstractView {
-  constructor($target) {
-    super($target);
+    constructor($target, params) {
+    super($target, params);
     this.setTitle("재생화면");
   }
 
@@ -11,6 +12,7 @@ export default class PlayControl extends AbstractView {
   }
 
   createHtml() {
+    console.log(this.params.id);
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper");
     this.$target.replaceChildren(wrapper);
@@ -33,6 +35,8 @@ export default class PlayControl extends AbstractView {
     backButtonImage.setAttribute("src", "/static/image/icon-arrow-left.svg");
     backButtonImage.setAttribute("alt", "뒤로가기");
     backButton.appendChild(backButtonImage);
+
+    this.getTrackData()
 
     const playControlFigure = document.createElement("figure");
     playControlFigure.innerHTML = `
@@ -112,6 +116,13 @@ export default class PlayControl extends AbstractView {
         history.back();
       });
     }
+  }
+
+  getTrackData() {
+    console.log("hi")
+    useFetch(`track/${this.params.id}`).then((res) => {
+      console.log(res)
+    })
   }
 }
 

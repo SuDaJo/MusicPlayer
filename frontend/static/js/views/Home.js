@@ -70,8 +70,8 @@ export default class Home extends AbstractView {
 
     let tempData = [];
     randomArtistArr.map((artist) => {
-      useFetch(`search?q=${artist}`).then((data) => {
-        tempData.push(data);
+      useFetch(`search?q=${artist}`).then((res) => {
+        tempData.push(res.data);
         if (tempData.length === 4) {
           this.repeatCreate(tempData);
         }
@@ -94,7 +94,7 @@ export default class Home extends AbstractView {
           ${list
             .map((item) => {
               return `
-                <a class="cont-album-link" href="/playcontrol">
+                <a class="cont-album-link" href="/playcontrol/${item.id}">
                   <img class="cover-album" src=${item.album.cover_medium} alt="앨범커버" />
                   <p class="album-title">${item.title}</p>
                   <p>${item.artist.name}</p>
@@ -110,4 +110,5 @@ export default class Home extends AbstractView {
 
     $homeWrapper.innerHTML += contCategory;
   }
+
 }
