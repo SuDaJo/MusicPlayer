@@ -42,7 +42,6 @@ const router = async () => {
 
   await viewHtml.getHtml();
 
-  // console.log(viewHtml.$target.baseURI);
   const $navBar = document.querySelector(".nav-bar");
   if (viewHtml.$target.baseURI.includes("playcontrol")) {
     $navBar.style.display = "none";
@@ -61,8 +60,6 @@ const router = async () => {
       navigateTo(e.currentTarget.href);
     });
   });
-
-
 };
 
 window.addEventListener("popstate", router);
@@ -83,17 +80,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const splash = new Splash();
-  splash.getSplash();
-
-  setTimeout(() => {
-    const $splash = document.querySelector(".splash-wrapper");
-    $splash.classList.add("fade-out");
-    $navBar.classList.remove("hidden-navbar");
+  if (location.pathname === "/") {
+    const splash = new Splash();
+    splash.getSplash();
+  
     setTimeout(() => {
-      $splash.style.display = "none";
-    }, 500)
-  }, 2000);
+      const $splash = document.querySelector(".splash-wrapper");
+      $splash.classList.add("fade-out");
+      $navBar.classList.remove("hidden-navbar");
+      setTimeout(() => {
+        $splash.style.display = "none";
+      }, 500)
+    }, 2000);
+  }
 
   router();
 });
