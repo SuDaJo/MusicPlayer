@@ -11,3 +11,7 @@
 :fire: Remove : 불필요한 파일 삭제<br />
 :hammer: Chore : 빌드 업무, 패키지매니저, 폴더트리, 세팅 수정<br />
 :bulb: Comment : 필요한 주석 추가 및 변경<br />
+
+Co-authored-by: DADA6061 <d.ya96v@gmail.com>
+Co-authored-by: ming-Jo <mwinterj@daum.net>
+Co-authored-by: IntHyun <wjdtngus1237@naver.com>
