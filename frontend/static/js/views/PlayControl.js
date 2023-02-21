@@ -52,7 +52,7 @@ export default class PlayControl extends AbstractView {
               alt="앨범 타이틀"
             />
             <figcaption class="play-control-info">
-              <span class="music-title">${response.album.title}</span>
+              <span class="music-title">${response.title}</span>
               <span class="music-artist">${response.artist.name}</span>
             </figcaption>
           </figure>
@@ -68,8 +68,11 @@ export default class PlayControl extends AbstractView {
                     alt="이전곡 재생버튼"
                   />
                 </button>
-                <button type="button">
-                  <img src="/static/image/icon-play.svg" alt="재생버튼" />
+                <button class="play-button" type="button" data-play="true">
+                  <img class="play-pause-img" src="/static/image/icon-pause.svg" alt="일시정지버튼" />
+                  <audio class="music-src">
+                    <source src=${response.preview}>
+                  </audio>
                 </button>
                 <button type="button">
                   <img
@@ -96,7 +99,27 @@ export default class PlayControl extends AbstractView {
       })
       .then(() => {
         this.goBack();
+        this.playMusic();
       });
+  }
+
+  playMusic() {
+    const $playButton = document.querySelector(".play-button");
+    const $audio = document.querySelector(".music-src");
+    const $playPauseImg = document.querySelector(".play-pause-img");
+    $audio.play();
+
+    $playButton.addEventListener("click", () => {
+      if ($playButton.dataset.play === "true") {
+        $audio.pause();
+        $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
+        $playButton.dataset.play = "false";
+      } else {
+        $audio.play();
+        $playPauseImg.setAttribute("src", "/static/image/icon-pause.svg");
+        $playButton.dataset.play = "true";
+      }
+    });
   }
 }
 
