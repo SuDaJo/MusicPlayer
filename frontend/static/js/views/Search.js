@@ -71,9 +71,9 @@ export default class Search extends AbstractView {
 
       event.preventDefault();
 
-      useFetch(`search?q=${$inputValue.value}`).then((data) => {
-        console.log(data);
-        const searchItem = data
+      useFetch(`search?q=${$inputValue.value}`).then((response) => {
+        console.log(response.data);
+        const searchItem = response.data
           .map((item) => {
             return `
               <li class="playlist-item">
