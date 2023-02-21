@@ -9,9 +9,9 @@ import Splash from "./views/Splash.js";
 const pathToRegex = (path) => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
 const getParams = (match) => {
-    const values = match.isMatch.slice(1);
-    const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(result => result[1]);
-    return Object.fromEntries(keys.map((key, i) => [key, values[i]]));
+  const values = match.isMatch.slice(1);
+  const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map((result) => result[1]);
+  return Object.fromEntries(keys.map((key, i) => [key, values[i]]));
 };
 
 const navigateTo = (url) => {
@@ -53,8 +53,8 @@ const router = async () => {
   const $navBar = document.querySelector(".nav-bar");
   if (viewHtml.$target.baseURI.includes("playcontrol")) {
     $navBar.style.display = "none";
-    const newPlayControl = new PlayControl();
-    newPlayControl.goBack();
+    // const newPlayControl = new PlayControl();
+    // newPlayControl.goBack();
   } else {
     $navBar.style.display = "block";
   }
@@ -91,14 +91,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (location.pathname === "/") {
     const splash = new Splash();
     splash.getSplash();
-  
+
     setTimeout(() => {
       const $splash = document.querySelector(".splash-wrapper");
       $splash.classList.add("fade-out");
       $navBar.classList.remove("hidden-navbar");
       setTimeout(() => {
         $splash.style.display = "none";
-      }, 500)
+      }, 500);
     }, 2000);
   }
 
