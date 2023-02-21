@@ -90,8 +90,8 @@ export default class PlayControl extends AbstractView {
             </div>
             <input type="range" class="progress-bar" />
             <div class="progress-bar-time">
-              <span class="progress-time">1:43</span>
-              <span>3:16</span>
+              <span class="progress-time">00 : 00</span>
+              <span>00 : 30</span>
             </div>
           </div>
         </div>
@@ -107,6 +107,8 @@ export default class PlayControl extends AbstractView {
     const $playButton = document.querySelector(".play-button");
     const $audio = document.querySelector(".music-src");
     const $playPauseImg = document.querySelector(".play-pause-img");
+    const $progressBar = document.querySelector(".progress-bar");
+    const $progressTime = document.querySelector(".progress-time");
     $audio.play();
 
     $playButton.addEventListener("click", () => {
@@ -118,6 +120,20 @@ export default class PlayControl extends AbstractView {
         $audio.play();
         $playPauseImg.setAttribute("src", "/static/image/icon-pause.svg");
         $playButton.dataset.play = "true";
+      }
+    });
+
+    $audio.addEventListener("timeupdate", (e) => {
+      let currentTime = e.target.currentTime; // 현재 시간
+      const duration = e.target.duration;
+      let progressWidth = (currentTime / duration) * 100;
+      $progressBar.style.width = `${progressWidth}%`;
+
+      let setCurrentTime = parseInt(currentTime).toString();
+      if (setCurrentTime.length < 2) {
+        $progressTime.textContent = `00 : 0${setCurrentTime}`;
+      } else {
+        $progressTime.textContent = `00 : ${setCurrentTime}`;
       }
     });
   }
