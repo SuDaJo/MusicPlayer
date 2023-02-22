@@ -88,7 +88,7 @@ export default class PlayControl extends AbstractView {
                 />
               </button>
             </div>
-            <input type="range" class="progress-bar" />
+            <input type="range" class="progress-bar" value="0" step="any" />
             <div class="progress-bar-time">
               <span class="progress-time">00 : 00</span>
               <span>00 : 30</span>
@@ -105,10 +105,9 @@ export default class PlayControl extends AbstractView {
 
   playMusic() {
     const $playButton = document.querySelector(".play-button");
-    const $audio = document.querySelector(".music-src");
     const $playPauseImg = document.querySelector(".play-pause-img");
-    const $progressBar = document.querySelector(".progress-bar");
-    const $progressTime = document.querySelector(".progress-time");
+    const $audio = document.querySelector(".music-src");
+
     $audio.play();
 
     $playButton.addEventListener("click", () => {
@@ -123,11 +122,21 @@ export default class PlayControl extends AbstractView {
       }
     });
 
+    this.timeUpdate();
+    this.moveProgressBar();
+    this.endAudio();
+  }
+
+  timeUpdate() {
+    const $audio = document.querySelector(".music-src");
+    const $progressBar = document.querySelector(".progress-bar");
+    const $progressTime = document.querySelector(".progress-time");
+
     $audio.addEventListener("timeupdate", (e) => {
       let currentTime = e.target.currentTime; // 현재 시간
       const duration = e.target.duration;
       let progressWidth = (currentTime / duration) * 100;
-      $progressBar.style.width = `${progressWidth}%`;
+      $progressBar.value = progressWidth;
 
       let setCurrentTime = parseInt(currentTime).toString();
       if (setCurrentTime.length < 2) {
@@ -137,68 +146,27 @@ export default class PlayControl extends AbstractView {
       }
     });
   }
-}
 
-// return `
+  moveProgressBar() {
+    const $progressBar = document.querySelector(".progress-bar");
+    const $audio = document.querySelector(".music-src");
 
-{
-  /* <main class="wrapper">
-  <section class="play-control-wrap">
-  <h2 class="sr-only">재생 화면</h2>
-    <button>
-      <img src="/static/image/icon-arrow-left.svg" alt="뒤로가기" />
-    </button>
-    <div class="play-control">
-      <figure>
-        <img
-          class="album-title-img"
-          src="./static/image/album-title-img.png"
-          alt="앨범 타이틀"
-        />
-        <figcaption class="play-control-info">
-          // text slide 적용해야됨
-          <span class="music-title">19th Floor</span>
-          <span class="music-artist">Bobby Richards</span>
-        </figcaption>
-      </figure>
-      <div class="controller">
-        <div class="controller-btn-wrapper">
-          <button type="button">
-            <img src="./static/image/icon-repeat.svg" alt="랜덤 재생버튼" />
-          </button>
-          <div class="controller-btns-play">
-            <button type="button">
-              <img
-                src="./static/image/icon-backward.svg"
-                alt="이전곡 재생버튼"
-              />
-            </button>
-            // 재생버튼 클릭하면 정지버튼으로 변경
-            <button type="button">
-              <img src="./static/image/icon-play.svg" alt="재생버튼" />
-            </button>
-            <button type="button">
-              <img
-                src="./static/image/icon-forward.svg"
-                alt="다음곡 재생버튼"
-              />
-            </button>
-          </div>
-          <button type="button">
-            <img
-              src="./static/image/icon-rotate-ccw.svg"
-              alt="한곡 반복 재생버튼"
-            />
-          </button>
-        </div>
-        <input type="range" class="progress-bar" />
-        <div class="progress-bar-time">
-          <span class="progress-time">1:43</span>
-          <span>3:16</span>
-        </div>
-      </div>
-    </div>
-  </section>
-</main> */
+    $progressBar.addEventListener("click", (e) => {
+      let progressInputValue = e.target.value;
+      let songDuration = $audio.duration;
+      $audio.currentTime = progressInputValue * songDuration / 100;
+    })
+  }
+  
+  endAudio() {
+    const $audio = document.querySelector(".music-src");
+    const $playButton = document.querySelector(".play-button");
+    const $playPauseImg = document.querySelector(".play-pause-img");
+
+    $audio.addEventListener("ended", () => {
+      $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
+      $playButton.dataset.play = "false";
+    })
+    
+  }
 }
-//     `;
