@@ -37,7 +37,8 @@ export default class PlayControl extends AbstractView {
     console.log("hi");
     useFetch(`track/${this.params.id}`)
       .then((response) => {
-        const $playControlWrapper = document.querySelector(".play-control-wrap");
+        const $playControlWrapper =
+          document.querySelector(".play-control-wrap");
         console.log(response);
         $playControlWrapper.innerHTML = `
         <h2 class="sr-only">재생 화면</h2>
@@ -91,7 +92,7 @@ export default class PlayControl extends AbstractView {
             <input type="range" class="progress-bar" value="0" step="any" />
             <div class="progress-bar-time">
               <span class="progress-time">00 : 00</span>
-              <span>00 : 30</span>
+              <span class="duration-time">00 : 00</span>
             </div>
           </div>
         </div>
@@ -109,6 +110,7 @@ export default class PlayControl extends AbstractView {
     const $audio = document.querySelector(".music-src");
 
     $audio.play();
+    $audio.volume = 0.05;
 
     $playButton.addEventListener("click", () => {
       if ($playButton.dataset.play === "true") {
@@ -131,6 +133,7 @@ export default class PlayControl extends AbstractView {
     const $audio = document.querySelector(".music-src");
     const $progressBar = document.querySelector(".progress-bar");
     const $progressTime = document.querySelector(".progress-time");
+    const $durationTime = document.querySelector(".duration-time");
 
     $audio.addEventListener("timeupdate", (e) => {
       let currentTime = e.target.currentTime; // 현재 시간
@@ -138,6 +141,7 @@ export default class PlayControl extends AbstractView {
       let progressWidth = (currentTime / duration) * 100;
       $progressBar.value = progressWidth;
 
+      $durationTime.textContent = `00 : ${parseInt(duration)}`
       let setCurrentTime = parseInt(currentTime).toString();
       if (setCurrentTime.length < 2) {
         $progressTime.textContent = `00 : 0${setCurrentTime}`;
@@ -151,13 +155,13 @@ export default class PlayControl extends AbstractView {
     const $progressBar = document.querySelector(".progress-bar");
     const $audio = document.querySelector(".music-src");
 
-    $progressBar.addEventListener("click", (e) => {
+    $progressBar.addEventListener("input", (e) => {
       let progressInputValue = e.target.value;
       let songDuration = $audio.duration;
-      $audio.currentTime = progressInputValue * songDuration / 100;
-    })
+      $audio.currentTime = (progressInputValue * songDuration) / 100;
+    });
   }
-  
+
   endAudio() {
     const $audio = document.querySelector(".music-src");
     const $playButton = document.querySelector(".play-button");
@@ -166,7 +170,6 @@ export default class PlayControl extends AbstractView {
     $audio.addEventListener("ended", () => {
       $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
       $playButton.dataset.play = "false";
-    })
-    
+    });
   }
 }
