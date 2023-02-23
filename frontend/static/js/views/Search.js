@@ -43,6 +43,7 @@ export default class Search extends AbstractView {
     const searchButton = document.createElement("button");
     const searchButtonImg = document.createElement("img");
 
+    searchButton.classList.add("search-button");
     searchButton.setAttribute("type", "button");
     searchButtonImg.setAttribute("src", "./static/image/icon-search.svg");
     searchButtonImg.setAttribute("alt", "검색 버튼");
@@ -65,35 +66,40 @@ export default class Search extends AbstractView {
 
   getSearchData() {
     const $searchForm = document.querySelector(".search-form");
+    const $searchButton = document.querySelector(".search-button");
+
+    $searchForm.addEventListener("submit", this.searchEventFunc);
+    $searchButton.addEventListener("click", this.searchEventFunc);
+  }
+
+  searchEventFunc(event) {
+    event.preventDefault();
+
     const $searchMainUl = document.querySelector("ul");
-    $searchForm.addEventListener("submit", (event) => {
-      let $inputValue = document.querySelector("#searchInpValue");
+    let $inputValue = document.querySelector("#searchInpValue");
 
-      event.preventDefault();
-
-      useFetch(`search?q=${$inputValue.value}`).then((response) => {
-        console.log(response.data);
-        const searchItem = response.data
-          .map((item) => {
-            return `
-              <li class="playlist-item">
-                <figure class="playlist-info">
-                  <img src=${item.album.cover_small} alt="앨범 타이틀">
-                  <figcaption class="playlist-item-info">
-                    <span class="playlist-title">${item.title}</span>
-                    <span class="playlist-artist">${item.artist.name}</span>
-                  </figcaption>
-                </figure>
-                <button class="chart-btn-play" type="button"><img src="/static/image/icon-play.svg" alt="재생버튼"></button>
-                <button type="button"><img src="/static/image/icon-plus.svg" alt="추가버튼"></button>
-                </button>
-              </li>
-          `;
-          })
-          .join("");
-        $searchMainUl.innerHTML = searchItem;
-      });
-      $inputValue.value = "";
+    useFetch(`search?q=${$inputValue.value}`).then((response) => {
+      console.log(response.data);
+      const searchItem = response.data
+        .map((item) => {
+          return `
+            <li class="playlist-item">
+              <figure class="playlist-info">
+                <img src=${item.album.cover_small} alt="앨범 타이틀">
+                <figcaption class="playlist-item-info">
+                  <span class="playlist-title">${item.title}</span>
+                  <span class="playlist-artist">${item.artist.name}</span>
+                </figcaption>
+              </figure>
+              <button class="chart-btn-play" type="button"><img src="/static/image/icon-play.svg" alt="재생버튼"></button>
+              <button type="button"><img src="/static/image/icon-plus.svg" alt="추가버튼"></button>
+              </button>
+            </li>
+        `;
+        })
+        .join("");
+      $searchMainUl.innerHTML = searchItem;
     });
+    $inputValue.value = "";
   }
 }
