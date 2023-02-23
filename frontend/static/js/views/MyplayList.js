@@ -20,52 +20,40 @@ export default class MyplayList extends AbstractView {
     const playlistMain = document.createElement("div");
     const playListItemUl = document.createElement("ul");
 
+    playListItemUl.classList.add("playlist-ul")
     playlistTitle.classList.add("tit-playlist");
     playlistMain.classList.add("playlist-main");
 
     playlistTitle.textContent = "MY PLAYLIST";
 
-    playListItemUl.innerHTML = `
-      <li class="playlist-item">
-        <figure class="playlist-info">
-          <img src="./static/image/album-img.png" alt="앨범 타이틀">
-          <figcaption class="playlist-item-info">
-            <span class="playlist-title">19th Floor</span>
-            <span class="playlist-artist">Bobby Richards</span>
-          </figcaption>
-        </figure>
-        <button class="btn-delete" type="button">
-          <img class="img-delete" src="./static/image/icon-trash.svg" alt="삭제버튼">
-        </button>
-      </li>
-    `;
-
     playlistMain.append(playListItemUl);
     playlistWrapper.append(playlistTitle, playlistMain);
     wrapper.append(playlistWrapper);
+
+    this.createPlayList()
+  }
+
+  createPlayList() {
+    const data = JSON.parse(localStorage.getItem("data"))
+    const $playListUl = document.querySelector('.playlist-ul')
+    console.log(data)
+
+    let playListLi = data.map((item) => {
+      return `
+        <li class="playlist-item">
+          <figure class="playlist-info">
+          <img src=${item.coverImg} alt="앨범 타이틀">
+            <figcaption class="playlist-item-info">
+              <span class="playlist-title">${item.title}</span>
+              <span class="playlist-artist">${item.artist}</span>
+            </figcaption>
+          </figure>
+          <button class="btn-delete" type="button">
+            <img class="img-delete" src="./static/image/icon-trash.svg" alt="삭제버튼">
+          </button>
+        </li>
+      `
+    }).join("");
+    $playListUl.innerHTML += playListLi;
   }
 }
-
-// return `
-// <main class="wrapper playlist-wrapper">
-// <section>
-//   <h2 class="tit-playlist">MY PLAYLIST</h2>
-//   <div class="playlist-main">
-//     <ul>
-//       <li class="playlist-item">
-//         <figure class="playlist-info">
-//           <img src="./static/image/album-img.png" alt="앨범 타이틀">
-//           <figcaption class="playlist-item-info">
-//             <span class="playlist-title">19th Floor</span>
-//             <span class="playlist-artist">Bobby Richards</span>
-//           </figcaption>
-//         </figure>
-//         <button class="btn-delete" type="button">
-//           <img class="img-delete" src="./static/image/icon-trash.svg" alt="삭제버튼">
-//         </button>
-//       </li>
-//     </ul>
-//   </div>
-// </section>
-// </main>
-// `
