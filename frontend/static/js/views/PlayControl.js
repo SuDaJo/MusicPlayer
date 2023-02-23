@@ -34,12 +34,25 @@ export default class PlayControl extends AbstractView {
   }
 
   getTrackData() {
-    console.log("hi");
     useFetch(`track/${this.params.id}`)
       .then((response) => {
-        const $playControlWrapper =
-          document.querySelector(".play-control-wrap");
+        let id = response.id;
+        let title = response.title;
+        let coverImg = response.album.cover_small;
+        let artist = response.artist.name;
+        localStorage.setItem(
+          "data",
+          JSON.stringify([...JSON.parse(localStorage.getItem("data") || "[]"), { 
+            data: id , 
+            title : title,
+            coverImg : coverImg,
+            artist : artist
+          }])
+        );
+
+        const $playControlWrapper = document.querySelector(".play-control-wrap");
         console.log(response);
+
         $playControlWrapper.innerHTML = `
         <h2 class="sr-only">재생 화면</h2>
         <button class="back-button">

@@ -27,3 +27,9 @@
 .playlist-info {
   margin-left: 0;
 }
+
+.playlist-info img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.5rem;
+}
