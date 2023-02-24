@@ -41,14 +41,16 @@ export default class MyplayList extends AbstractView {
     let playListLi = data
       .map((item) => {
         return `
-        <li id=${item.data} class="playlist-item">
-          <figure class="playlist-info">
-          <img src=${item.coverImg} alt="앨범 타이틀">
-            <figcaption class="playlist-item-info">
-              <span class="playlist-title">${item.title}</span>
-              <span class="playlist-artist">${item.artist}</span>
-            </figcaption>
-          </figure>
+        <li id=${item.id} class="playlist-item">
+          <a href="/playcontrol/${item.id}">
+            <figure class="playlist-info">
+            <img src=${item.coverImg} alt="앨범 타이틀">
+              <figcaption class="playlist-item-info">
+                <span class="playlist-title">${item.title}</span>
+                <span class="playlist-artist">${item.artist}</span>
+              </figcaption>
+            </figure>
+          </a>
           <button class="btn-delete" type="button">
             <img class="img-delete" src="./static/image/icon-trash.svg" alt="삭제버튼">
           </button>
@@ -66,7 +68,7 @@ export default class MyplayList extends AbstractView {
         let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
 
         musicList.forEach((item) => {
-          if (item.data === parseInt(event.currentTarget.parentNode.id)) {
+          if (item.id === parseInt(event.currentTarget.parentNode.id)) {
             musicList.splice(musicList.indexOf(item), 1);
           }
         });
