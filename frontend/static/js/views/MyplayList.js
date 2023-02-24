@@ -42,13 +42,15 @@ export default class MyplayList extends AbstractView {
       .map((item) => {
         return `
         <li id=${item.data} class="playlist-item">
-          <figure class="playlist-info">
-          <img src=${item.coverImg} alt="앨범 타이틀">
-            <figcaption class="playlist-item-info">
-              <span class="playlist-title">${item.title}</span>
-              <span class="playlist-artist">${item.artist}</span>
-            </figcaption>
-          </figure>
+          <a href="/playcontrol/${item.data}">
+            <figure class="playlist-info">
+            <img src=${item.coverImg} alt="앨범 타이틀">
+              <figcaption class="playlist-item-info">
+                <span class="playlist-title">${item.title}</span>
+                <span class="playlist-artist">${item.artist}</span>
+              </figcaption>
+            </figure>
+          </a>
           <button class="btn-delete" type="button">
             <img class="img-delete" src="./static/image/icon-trash.svg" alt="삭제버튼">
           </button>
