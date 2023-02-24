@@ -41,8 +41,8 @@ export default class MyplayList extends AbstractView {
     let playListLi = data
       .map((item) => {
         return `
-        <li id=${item.data} class="playlist-item">
-          <a href="/playcontrol/${item.data}">
+        <li id=${item.id} class="playlist-item">
+          <a href="/playcontrol/${item.id}">
             <figure class="playlist-info">
             <img src=${item.coverImg} alt="앨범 타이틀">
               <figcaption class="playlist-item-info">
@@ -68,7 +68,7 @@ export default class MyplayList extends AbstractView {
         let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
 
         musicList.forEach((item) => {
-          if (item.data === parseInt(event.currentTarget.parentNode.id)) {
+          if (item.id === parseInt(event.currentTarget.parentNode.id)) {
             musicList.splice(musicList.indexOf(item), 1);
           }
         });
