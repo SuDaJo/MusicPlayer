@@ -78,11 +78,11 @@ export default class Search extends AbstractView {
     const $searchMainUl = document.querySelector("ul");
     let $inputValue = document.querySelector("#searchInpValue");
 
-    useFetch(`search?q=${$inputValue.value}`).then((response) => {
-      console.log(response.data);
-      const searchItem = response.data
-        .map((item) => {
-          return `
+    useFetch(`search?q=${$inputValue.value}`)
+      .then((response) => {
+        const searchItem = response.data
+          .map((item) => {
+            return `
             <li class="playlist-item">
               <figure class="playlist-info">
                 <img src=${item.album.cover_small} alt="앨범 타이틀">
@@ -91,15 +91,57 @@ export default class Search extends AbstractView {
                   <span class="playlist-artist">${item.artist.name}</span>
                 </figcaption>
               </figure>
-              <button class="chart-btn-play" type="button"><img src="/static/image/icon-play.svg" alt="재생버튼"></button>
-              <button type="button"><img src="/static/image/icon-plus.svg" alt="추가버튼"></button>
+              <a href="playcontrol/${item.id}" class="chart-btn-play" type="button">
+                <img src="/static/image/icon-play.svg" alt="재생버튼">
+              </a>
+              <button class="music-add-btn" type="button"
+                data-id="${item.id}"
+                data-title="${item.title}"
+                data-artist="${item.artist.name}"
+                data-cover="${item.album.cover_small}"
+                >
+                <img src="/static/image/icon-plus.svg" alt="추가버튼">
+              </button>
               </button>
             </li>
         `;
+          })
+          .join("");
+        $searchMainUl.innerHTML = searchItem;
+        return response;
+      }).then(() => {
+        const $musicAddBtn = document.querySelectorAll(".music-add-btn");
+        $musicAddBtn.forEach((button) => {
+          button.addEventListener("click", (event) => {
+            let id = Number(event.currentTarget.dataset.id);
+            let title = event.currentTarget.dataset.title;
+            let coverImg = event.currentTarget.dataset.cover;
+            let artist = event.currentTarget.dataset.artist;
+
+            localStorage.setItem(
+              "data",
+              JSON.stringify([
+                ...JSON.parse(localStorage.getItem("data") || "[]"),
+                {
+                  id: id,
+                  title: title,
+                  coverImg: coverImg,
+                  artist: artist,
+                },
+              ])
+            );
+    
+            // 중복 제거하는 로직
+            if (localStorage.getItem("data") != null) {
+              let musicList = JSON.parse(localStorage.getItem("data"));
+    
+              const newSetArray = [...new Set(musicList.map(JSON.stringify))].map(JSON.parse);
+              localStorage.setItem("data", JSON.stringify(newSetArray));
+            }
+          })
+          
         })
-        .join("");
-      $searchMainUl.innerHTML = searchItem;
-    });
+      });
     $inputValue.value = "";
   }
 }
