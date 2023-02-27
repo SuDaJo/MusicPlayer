@@ -32,29 +32,7 @@ export default class Home extends AbstractView {
   }
 
   pickArtistData() {
-    const koreanArtist = ["아이유", "BTS", "성시경", "뉴진스", "임영웅", "태연", "세븐틴", "블랙핑크"];
-    const foreignArtist = [
-      "Ariana Grande",
-      "eminem",
-      "Justin Bieber",
-      "Charlie Puth",
-      "Taylor Swift",
-      "Rihanna",
-      "Beyonce",
-    ];
-    const femaleArtist = [
-      "소녀시대",
-      "마마무",
-      "청하",
-      "Lady Gaga",
-      "Alicia Keys",
-      "Kesha",
-      "Kelly Clarkson",
-      "Billie Eilish",
-    ];
-    const maleArtist = ["싸이", "폴킴", "박재범", "케이윌", "Sam Smith", "Ed Sheeran", "Maroon5"];
-
-    const artistListGroup = [koreanArtist, foreignArtist, femaleArtist, maleArtist];
+    const artistListGroup = [this.koreanArtist, this.foreignArtist, this.femaleArtist, this.maleArtist];
 
     let artistRandomPick = [];
 
