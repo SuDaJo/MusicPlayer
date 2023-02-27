@@ -24,13 +24,14 @@
   color: #fff;
 }
 
-.chart-header-item a {
+.chart-header-item button {
   padding: 1.5rem 0;
   width: 100%;
+  font-size: inherit;
 }
 
 .chart-main {
-  padding: 2.8rem;
+  padding: 2.8rem 1.8rem;
   overflow-y: auto;
   height: calc(100vh - 13.2rem);
 }
@@ -40,18 +41,27 @@
   display: flex;
   align-items: center;
 }
-.chart-list-item + .chart-list-item {
-  margin-top: 1rem;
+.chart-list-item {
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 1.2rem;
 }
 
-.chart-top-rank {
-  font-size: 1.4rem;
-  color: var(--main-color);
-  font-weight: var(--font-700);
+.chart-list-item + .chart-list-item {
+  margin-top: 1.2rem;
 }
 
 .chart-rank {
+  width: 1.8rem;
   font-size: 1.4rem;
+  text-align: center;
+}
+
+.chart-top-rank {
+  width: 1.8rem;
+  font-size: 1.4rem;
+  text-align: center;
+  color: var(--main-color);
+  font-weight: var(--font-700);
 }
 
 .chart-album-info,
@@ -59,7 +69,7 @@
   display: flex;
   align-items: center;
   flex-grow: 1;
-  margin-left: 1.6rem;
+  margin-left: 1.4rem;
   gap: 1.6rem;
 }
 
@@ -68,6 +78,12 @@
   display: flex;
   flex-direction: column;
   max-width: 18rem;
+}
+
+.chart-album-info img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.5rem;
 }
 
 .chart-item-title,

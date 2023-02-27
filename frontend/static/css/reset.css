@@ -83,6 +83,7 @@ a:visited {
 }
 
 button {
+  font-family: var(--font);
   background-color: transparent;
   border: none;
   cursor: pointer;
