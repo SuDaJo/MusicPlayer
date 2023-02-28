@@ -26,16 +26,19 @@ export default class Chart extends AbstractView {
     chartWrapper.append(chartTitle, chartHeader);
     wrapper.append(chartWrapper, chartMain);
 
-    const chartHeaderItemList = [{ top20: "TOP 20" }, { genre1: "국내" }, { genre2: "해외" }];
+    const chartHeaderItemList = [{ koreaTop: "국내 TOP 20" }, { popTop: "해외 TOP 20" }];
 
     chartHeaderItemList.forEach((listTitle) => {
       const chartHeaderItem = document.createElement("li");
       const chartHeaderItemLink = document.createElement("button");
 
-      // chartHeaderItemLink.setAttribute("href", "#");
       chartHeaderItem.appendChild(chartHeaderItemLink);
       chartHeaderItem.classList.add("chart-header-item");
       chartHeaderItemLink.textContent = Object.values(listTitle)[0];
+
+      if (chartHeaderItemLink.textContent === "국내 TOP 20") {
+        chartHeaderItem.classList.add("header-active");
+      }
 
       chartHeader.appendChild(chartHeaderItem);
     });
@@ -46,38 +49,60 @@ export default class Chart extends AbstractView {
     chartMainTitle.classList.add("sr-only");
     chartMain.append(chartMainTitle, chartMainHeader);
 
-    this.getTop20List();
+    this.setTop20List();
   }
 
-  getTop20List() {
-    const chartHeaderItem = document.querySelector(".chart-header-item button");
+  setTop20List() {
+    const $chartHeaderItemBtns = document.querySelectorAll(".chart-header-item button");
+    let tempArtistData;
 
-    let chartTempData =[];
+    $chartHeaderItemBtns.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        let targetHeader = event.currentTarget.parentNode;
+        if (event.target.textContent === "해외 TOP 20") {
+          targetHeader.classList.add("header-active");
+          targetHeader.previousSibling.classList.remove("header-active");
+          tempArtistData = this.foreignArtist;
+        } else {
+          targetHeader.classList.add("header-active");
+          targetHeader.nextSibling.classList.remove("header-active");
+          tempArtistData = this.koreanArtist;
+        }
+        this.getTop20List(tempArtistData);
+      });
+      this.getTop20List(tempArtistData);
+    });
+  }
 
-    this.koreanArtist.map((artist) => {
+  getTop20List(item) {
+    let chartTempData = [];
+
+    if (!item) {
+      item = this.koreanArtist;
+    }
+
+    item.map((artist, idx) => {
       useFetch(`search?q=${artist}`).then((res) => {
         chartTempData.push(...res.data);
-        if(chartTempData.length === 164) {
-          this.createChart(chartTempData)
+
+        if (idx === item.length - 1) {
+          this.createChart(chartTempData);
         }
       });
     });
-
-    chartHeaderItem.classList.toggle("header-active");
   }
 
-  createChart(musicData){
+  createChart(musicData) {
     const chartMainHeader = document.querySelector(".chart-main ol");
 
-    let sortMusicData = musicData.sort((a, b) => b.rank - a.rank).slice(0,20);
+    let sortMusicData = musicData.sort((a, b) => b.rank - a.rank).slice(0, 20);
 
-    const top20Item = sortMusicData.map((list, idx) => {
-      return`
+    const top20Item = sortMusicData
+      .map((list, idx) => {
+        return `
         <li class="chart-list-item">
         ${
-          idx + 1 <= 3 
-            ? `<span class="chart-top-rank">${idx + 1}</span>`
-            : `<span class="chart-rank">${idx + 1}</span>`
+          idx + 1 <= 3 ? `<span class="chart-top-rank">${idx + 1}</span>` : `<span class="chart-rank">${idx + 1}</span>`
         }
           <figure class="chart-album-info">
             <img src=${list.album.cover_small} alt="앨범 타이틀">
@@ -98,13 +123,14 @@ export default class Chart extends AbstractView {
             <img src="/static/image/icon-plus.svg" alt="추가버튼">
           </button>
       </li>
-      `
-    }).join("")
-    chartMainHeader.innerHTML += top20Item;
-    this.setData(sortMusicData);
+      `;
+      })
+      .join("");
+    chartMainHeader.innerHTML = top20Item;
+    this.setLocalData(sortMusicData);
   }
 
-  setData(){
+  setLocalData() {
     const btn = document.querySelectorAll(".music-add-btn");
     btn.forEach((button) => {
       button.addEventListener("click", (event) => {
@@ -114,7 +140,7 @@ export default class Chart extends AbstractView {
         let artist = event.currentTarget.dataset.artist;
 
         super.setLocalStorage(id, title, coverImg, artist);
-      })
-    })
+      });
+    });
   }
 }
