@@ -70,8 +70,8 @@ export default class Chart extends AbstractView {
         }
         this.getTop20List(tempArtistData);
       });
-      this.getTop20List(tempArtistData);
     });
+    this.getTop20List(tempArtistData);
   }
 
   getTop20List(item) {
