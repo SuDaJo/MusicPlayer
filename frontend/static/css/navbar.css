@@ -35,3 +35,7 @@
 .hidden-navbar {
   display: none;
 }
+
+.nav-list-item.active {
+  filter: invert(63%) sepia(51%) saturate(3249%) hue-rotate(136deg) brightness(93%) contrast(97%);
+}
