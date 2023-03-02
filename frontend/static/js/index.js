@@ -6,11 +6,14 @@ import PlayControl from "./views/PlayControl.js";
 import NotFound from "./views/NotFound.js";
 import Splash from "./views/Splash.js";
 
-const pathToRegex = (path) => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
+const pathToRegex = (path) =>
+  new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
 const getParams = (match) => {
   const values = match.isMatch.slice(1);
-  const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map((result) => result[1]);
+  const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(
+    (result) => result[1]
+  );
   return Object.fromEntries(keys.map((key, i) => [key, values[i]]));
 };
 
@@ -36,7 +39,9 @@ const router = async () => {
     };
   });
 
-  let match = potentialMatches.find((potentialMatch) => potentialMatch.isMatch !== null);
+  let match = potentialMatches.find(
+    (potentialMatch) => potentialMatch.isMatch !== null
+  );
 
   if (!match) {
     match = {
@@ -53,8 +58,6 @@ const router = async () => {
   const $navBar = document.querySelector(".nav-bar");
   if (viewHtml.$target.baseURI.includes("playcontrol")) {
     $navBar.style.display = "none";
-    // const newPlayControl = new PlayControl();
-    // newPlayControl.goBack();
   } else {
     $navBar.style.display = "block";
   }
@@ -101,6 +104,33 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 500);
     }, 2000);
   }
+
+  const menuItems = document.querySelectorAll(".nav-list-item");
+
+  let currentActive;
+
+  menuItems.forEach((item) => {
+    const itemHref = item.querySelector("a").getAttribute("href");
+    if (location.pathname === "/") {
+      if (itemHref === "/") {
+        currentActive = item;
+        currentActive.classList.add("active");
+      }
+    } else if (location.pathname.includes(itemHref) && itemHref.length !== 1) {
+      currentActive = item;
+      currentActive.classList.add("active");
+    }
+  });
+
+  menuItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      if (item !== currentActive) {
+        currentActive.classList.remove("active");
+        item.classList.add("active");
+        currentActive = item;
+      }
+    });
+  });
 
   router();
 });
