@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "김다정",
+    "github": "https://github.com/DADA6041",
+    "resume": "https://www.notion.so/978cd935d53148d1b9c189859f4342d5?pvs=4",
+    "img": "https://raw.githubusercontent.com/RainbowMarkets/RainbowMarket/photo/DaJeong-Profile.jpg"
+  },
+  {
+    "id": 2,
+    "name": "정수현",
+    "github": "https://github.com/IntHyun",
+    "resume": "https://github.com/IntHyun",
+    "img": "https://avatars.githubusercontent.com/u/68059880?v=4"
+  },
+  {
+    "id": 3,
+    "name": "조민지",
+    "github": "https://github.com/ming-Jo",
+    "resume": "https://github.com/ming-Jo",
+    "img": "https://avatars.githubusercontent.com/u/112460344?v=4"
+  }
+]

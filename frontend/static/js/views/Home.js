@@ -11,6 +11,17 @@ export default class Home extends AbstractView {
     this.createHtml();
   }
 
+  // async createMemberData() {
+  //   const response = await fetch("../json/memberData.json");
+  //   console.log(response);
+  //   if (response.ok) {
+  //     const memberData = await response.json();
+  //     console.log(memberData);
+  //   } else {
+  //     console.log("실패!!" + response.status);
+  //   }
+  // }
+
   createHtml() {
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper");
@@ -24,7 +35,21 @@ export default class Home extends AbstractView {
     const advertise = document.createElement("aside");
     homeTitle.classList.add("sr-only");
     homeTitle.textContent = "홈 화면";
-    advertise.textContent = "우리 광고";
+
+    // this.createMemberData();
+
+    advertise.innerHTML = `
+      <ul>
+        <li class="member-info">
+          <img class="member-profile-img" src="https://avatars.githubusercontent.com/u/112460344?v=4" alt="프로필 사진" />
+          <div>
+            <strong class="member-name">멋쟁이</strong>
+            <a class="member-github" href="https://github.com/IntHyun">GitHub</a>
+            <a class="member-resume" href="https://www.notion.so/978cd935d53148d1b9c189859f4342d5?pvs=4">Resume</a>
+          </div>
+        </li>
+      </ul>
+    `;
 
     homeWrapper.append(homeTitle, advertise);
 
@@ -88,5 +113,4 @@ export default class Home extends AbstractView {
 
     $homeWrapper.innerHTML += contCategory;
   }
-
 }
