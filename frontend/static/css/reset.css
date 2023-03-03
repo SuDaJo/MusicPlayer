@@ -78,10 +78,6 @@ a {
   color: black;
 }
 
-a:visited {
-  color: inherit;
-}
-
 button {
   font-family: var(--font);
   background-color: transparent;

@@ -4,12 +4,6 @@
   height: calc(100vh - 7.8rem);
 }
 
-.wrapper aside {
-  background-color: antiquewhite;
-  height: 14rem;
-  margin-bottom: 2.2rem;
-}
-
 .cont-category + .cont-category {
   margin-top: 2.2rem;
 }
@@ -57,4 +51,50 @@
 .album-title {
   margin: 0.2rem 0;
   font-weight: var(--font-700);
+}
+
+.wrapper aside {
+  background: no-repeat center/cover url("/static/image/id_card.png");
+  height: 14rem;
+  margin-bottom: 2.2rem;
+  box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px;
+  border-radius: 1rem;
+}
+.wrapper aside ul {
+  height: 100%;
+}
+
+.member-info {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.member-profile-img {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+}
+
+.member-name {
+  display: block;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.member-github,
+.member-resume {
+  width: 7rem;
+  padding: 0.6rem 0;
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.member-github + .member-resume {
+  margin-left: 0.5rem;
 }
