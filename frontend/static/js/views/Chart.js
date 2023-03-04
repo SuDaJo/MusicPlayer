@@ -4,7 +4,7 @@ import useFetch from "../API/API.js";
 export default class Chart extends AbstractView {
   constructor($target) {
     super($target);
-    this.setTitle("차트");
+    this.setTitle("MusicDrop｜Chart");
   }
 
   async getHtml() {

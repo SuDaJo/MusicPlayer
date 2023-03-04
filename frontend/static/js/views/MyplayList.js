@@ -3,7 +3,7 @@ import AbstractView from "./AbstractView.js";
 export default class MyplayList extends AbstractView {
   constructor($target) {
     super($target);
-    this.setTitle("플레이리스트");
+    this.setTitle("MusicDrop｜PlayList");
   }
 
   async getHtml() {

@@ -4,7 +4,7 @@ import useFetch from "../API/API.js";
 export default class Search extends AbstractView {
   constructor($target) {
     super($target);
-    this.setTitle("서치");
+    this.setTitle("MusicDrop｜Search");
   }
 
   async getHtml() {
