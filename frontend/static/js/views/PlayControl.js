@@ -21,7 +21,7 @@ export default class PlayControl extends AbstractView {
     playControlWrapper.classList.add("play-control-wrap");
     wrapper.appendChild(playControlWrapper);
 
-    this.getTrackData();
+    this.getTrackData(this.params.id);
   }
 
   goBack() {
@@ -33,8 +33,8 @@ export default class PlayControl extends AbstractView {
     }
   }
 
-  getTrackData() {
-    useFetch(`track/${this.params.id}`)
+  getTrackData(params) {
+    useFetch(`track/${params}`)
       .then((response) => {
         let id = response.id;
         let title = response.title;
@@ -68,7 +68,7 @@ export default class PlayControl extends AbstractView {
                 <img src="/static/image/icon-repeat.svg" alt="랜덤 재생버튼" />
               </button>
               <div class="controller-btns-play">
-                <button type="button">
+                <button class="prev-play-btn" type="button">
                   <img
                     src="/static/image/icon-backward.svg"
                     alt="이전곡 재생버튼"
@@ -80,7 +80,7 @@ export default class PlayControl extends AbstractView {
                     <source src=${response.preview}>
                   </audio>
                 </button>
-                <button type="button">
+                <button class="next-play-btn" type="button">
                   <img
                     src="/static/image/icon-forward.svg"
                     alt="다음곡 재생버튼"
@@ -132,6 +132,38 @@ export default class PlayControl extends AbstractView {
     this.timeUpdate();
     this.moveProgressBar();
     this.endAudio();
+    this.playPrevMusic();
+    this.playNextMusic()
+  }
+
+  playPrevMusic() {
+    let currentId;
+    const $prevBtn = document.querySelector(".prev-play-btn");
+    $prevBtn.addEventListener("click", () => {
+      currentId = Number(this.params.id);
+      let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
+      musicList.forEach((item, idx) => {
+        if (item.id == currentId) {
+          this.getTrackData(musicList[idx - 1].id);
+          this.params.id = musicList[idx - 1].id;
+        }
+      })
+    })
+  }
+
+  playNextMusic() {
+    let currentId;
+    const $nextBtn = document.querySelector(".next-play-btn");
+    $nextBtn.addEventListener("click", () => {
+      currentId = Number(this.params.id);
+      let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
+      musicList.forEach((item, idx) => {
+        if (item.id == currentId) {
+          this.getTrackData(musicList[idx + 1].id);
+          this.params.id = musicList[idx + 1].id;
+        }
+      })
+    })
   }
 
   timeUpdate() {
