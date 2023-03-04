@@ -4,7 +4,7 @@ import useFetch from "../API/API.js";
 export default class Home extends AbstractView {
   constructor($target) {
     super($target);
-    this.setTitle("홈");
+    this.setTitle("MusicDrop｜Home");
   }
 
   async getHtml() {

@@ -3,7 +3,7 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
   constructor() {
     super();
-    this.setTitle("못찾아요");
+    this.setTitle("NotFound 404");
   }
 
   async getHtml() {

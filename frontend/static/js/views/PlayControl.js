@@ -4,7 +4,7 @@ import useFetch from "../API/API.js";
 export default class PlayControl extends AbstractView {
   constructor($target, params) {
     super($target, params);
-    this.setTitle("재생화면");
+    this.setTitle("MusicDrop｜Play");
   }
 
   async getHtml() {
