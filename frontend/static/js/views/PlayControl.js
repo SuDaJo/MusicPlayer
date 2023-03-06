@@ -113,6 +113,8 @@ export default class PlayControl extends AbstractView {
     const $playButton = document.querySelector(".play-button");
     const $playPauseImg = document.querySelector(".play-pause-img");
     const $audio = document.querySelector(".music-src");
+    const $prevBtn = document.querySelector(".prev-play-btn");
+    const $nextBtn = document.querySelector(".next-play-btn");
 
     $audio.play();
     $audio.volume = 0.05;
@@ -129,40 +131,40 @@ export default class PlayControl extends AbstractView {
       }
     });
 
+    $audio.addEventListener("ended", () => {
+      this.changeMusic(+1);
+    })
+
+    $nextBtn.addEventListener("click", () => {
+      this.changeMusic(+1);
+    })
+
+    $prevBtn.addEventListener("click", () => {
+      this.changeMusic(-1);
+    })
+
     this.timeUpdate();
     this.moveProgressBar();
     this.endAudio();
-    this.playPrevMusic();
-    this.playNextMusic()
   }
 
-  playPrevMusic() {
+  changeMusic(isNext) {
     let currentId;
-    const $prevBtn = document.querySelector(".prev-play-btn");
-    $prevBtn.addEventListener("click", () => {
-      currentId = Number(this.params.id);
-      let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
-      musicList.forEach((item, idx) => {
-        if (item.id == currentId) {
-          this.getTrackData(musicList[idx - 1].id);
-          this.params.id = musicList[idx - 1].id;
+    currentId = Number(this.params.id);
+    let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
+    musicList.forEach((item, idx) => {
+      if (item.id === currentId) {
+        if (musicList[musicList.length - 1].id === currentId && isNext === + 1) {
+          this.getTrackData(musicList[0].id)
+          this.params.id = musicList[0].id;
+        } else if(musicList[0].id === currentId && isNext === -1) {
+          this.getTrackData(musicList[musicList.length - 1].id);
+          this.params.id = musicList[musicList.length - 1].id;
+        } else {
+          this.getTrackData(musicList[idx + isNext].id);
+          this.params.id = musicList[idx + isNext].id;
         }
-      })
-    })
-  }
-
-  playNextMusic() {
-    let currentId;
-    const $nextBtn = document.querySelector(".next-play-btn");
-    $nextBtn.addEventListener("click", () => {
-      currentId = Number(this.params.id);
-      let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
-      musicList.forEach((item, idx) => {
-        if (item.id == currentId) {
-          this.getTrackData(musicList[idx + 1].id);
-          this.params.id = musicList[idx + 1].id;
-        }
-      })
+      }
     })
   }
 
