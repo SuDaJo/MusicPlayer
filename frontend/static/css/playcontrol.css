@@ -92,3 +92,10 @@ input[type="range"]::-webkit-slider-thumb {
 .progress-bar-time .progress-time {
   color: var(--main-color);
 }
+
+.random-button.active,
+.repeat-button.active {
+  filter: invert(49%) sepia(89%) saturate(1411%) hue-rotate(142deg) brightness(98%) contrast(102%);
+}
+
+

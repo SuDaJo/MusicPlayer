@@ -12,7 +12,6 @@ export default class PlayControl extends AbstractView {
   }
 
   createHtml() {
-    console.log(this.params.id);
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper");
     this.$target.replaceChildren(wrapper);
@@ -64,8 +63,8 @@ export default class PlayControl extends AbstractView {
           </figure>
           <div class="controller">
             <div class="controller-btn-wrapper">
-              <button type="button">
-                <img src="/static/image/icon-repeat.svg" alt="랜덤 재생버튼" />
+              <button class="random-button" type="button">
+                <img src="/static/image/icon-random.svg" alt="랜덤 재생버튼" />
               </button>
               <div class="controller-btns-play">
                 <button class="prev-play-btn" type="button">
@@ -87,9 +86,9 @@ export default class PlayControl extends AbstractView {
                   />
                 </button>
               </div>
-              <button type="button">
+              <button class="repeat-button" type="button">
                 <img
-                  src="/static/image/icon-rotate-ccw.svg"
+                  src="/static/image/icon-repeat.svg"
                   alt="한곡 반복 재생버튼"
                 />
               </button>
@@ -146,6 +145,22 @@ export default class PlayControl extends AbstractView {
     this.timeUpdate();
     this.moveProgressBar();
     this.endAudio();
+    this.randomPlayMusic()
+  }
+
+  randomPlayMusic() {
+    const $randomBtn = document.querySelector(".random-button")
+    let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
+    $randomBtn.addEventListener("click", () => {
+      $randomBtn.classList.toggle("active");
+      if ($randomBtn.classList.contains('active')) {
+        localStorage.setItem("random", true);
+        let hi = musicList.sort(() => Math.random() - 0.5)
+        console.log(hi)
+      } else {
+        localStorage.removeItem("random")
+      }
+    })
   }
 
   changeMusic(isNext) {
@@ -155,7 +170,7 @@ export default class PlayControl extends AbstractView {
     musicList.forEach((item, idx) => {
       if (item.id === currentId) {
         if (musicList[musicList.length - 1].id === currentId && isNext === + 1) {
-          this.getTrackData(musicList[0].id)
+          this.getTrackData(musicList[0].id);
           this.params.id = musicList[0].id;
         } else if(musicList[0].id === currentId && isNext === -1) {
           this.getTrackData(musicList[musicList.length - 1].id);
