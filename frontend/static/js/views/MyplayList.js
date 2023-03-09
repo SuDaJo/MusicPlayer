@@ -58,9 +58,9 @@ export default class MyplayList extends AbstractView {
         `;
         })
         .join("");
-        $playListUl.innerHTML += playListLi;
+      $playListUl.innerHTML += playListLi;
     }
-    return ; 
+    return;
   }
 
   removeList() {
@@ -68,6 +68,7 @@ export default class MyplayList extends AbstractView {
     $btnDelete.forEach((button) => {
       button.addEventListener("click", (event) => {
         let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
+        let randomMusicList;
 
         musicList.forEach((item) => {
           if (item.id === parseInt(event.currentTarget.parentNode.id)) {
@@ -76,6 +77,17 @@ export default class MyplayList extends AbstractView {
         });
         localStorage.setItem("data", JSON.stringify(musicList));
         event.currentTarget.parentElement.remove();
+
+        if (localStorage.getItem("randomData")) {
+          randomMusicList = Array.from(JSON.parse(localStorage.getItem("randomData")));
+          randomMusicList.forEach((item) => {
+            if (item.id === parseInt(event.currentTarget.parentNode.id)) {
+              randomMusicList.splice(randomMusicList.indexOf(item), 1);
+            }
+          });
+          localStorage.setItem("randomData", JSON.stringify(randomMusicList));
+          event.currentTarget.parentElement.remove();
+        }
       });
     });
   }
