@@ -118,7 +118,8 @@ export default class PlayControl extends AbstractView {
     $audio.play();
     $audio.volume = 0.05;
 
-    $playButton.addEventListener("click", () => {
+    $playButton.addEventListener("click", (e) => {
+      e.preventDefault();
       if ($playButton.dataset.play === "true") {
         $audio.pause();
         $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
@@ -130,49 +131,71 @@ export default class PlayControl extends AbstractView {
       }
     });
 
-    $audio.addEventListener("ended", () => {
+    $audio.addEventListener("ended", (e) => {
+      e.preventDefault();
       this.changeMusic(+1);
-    })
+    });
 
-    $nextBtn.addEventListener("click", () => {
+    $nextBtn.addEventListener("click", (e) => {
+      e.preventDefault();
       this.changeMusic(+1);
-    })
+    });
 
-    $prevBtn.addEventListener("click", () => {
+    $prevBtn.addEventListener("click", (e) => {
+      e.preventDefault();
       this.changeMusic(-1);
-    })
+    });
 
     this.timeUpdate();
     this.moveProgressBar();
     this.endAudio();
-    this.randomPlayMusic()
+    this.randomPlayMusic();
   }
 
   randomPlayMusic() {
-    const $randomBtn = document.querySelector(".random-button")
+    const $randomBtn = document.querySelector(".random-button");
     let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
-    $randomBtn.addEventListener("click", () => {
-      $randomBtn.classList.toggle("active");
-      if ($randomBtn.classList.contains('active')) {
+    console.log(musicList);
+
+    if (!localStorage.getItem("random") || localStorage.getItem("random") === "false") {
+      $randomBtn.classList.remove("active");
+    } else {
+      $randomBtn.classList.add("active");
+    }
+
+    $randomBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (!localStorage.getItem("random") || localStorage.getItem("random") === "false") {
+        $randomBtn.classList.add("active");
         localStorage.setItem("random", true);
-        let hi = musicList.sort(() => Math.random() - 0.5)
-        console.log(hi)
+        let sortRandomData = musicList.sort(() => Math.random() - 0.5);
+        localStorage.setItem("randomData", JSON.stringify(sortRandomData));
       } else {
-        localStorage.removeItem("random")
+        $randomBtn.classList.remove("active");
+        localStorage.setItem("random", false);
+        localStorage.removeItem("randomData");
       }
-    })
+    });
   }
 
   changeMusic(isNext) {
     let currentId;
     currentId = Number(this.params.id);
-    let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
+
+    let musicList;
+
+    if (localStorage.getItem("random") === "true") {
+      musicList = Array.from(JSON.parse(localStorage.getItem("randomData")));
+    } else {
+      musicList = Array.from(JSON.parse(localStorage.getItem("data")));
+    }
+
     musicList.forEach((item, idx) => {
       if (item.id === currentId) {
-        if (musicList[musicList.length - 1].id === currentId && isNext === + 1) {
+        if (musicList[musicList.length - 1].id === currentId && isNext === +1) {
           this.getTrackData(musicList[0].id);
           this.params.id = musicList[0].id;
-        } else if(musicList[0].id === currentId && isNext === -1) {
+        } else if (musicList[0].id === currentId && isNext === -1) {
           this.getTrackData(musicList[musicList.length - 1].id);
           this.params.id = musicList[musicList.length - 1].id;
         } else {
@@ -180,7 +203,7 @@ export default class PlayControl extends AbstractView {
           this.params.id = musicList[idx + isNext].id;
         }
       }
-    })
+    });
   }
 
   timeUpdate() {
@@ -221,7 +244,8 @@ export default class PlayControl extends AbstractView {
     const $playButton = document.querySelector(".play-button");
     const $playPauseImg = document.querySelector(".play-pause-img");
 
-    $audio.addEventListener("ended", () => {
+    $audio.addEventListener("ended", (e) => {
+      e.preventDefault();
       $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
       $playButton.dataset.play = "false";
     });
