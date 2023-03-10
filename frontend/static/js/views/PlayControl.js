@@ -133,7 +133,14 @@ export default class PlayControl extends AbstractView {
 
     $audio.addEventListener("ended", (e) => {
       e.preventDefault();
-      this.changeMusic(+1);
+      $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
+      $playButton.dataset.play = "false";
+
+      if (!localStorage.getItem("repeat")) {
+        this.changeMusic(+1);
+      } else {
+        this.changeMusic(0);
+      }
     });
 
     $nextBtn.addEventListener("click", (e) => {
@@ -148,8 +155,8 @@ export default class PlayControl extends AbstractView {
 
     this.timeUpdate();
     this.moveProgressBar();
-    this.endAudio();
     this.randomPlayMusic();
+    this.repeatMusic();
   }
 
   randomPlayMusic() {
@@ -157,7 +164,7 @@ export default class PlayControl extends AbstractView {
     let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
     console.log(musicList);
 
-    if (!localStorage.getItem("random") || localStorage.getItem("random") === "false") {
+    if (!localStorage.getItem("random")) {
       $randomBtn.classList.remove("active");
     } else {
       $randomBtn.classList.add("active");
@@ -165,14 +172,14 @@ export default class PlayControl extends AbstractView {
 
     $randomBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      if (!localStorage.getItem("random") || localStorage.getItem("random") === "false") {
+      if (!localStorage.getItem("random")) {
         $randomBtn.classList.add("active");
         localStorage.setItem("random", true);
         let sortRandomData = musicList.sort(() => Math.random() - 0.5);
         localStorage.setItem("randomData", JSON.stringify(sortRandomData));
       } else {
         $randomBtn.classList.remove("active");
-        localStorage.setItem("random", false);
+        localStorage.removeItem("random");
         localStorage.removeItem("randomData");
       }
     });
@@ -239,15 +246,23 @@ export default class PlayControl extends AbstractView {
     });
   }
 
-  endAudio() {
-    const $audio = document.querySelector(".music-src");
-    const $playButton = document.querySelector(".play-button");
-    const $playPauseImg = document.querySelector(".play-pause-img");
+  repeatMusic() {
+    const $repeatBtn = document.querySelector(".repeat-button");
 
-    $audio.addEventListener("ended", (e) => {
-      e.preventDefault();
-      $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
-      $playButton.dataset.play = "false";
-    });
+    if (!localStorage.getItem("repeat")) {
+      $repeatBtn.classList.remove("active");
+    } else {
+      $repeatBtn.classList.add("active");
+    }
+
+    $repeatBtn.addEventListener("click", () => {
+      if (!localStorage.getItem("repeat")) {
+        $repeatBtn.classList.add("active");
+        localStorage.setItem("repeat", true);
+      } else {
+        $repeatBtn.classList.remove("active");
+        localStorage.removeItem("repeat");
+      }
+    })
   }
 }
