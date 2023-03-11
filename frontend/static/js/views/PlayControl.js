@@ -42,7 +42,8 @@ export default class PlayControl extends AbstractView {
 
         super.setLocalStorage(id, title, coverImg, artist);
 
-        const $playControlWrapper = document.querySelector(".play-control-wrap");
+        const $playControlWrapper =
+          document.querySelector(".play-control-wrap");
 
         $playControlWrapper.innerHTML = `
         <h2 class="sr-only">재생 화면</h2>
@@ -105,6 +106,7 @@ export default class PlayControl extends AbstractView {
       .then(() => {
         this.goBack();
         this.playMusic();
+        this.slideText();
       });
   }
 
@@ -162,7 +164,6 @@ export default class PlayControl extends AbstractView {
   randomPlayMusic() {
     const $randomBtn = document.querySelector(".random-button");
     let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
-    console.log(musicList);
 
     if (!localStorage.getItem("random")) {
       $randomBtn.classList.remove("active");
@@ -263,6 +264,32 @@ export default class PlayControl extends AbstractView {
         $repeatBtn.classList.remove("active");
         localStorage.removeItem("repeat");
       }
-    })
+    });
+  }
+
+  slideText() {
+    const $musicTitle = document.querySelector(".music-title");
+
+    let elementWidth = $musicTitle.offsetWidth;
+    let parentWidth = $musicTitle.parentNode.offsetWidth;
+    let location = 0;
+    
+    if (elementWidth > parentWidth) {
+      $musicTitle.style.alignSelf = "flex-start";
+      $musicTitle.innerHTML += "&emsp; &emsp; &emsp;" + $musicTitle.textContent;
+    }
+    setTimeout(() => {
+      function slideContent() {
+        if (elementWidth > parentWidth) {
+          $musicTitle.style.marginLeft = --location + "px";
+    
+          if (elementWidth + 50 === -location) {
+            location = 0;
+          }
+        }
+        requestAnimationFrame(slideContent);
+      }
+      slideContent();
+    }, 1500);
   }
 }
