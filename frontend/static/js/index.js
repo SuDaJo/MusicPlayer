@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         $splash.style.display = "none";
       }, 500);
-    }, 2000);
+    }, 1200);
   }
 
   const menuItems = document.querySelectorAll(".nav-list-item");

@@ -12,7 +12,6 @@ export default class PlayControl extends AbstractView {
   }
 
   createHtml() {
-    console.log(this.params.id);
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper");
     this.$target.replaceChildren(wrapper);
@@ -21,7 +20,7 @@ export default class PlayControl extends AbstractView {
     playControlWrapper.classList.add("play-control-wrap");
     wrapper.appendChild(playControlWrapper);
 
-    this.getTrackData();
+    this.getTrackData(this.params.id);
   }
 
   goBack() {
@@ -33,8 +32,8 @@ export default class PlayControl extends AbstractView {
     }
   }
 
-  getTrackData() {
-    useFetch(`track/${this.params.id}`)
+  getTrackData(params) {
+    useFetch(`track/${params}`)
       .then((response) => {
         let id = response.id;
         let title = response.title;
@@ -43,7 +42,8 @@ export default class PlayControl extends AbstractView {
 
         super.setLocalStorage(id, title, coverImg, artist);
 
-        const $playControlWrapper = document.querySelector(".play-control-wrap");
+        const $playControlWrapper =
+          document.querySelector(".play-control-wrap");
 
         $playControlWrapper.innerHTML = `
         <h2 class="sr-only">재생 화면</h2>
@@ -64,11 +64,11 @@ export default class PlayControl extends AbstractView {
           </figure>
           <div class="controller">
             <div class="controller-btn-wrapper">
-              <button type="button">
-                <img src="/static/image/icon-repeat.svg" alt="랜덤 재생버튼" />
+              <button class="random-button" type="button">
+                <img src="/static/image/icon-random.svg" alt="랜덤 재생버튼" />
               </button>
               <div class="controller-btns-play">
-                <button type="button">
+                <button class="prev-play-btn" type="button">
                   <img
                     src="/static/image/icon-backward.svg"
                     alt="이전곡 재생버튼"
@@ -80,16 +80,16 @@ export default class PlayControl extends AbstractView {
                     <source src=${response.preview}>
                   </audio>
                 </button>
-                <button type="button">
+                <button class="next-play-btn" type="button">
                   <img
                     src="/static/image/icon-forward.svg"
                     alt="다음곡 재생버튼"
                   />
                 </button>
               </div>
-              <button type="button">
+              <button class="repeat-button" type="button">
                 <img
-                  src="/static/image/icon-rotate-ccw.svg"
+                  src="/static/image/icon-repeat.svg"
                   alt="한곡 반복 재생버튼"
                 />
               </button>
@@ -106,6 +106,7 @@ export default class PlayControl extends AbstractView {
       .then(() => {
         this.goBack();
         this.playMusic();
+        this.slideText();
       });
   }
 
@@ -113,11 +114,14 @@ export default class PlayControl extends AbstractView {
     const $playButton = document.querySelector(".play-button");
     const $playPauseImg = document.querySelector(".play-pause-img");
     const $audio = document.querySelector(".music-src");
+    const $prevBtn = document.querySelector(".prev-play-btn");
+    const $nextBtn = document.querySelector(".next-play-btn");
 
     $audio.play();
     $audio.volume = 0.05;
 
-    $playButton.addEventListener("click", () => {
+    $playButton.addEventListener("click", (e) => {
+      e.preventDefault();
       if ($playButton.dataset.play === "true") {
         $audio.pause();
         $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
@@ -129,9 +133,85 @@ export default class PlayControl extends AbstractView {
       }
     });
 
+    $audio.addEventListener("ended", (e) => {
+      e.preventDefault();
+      $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
+      $playButton.dataset.play = "false";
+
+      if (!localStorage.getItem("repeat")) {
+        this.changeMusic(+1);
+      } else {
+        this.changeMusic(0);
+      }
+    });
+
+    $nextBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.changeMusic(+1);
+    });
+
+    $prevBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.changeMusic(-1);
+    });
+
     this.timeUpdate();
     this.moveProgressBar();
-    this.endAudio();
+    this.randomPlayMusic();
+    this.repeatMusic();
+  }
+
+  randomPlayMusic() {
+    const $randomBtn = document.querySelector(".random-button");
+    let musicList = Array.from(JSON.parse(localStorage.getItem("data")));
+
+    if (!localStorage.getItem("random")) {
+      $randomBtn.classList.remove("active");
+    } else {
+      $randomBtn.classList.add("active");
+    }
+
+    $randomBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (!localStorage.getItem("random")) {
+        $randomBtn.classList.add("active");
+        localStorage.setItem("random", true);
+        let sortRandomData = musicList.sort(() => Math.random() - 0.5);
+        localStorage.setItem("randomData", JSON.stringify(sortRandomData));
+      } else {
+        $randomBtn.classList.remove("active");
+        localStorage.removeItem("random");
+        localStorage.removeItem("randomData");
+      }
+    });
+  }
+
+  changeMusic(isNext) {
+    let currentId;
+    currentId = Number(this.params.id);
+
+    let musicList;
+
+    if (localStorage.getItem("random") === "true") {
+      musicList = Array.from(JSON.parse(localStorage.getItem("randomData")));
+    } else {
+      musicList = Array.from(JSON.parse(localStorage.getItem("data")));
+    }
+
+    musicList.forEach((item, idx) => {
+      if (item.id === currentId) {
+        if (musicList[musicList.length - 1].id === currentId && isNext === +1) {
+          this.getTrackData(musicList[0].id);
+          this.params.id = musicList[0].id;
+        } else if (musicList[0].id === currentId && isNext === -1) {
+          this.getTrackData(musicList[musicList.length - 1].id);
+          this.params.id = musicList[musicList.length - 1].id;
+        } else {
+          this.getTrackData(musicList[idx + isNext].id);
+          this.params.id = musicList[idx + isNext].id;
+        }
+      }
+    });
   }
 
   timeUpdate() {
@@ -167,14 +247,49 @@ export default class PlayControl extends AbstractView {
     });
   }
 
-  endAudio() {
-    const $audio = document.querySelector(".music-src");
-    const $playButton = document.querySelector(".play-button");
-    const $playPauseImg = document.querySelector(".play-pause-img");
+  repeatMusic() {
+    const $repeatBtn = document.querySelector(".repeat-button");
 
-    $audio.addEventListener("ended", () => {
-      $playPauseImg.setAttribute("src", "/static/image/icon-play.svg");
-      $playButton.dataset.play = "false";
+    if (!localStorage.getItem("repeat")) {
+      $repeatBtn.classList.remove("active");
+    } else {
+      $repeatBtn.classList.add("active");
+    }
+
+    $repeatBtn.addEventListener("click", () => {
+      if (!localStorage.getItem("repeat")) {
+        $repeatBtn.classList.add("active");
+        localStorage.setItem("repeat", true);
+      } else {
+        $repeatBtn.classList.remove("active");
+        localStorage.removeItem("repeat");
+      }
     });
+  }
+
+  slideText() {
+    const $musicTitle = document.querySelector(".music-title");
+
+    let elementWidth = $musicTitle.offsetWidth;
+    let parentWidth = $musicTitle.parentNode.offsetWidth;
+    let location = 0;
+    
+    if (elementWidth > parentWidth) {
+      $musicTitle.style.alignSelf = "flex-start";
+      $musicTitle.innerHTML += "&emsp; &emsp; &emsp;" + $musicTitle.textContent;
+    }
+    setTimeout(() => {
+      function slideContent() {
+        if (elementWidth > parentWidth) {
+          $musicTitle.style.marginLeft = --location + "px";
+    
+          if (elementWidth + 50 === -location) {
+            location = 0;
+          }
+        }
+        requestAnimationFrame(slideContent);
+      }
+      slideContent();
+    }, 1500);
   }
 }
