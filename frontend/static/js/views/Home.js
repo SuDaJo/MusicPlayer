@@ -11,18 +11,18 @@ export default class Home extends AbstractView {
     this.createHtml();
   }
 
-  // async createMemberData() {
-  //   const response = await fetch("../json/memberData.json");
-  //   console.log(response);
-  //   if (response.ok) {
-  //     const memberData = await response.json();
-  //     console.log(memberData);
-  //   } else {
-  //     console.log("실패!!" + response.status);
-  //   }
-  // }
+  async createMemberData() {
+    const response = await fetch("/static/js/json/memberData.json");
+    console.log(response);
+    if (response.ok) {
+      const memberData = await response.json();
+      return memberData;
+    } else {
+      console.log("실패!!" + response.status);
+    }
+  }
 
-  createHtml() {
+  async createHtml() {
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper");
     this.$target.replaceChildren(wrapper);
@@ -33,23 +33,30 @@ export default class Home extends AbstractView {
 
     const homeTitle = document.createElement("h2");
     const advertise = document.createElement("aside");
+    const advertiseUl = document.createElement("ul");
+
+    advertise.appendChild(advertiseUl);
+
     homeTitle.classList.add("sr-only");
     homeTitle.textContent = "홈 화면";
 
-    // this.createMemberData();
+    const memberData = await this.createMemberData();
 
-    advertise.innerHTML = `
-      <ul>
+    const memberList = memberData
+      .map((data) => {
+        return `
         <li class="member-info">
-          <img class="member-profile-img" src="https://avatars.githubusercontent.com/u/112460344?v=4" alt="프로필 사진" />
+          <img class="member-profile-img" src=${data.img} alt="프로필 사진" />
           <div>
-            <strong class="member-name">멋쟁이</strong>
-            <a class="member-github" href="https://github.com/IntHyun">GitHub</a>
-            <a class="member-resume" href="https://www.notion.so/978cd935d53148d1b9c189859f4342d5?pvs=4">Resume</a>
+            <strong class="member-name">${data.name}</strong>
+            <a class="member-github" href=${data.github}>GitHub</a>
+            <a class="member-resume" href=${data.resume}>Resume</a>
           </div>
         </li>
-      </ul>
-    `;
+        `;
+      })
+      .join("");
+    advertiseUl.innerHTML += memberList;
 
     homeWrapper.append(homeTitle, advertise);
 

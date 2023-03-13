@@ -1,3 +1,27 @@
+@keyframes rotate {
+  0% {
+    transform: translateY(0);
+  }
+  16.5% {
+    transform: translateY(-100%);
+  }
+  33% {
+    transform: translateY(-100%);
+  }
+  49.5% {
+    transform: translateY(-200%);
+  }
+  66% {
+    transform: translateY(-200%);
+  }
+  82.5% {
+    transform: translateY(-300%);
+  }
+  100% {
+    transform: translateY(-300%);
+  }
+}
+
 .home-wrapper {
   padding: 2rem;
   overflow-y: auto;
@@ -59,9 +83,18 @@
   margin-bottom: 2.2rem;
   box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px;
   border-radius: 1rem;
+  overflow: hidden;
 }
+
 .wrapper aside ul {
   height: 100%;
+  animation: rotate 7s infinite;
+  animation-delay: 2.2s;
+  transition-duration: all 0.5s;
+}
+
+.wrapper aside ul:hover {
+  animation-play-state: paused;
 }
 
 .member-info {
