@@ -29,3 +29,12 @@
   overflow-y: auto;
   height: calc(100vh - 14.4rem);
 }
+
+.search-default-image {
+  width: 25rem;
+  margin: 20rem auto;
+}
+
+#searchInpValue {
+  width: 100%;
+}
