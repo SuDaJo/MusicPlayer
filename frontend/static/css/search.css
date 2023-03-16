@@ -28,11 +28,18 @@
   padding: 2rem;
   overflow-y: auto;
   height: calc(100vh - 14.4rem);
+  display: flex;
+}
+
+.searchlist-main ul{
+  flex-grow: 1;
 }
 
 .search-default-image {
   width: 25rem;
-  margin: 20rem auto;
+  height: auto;
+  align-self: center;
+  margin: 0 auto;
 }
 
 #searchInpValue {
