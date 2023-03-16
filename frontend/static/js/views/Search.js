@@ -57,10 +57,8 @@ export default class Search extends AbstractView {
     searchMainTitle.textContent = "검색 결과";
     searchMainTitle.classList.add("sr-only");
 
-    const searchMainUl = document.createElement("ul");
-
     searchInputBar.append(searchInputTitle, searchInpLabel, searchInput, searchButton);
-    searchListMain.append(searchMainTitle, searchMainUl, searchDefaultImage);
+    searchListMain.append(searchMainTitle, searchDefaultImage);
     searchForm.append(searchInputBar);
     searchWrapper.append(searchTitle, searchForm, searchListMain);
     wrapper.appendChild(searchWrapper);
@@ -79,7 +77,6 @@ export default class Search extends AbstractView {
   searchEventFunc(event) {
     event.preventDefault();
 
-    const $searchMainUl = document.querySelector("ul");
     const $searchDefaultImage = document.querySelector(".search-default-image");
     let $inputValue = document.querySelector("#searchInpValue");
 
@@ -88,6 +85,10 @@ export default class Search extends AbstractView {
     } else {
       useFetch(`search?q=${$inputValue.value}`)
         .then((response) => {
+          const searchMainUl = document.createElement("ul");
+          const $searchListMain = document.querySelector(".searchlist-main");
+          $searchListMain.replaceChildren(searchMainUl);
+
           const searchItem = response.data
             .map((item) => {
               return `
@@ -115,7 +116,7 @@ export default class Search extends AbstractView {
         `;
             })
             .join("");
-          $searchMainUl.innerHTML = searchItem;
+          searchMainUl.innerHTML = searchItem;
           return response;
         })
         .then(() => {
