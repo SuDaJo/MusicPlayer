@@ -22,11 +22,15 @@ export default class Search extends AbstractView {
     const searchForm = document.createElement("form");
     const searchInputBar = document.createElement("fieldset");
     const searchListMain = document.createElement("section");
+    const searchDefaultImage = document.createElement("img");
 
     searchForm.classList.add("search-form");
     searchTitle.classList.add("sr-only");
     searchInputBar.classList.add("search-input-bar");
     searchListMain.classList.add("searchlist-main");
+
+    searchDefaultImage.classList.add("search-default-image");
+    searchDefaultImage.setAttribute("src", "/static/image/search-default.png");
 
     const searchInputTitle = document.createElement("legend");
     const searchInpLabel = document.createElement("label");
@@ -56,7 +60,7 @@ export default class Search extends AbstractView {
     const searchMainUl = document.createElement("ul");
 
     searchInputBar.append(searchInputTitle, searchInpLabel, searchInput, searchButton);
-    searchListMain.append(searchMainTitle, searchMainUl);
+    searchListMain.append(searchMainTitle, searchMainUl, searchDefaultImage);
     searchForm.append(searchInputBar);
     searchWrapper.append(searchTitle, searchForm, searchListMain);
     wrapper.appendChild(searchWrapper);
@@ -76,13 +80,17 @@ export default class Search extends AbstractView {
     event.preventDefault();
 
     const $searchMainUl = document.querySelector("ul");
+    const $searchDefaultImage = document.querySelector(".search-default-image");
     let $inputValue = document.querySelector("#searchInpValue");
 
-    useFetch(`search?q=${$inputValue.value}`)
-      .then((response) => {
-        const searchItem = response.data
-          .map((item) => {
-            return `
+    if (!$inputValue.value) {
+      alert("검색어를 입력해주세요");
+    } else {
+      useFetch(`search?q=${$inputValue.value}`)
+        .then((response) => {
+          const searchItem = response.data
+            .map((item) => {
+              return `
             <li class="playlist-item">
               <figure class="playlist-info">
                 <img src=${item.album.cover_small} alt="앨범 타이틀">
@@ -105,23 +113,31 @@ export default class Search extends AbstractView {
               </button>
             </li>
         `;
-          })
-          .join("");
-        $searchMainUl.innerHTML = searchItem;
-        return response;
-      }).then(() => {
-        const $musicAddBtn = document.querySelectorAll(".music-add-btn");
-        $musicAddBtn.forEach((button) => {
-          button.addEventListener("click", (event) => {
-            let id = Number(event.currentTarget.dataset.id);
-            let title = event.currentTarget.dataset.title;
-            let coverImg = event.currentTarget.dataset.cover;
-            let artist = event.currentTarget.dataset.artist;
-
-            super.setLocalStorage(id, title, coverImg, artist);
-          })
+            })
+            .join("");
+          $searchMainUl.innerHTML = searchItem;
+          return response;
         })
-      });
-    $inputValue.value = "";
+        .then(() => {
+          const $musicAddBtn = document.querySelectorAll(".music-add-btn");
+          $musicAddBtn.forEach((button) => {
+            button.addEventListener("click", (event) => {
+              let id = Number(event.currentTarget.dataset.id);
+              let title = event.currentTarget.dataset.title;
+              let coverImg = event.currentTarget.dataset.cover;
+              let artist = event.currentTarget.dataset.artist;
+
+              super.setLocalStorage(id, title, coverImg, artist);
+            });
+          });
+        });
+      $inputValue.value = "";
+
+      if (!$searchDefaultImage) {
+        return;
+      } else {
+        $searchDefaultImage.remove();
+      }
+    }
   }
 }
