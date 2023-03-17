@@ -1,10 +1,11 @@
 @import "/static/css/reset.css";
-@import "/static/css/chart.css";
-@import "/static/css/home.css";
-@import "/static/css/myplaylist.css";
 @import "/static/css/navbar.css";
+@import "/static/css/home.css";
+@import "/static/css/chart.css";
+@import "/static/css/myplaylist.css";
 @import "/static/css/playcontrol.css";
 @import "/static/css/search.css";
+@import "/static/css/notfound.css";
 
 .wrapper {
   max-width: 40rem;

@@ -13,7 +13,6 @@ export default class Home extends AbstractView {
 
   async createMemberData() {
     const response = await fetch("/static/js/json/memberData.json");
-    console.log(response);
     if (response.ok) {
       const memberData = await response.json();
       return memberData;

@@ -43,20 +43,24 @@ const router = async () => {
     (potentialMatch) => potentialMatch.isMatch !== null
   );
 
+  const $root = document.querySelector("#root");
+
   if (!match) {
     match = {
       route: routes[routes.length - 1],
       isMatch: true,
     };
+    const viewHtml = new NotFound($root);
+    await viewHtml.getHtml();
+  } else {
+    const viewHtml = new match.route.view($root, getParams(match));
+    await viewHtml.getHtml();
   }
 
-  const $root = document.querySelector("#root");
-  const viewHtml = new match.route.view($root, getParams(match));
-
-  await viewHtml.getHtml();
+  // await viewHtml.getHtml();
 
   const $navBar = document.querySelector(".nav-bar");
-  if (viewHtml.$target.baseURI.includes("playcontrol")) {
+  if (match.route.path.includes("playcontrol") || match.route.path.includes("notfound")) {
     $navBar.style.display = "none";
   } else {
     $navBar.style.display = "block";
