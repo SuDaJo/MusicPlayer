@@ -6,7 +6,7 @@
 
 <br/>
 
-## <span id="projectIntro">프로젝트 소개</span>
+## <span id="projectintro">프로젝트 소개</span>
 
 ### [ 개요 ]
 
@@ -24,8 +24,8 @@
 
 ## 📍 목차
 
-[1. 프로젝트 소개](#projectIntro)<br>
-[2. 팀원 소개](#introduceTeam)<br>
+[1. 프로젝트 소개](#projectintro)<br>
+[2. 팀원 소개](#introduceteam)<br>
 [3. 개발 환경](#development)<br>
 [4. 구현 기능](#feature)<br>
 [5. 프로젝트 구조](#structure)<br>
@@ -34,7 +34,7 @@
 
 <br/>
 
-## <span id="introduceTeam">🙋‍♀️ 팀원 소개</span>
+## <span id="introduceteam">🙋‍♀️ 팀원 소개</span>
 
 |김다정|정수현|조민지|
 |:-:|:-:|:-:|
