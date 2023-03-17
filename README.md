@@ -6,7 +6,7 @@
 
 <br/>
 
-## 프로젝트 소개
+## <span id="projectIntro">프로젝트 소개</span>
 
 ### [ 개요 ]
 
@@ -24,17 +24,17 @@
 
 ## 📍 목차
 
-[1. 프로젝트 소개](#프로젝트-소개)<br>
-[2. 팀원 소개](#🙋‍♀️-팀원-소개)<br>
-[3. 개발 환경](#⚙️-개발-환경)<br>
-[4. 구현 기능](#🛠-구현-기능)<br>
-[5. 프로젝트 구조](#🗂-프로젝트-구조)<br>
-[6. 트러블 슈팅](#🙇‍♀️-트러블-슈팅)<br>
-[7. 프로젝트 배포 후 느낀 점](#👩‍👧‍👧-프로젝트-배포-후-느낀-점)
+[1. 프로젝트 소개](#projectIntro)<br>
+[2. 팀원 소개](#introduceTeam)<br>
+[3. 개발 환경](#development)<br>
+[4. 구현 기능](#feature)<br>
+[5. 프로젝트 구조](#structure)<br>
+[6. 트러블 슈팅](#troubleshooting)<br>
+[7. 프로젝트 배포 후 느낀 점](#deploy)
 
 <br/>
 
-## 🙋‍♀️ 팀원 소개
+## <span id="introduceTeam">🙋‍♀️ 팀원 소개</span>
 
 |김다정|정수현|조민지|
 |:-:|:-:|:-:|
@@ -43,7 +43,7 @@
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
-## ⚙️ 개발 환경
+## <span id="development">⚙️ 개발 환경</span>
 
 ### [ 기술 스택 ]
 
@@ -100,7 +100,7 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
-## 🛠 구현 기능
+## <span id="feature">🛠 구현 기능</span>
 
 ---
 |<center>Splash</center>|<center>Home</center>|<center>Chart</center>|
@@ -114,7 +114,7 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
-## 🗂 프로젝트 구조
+## <span id="structure">🗂 프로젝트 구조</span>
 
 ```markdown
 📦frontend
@@ -151,7 +151,7 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
-## 🙇‍♀️ 트러블 슈팅 
+## <span id="troubleshooting">🙇‍♀️ 트러블 슈팅</span>
 #### 1. 
 * 문제 : 
 * 원인 : 
@@ -172,7 +172,7 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
 
 <br/>
 
-## 👩‍👧‍👧 프로젝트 배포 후 느낀 점 
+## <span id="deploy">👩‍👧‍👧 프로젝트 배포 후 느낀 점</span>
 
 
 ### 🐼 김다정
