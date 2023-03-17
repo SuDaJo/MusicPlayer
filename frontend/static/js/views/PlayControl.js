@@ -47,7 +47,7 @@ export default class PlayControl extends AbstractView {
 
         $playControlWrapper.innerHTML = `
         <h2 class="sr-only">재생 화면</h2>
-        <button class="back-button">
+        <button type="button" class="back-button">
           <img src="/static/image/icon-arrow-left.svg" alt="뒤로가기" />
         </button>
         <div class="play-control">

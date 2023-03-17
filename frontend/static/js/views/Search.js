@@ -49,7 +49,7 @@ export default class Search extends AbstractView {
 
     searchButton.classList.add("search-button");
     searchButton.setAttribute("type", "button");
-    searchButtonImg.setAttribute("src", "./static/image/icon-search.svg");
+    searchButtonImg.setAttribute("src", "/static/image/icon-search.svg");
     searchButtonImg.setAttribute("alt", "검색 버튼");
     searchButton.appendChild(searchButtonImg);
 
