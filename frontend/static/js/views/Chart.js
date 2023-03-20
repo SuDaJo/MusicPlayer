@@ -134,6 +134,8 @@ export default class Chart extends AbstractView {
     const btn = document.querySelectorAll(".music-add-btn");
     btn.forEach((button) => {
       button.addEventListener("click", (event) => {
+        super.toast();
+
         let id = Number(event.currentTarget.dataset.id);
         let title = event.currentTarget.dataset.title;
         let coverImg = event.currentTarget.dataset.cover;

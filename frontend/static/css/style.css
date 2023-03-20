@@ -7,6 +7,29 @@
 @import "/static/css/search.css";
 @import "/static/css/notfound.css";
 
+@keyframes toast {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(0, 0);
+  }
+  33% {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, -30%);
+  }
+  66% {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, -30%);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(0, 0);
+  }
+}
+
 .wrapper {
   max-width: 40rem;
   margin: 0 auto;
@@ -40,12 +63,11 @@
 
 .fade-out {
   opacity: 0;
-  transition : 0.5s;
+  transition: 0.5s;
 }
 /* splash 끝 */
 
 /* Scroll Bar 디자인 시작*/
-
 .cont-album::-webkit-scrollbar {
   height: 0.5rem;
 }
@@ -73,3 +95,26 @@
   background-color: transparent;
 }
 /* Scroll Bar 디자인 끝 */
+
+/* Toast UI 시작 */
+#toastUi {
+  position: fixed;
+  bottom: 9rem;
+  width: 27rem;
+  left: calc(50% - 13.5rem);
+  padding: 0.8rem 1.8rem;
+  border-radius: 5rem;
+  overflow: hidden;
+  font-size: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  background: #fffbe4;
+  border: solid 2px #04bfbf;
+  z-index: 10000;
+  text-align: center;
+}
+
+#toastUi.reveal {
+  animation: toast 1.5s;
+}
+/* Toast UI 끝 */
