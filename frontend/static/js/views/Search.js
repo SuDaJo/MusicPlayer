@@ -85,39 +85,53 @@ export default class Search extends AbstractView {
     } else {
       useFetch(`search?q=${$inputValue.value}`)
         .then((response) => {
-          const searchMainUl = document.createElement("ul");
           const $searchListMain = document.querySelector(".searchlist-main");
-          $searchListMain.replaceChildren(searchMainUl);
 
-          const searchItem = response.data
-            .map((item) => {
-              return `
-            <li class="playlist-item">
-              <figure class="playlist-info">
-                <img src=${item.album.cover_small} alt="앨범 타이틀">
-                <figcaption class="playlist-item-info">
-                  <span class="playlist-title">${item.title}</span>
-                  <span class="playlist-artist">${item.artist.name}</span>
-                </figcaption>
-              </figure>
-              <a href="playcontrol/${item.id}" class="chart-btn-play" type="button">
-                <img src="/static/image/icon-play.svg" alt="재생버튼">
-              </a>
-              <button class="music-add-btn" type="button"
-                data-id="${item.id}"
-                data-title="${item.title}"
-                data-artist="${item.artist.name}"
-                data-cover="${item.album.cover_small}"
-                >
-                <img src="/static/image/icon-plus.svg" alt="추가버튼">
-              </button>
-              </button>
-            </li>
-        `;
-            })
-            .join("");
-          searchMainUl.innerHTML = searchItem;
-          return response;
+          if (response.total === 0) {
+            const noResultImage = document.createElement("img");
+            noResultImage.classList.add("search-no-result")
+            noResultImage.setAttribute("src", "/static/image/search-no-result.png");
+            noResultImage.setAttribute("alt", "검색 결과 없음");
+
+            const searchMainTitle = document.createElement("h3");
+            searchMainTitle.textContent = "검색 결과 없음";
+            searchMainTitle.classList.add("sr-only");
+
+            $searchListMain.replaceChildren(searchMainTitle, noResultImage);
+          } else {
+            const searchMainUl = document.createElement("ul");
+            $searchListMain.replaceChildren(searchMainUl);
+
+            const searchItem = response.data
+              .map((item) => {
+                return `
+              <li class="playlist-item">
+                <figure class="playlist-info">
+                  <img src=${item.album.cover_small} alt="앨범 타이틀">
+                  <figcaption class="playlist-item-info">
+                    <span class="playlist-title">${item.title}</span>
+                    <span class="playlist-artist">${item.artist.name}</span>
+                  </figcaption>
+                </figure>
+                <a href="playcontrol/${item.id}" class="chart-btn-play" type="button">
+                  <img src="/static/image/icon-play.svg" alt="재생버튼">
+                </a>
+                <button class="music-add-btn" type="button"
+                  data-id="${item.id}"
+                  data-title="${item.title}"
+                  data-artist="${item.artist.name}"
+                  data-cover="${item.album.cover_small}"
+                  >
+                  <img src="/static/image/icon-plus.svg" alt="추가버튼">
+                </button>
+                </button>
+              </li>
+          `;
+              })
+              .join("");
+            searchMainUl.innerHTML = searchItem;
+            return response;
+          }
         })
         .then(() => {
           const $musicAddBtn = document.querySelectorAll(".music-add-btn");
@@ -134,6 +148,7 @@ export default class Search extends AbstractView {
             });
           });
         });
+
       $inputValue.value = "";
 
       if (!$searchDefaultImage) {
