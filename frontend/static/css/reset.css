@@ -50,6 +50,10 @@ html {
   font-size: 10px;
 }
 
+body {
+  background-color: var(--sub-color);
+}
+
 .sr-only {
   position: absolute;
   clip: rect(0 0 0 0);

@@ -35,11 +35,16 @@
   flex-grow: 1;
 }
 
-.search-default-image {
+.search-default-image,
+.search-no-result {
   width: 20rem;
   height: auto;
   align-self: center;
   margin: 0 auto;
+}
+
+.highlight {
+  background-color: #bcf3f1;
 }
 
 #searchInpValue {
