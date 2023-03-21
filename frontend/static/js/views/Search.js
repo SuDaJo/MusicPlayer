@@ -83,8 +83,30 @@ export default class Search extends AbstractView {
     if (!$inputValue.value) {
       alert("검색어를 입력해주세요");
     } else {
-      useFetch(`search?q=${$inputValue.value}`)
+      const inputValue = $inputValue.value
+      useFetch(`search?q=${inputValue}`)
         .then((response) => {
+          const findMatches = (str) => {
+            return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+          }
+        
+          const highlightText = (data, keyword) => {
+            const matchReg = new RegExp(`(${findMatches(keyword)})`, "gi");
+
+            if (keyword !== "" && data.toLowerCase().includes(keyword.toLowerCase())) {
+              let matchs = data.split(matchReg);
+              let highlightData = matchs.map((match) => {
+                if (match.toLowerCase() === keyword.toLowerCase()) {
+                    return `<span class="highlight">${match}</span>`
+                  } else {
+                    return match
+                  }
+                }
+              ).join("");
+              return highlightData;
+            }
+            return data;
+          }
           const $searchListMain = document.querySelector(".searchlist-main");
 
           if (response.total === 0) {
@@ -109,8 +131,8 @@ export default class Search extends AbstractView {
                 <figure class="playlist-info">
                   <img src=${item.album.cover_small} alt="앨범 타이틀">
                   <figcaption class="playlist-item-info">
-                    <span class="playlist-title">${item.title}</span>
-                    <span class="playlist-artist">${item.artist.name}</span>
+                    <span class="playlist-title">${highlightText(item.title, inputValue)}</span>
+                    <span class="playlist-artist">${highlightText(item.artist.name, inputValue)}</span>
                   </figcaption>
                 </figure>
                 <a href="playcontrol/${item.id}" class="chart-btn-play" type="button">

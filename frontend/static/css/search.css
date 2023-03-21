@@ -43,6 +43,10 @@
   margin: 0 auto;
 }
 
+.highlight {
+  background-color: #bcf3f1;
+}
+
 #searchInpValue {
   width: 100%;
 }
