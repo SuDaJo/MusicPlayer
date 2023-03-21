@@ -1,6 +1,6 @@
 # <span id="top">🎵 Music Drop</span>
 
-<!-- <img width="100%" src=""></img> -->
+<img width="100%" src="https://user-images.githubusercontent.com/112460344/226498134-692f3e4e-6dd1-4a40-aa1a-3a6fe358c989.png"></img>
 
 🔗 [**배포URL**](https://musicdropplay.netlify.app/)
 
