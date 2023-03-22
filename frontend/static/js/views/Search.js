@@ -17,6 +17,7 @@ export default class Search extends AbstractView {
     this.$target.replaceChildren(wrapper);
 
     const searchWrapper = document.createElement("section");
+
     const searchTitle = document.createElement("h2");
     searchTitle.textContent = "검색 화면";
     const searchForm = document.createElement("form");
@@ -79,40 +80,48 @@ export default class Search extends AbstractView {
 
     const $searchDefaultImage = document.querySelector(".search-default-image");
     let $inputValue = document.querySelector("#searchInpValue");
+    const $searchListMain = document.querySelector(".searchlist-main");
+    $searchListMain.replaceChildren(super.createLoading());
 
     if (!$inputValue.value) {
       alert("검색어를 입력해주세요");
     } else {
-      const inputValue = $inputValue.value
+      const inputValue = $inputValue.value;
       useFetch(`search?q=${inputValue}`)
         .then((response) => {
           const findMatches = (str) => {
             return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
-          }
-        
+          };
+
           const highlightText = (data, keyword) => {
             const matchReg = new RegExp(`(${findMatches(keyword)})`, "gi");
 
-            if (keyword !== "" && data.toLowerCase().includes(keyword.toLowerCase())) {
+            if (
+              keyword !== "" &&
+              data.toLowerCase().includes(keyword.toLowerCase())
+            ) {
               let matchs = data.split(matchReg);
-              let highlightData = matchs.map((match) => {
-                if (match.toLowerCase() === keyword.toLowerCase()) {
-                    return `<span class="highlight">${match}</span>`
+              let highlightData = matchs
+                .map((match) => {
+                  if (match.toLowerCase() === keyword.toLowerCase()) {
+                    return `<span class="highlight">${match}</span>`;
                   } else {
-                    return match
+                    return match;
                   }
-                }
-              ).join("");
+                })
+                .join("");
               return highlightData;
             }
             return data;
-          }
-          const $searchListMain = document.querySelector(".searchlist-main");
+          };
 
           if (response.total === 0) {
             const noResultImage = document.createElement("img");
-            noResultImage.classList.add("search-no-result")
-            noResultImage.setAttribute("src", "/static/image/search-no-result.png");
+            noResultImage.classList.add("search-no-result");
+            noResultImage.setAttribute(
+              "src",
+              "/static/image/search-no-result.png"
+            );
             noResultImage.setAttribute("alt", "검색 결과 없음");
 
             const searchMainTitle = document.createElement("h3");
@@ -123,36 +132,53 @@ export default class Search extends AbstractView {
           } else {
             const searchMainUl = document.createElement("ul");
             $searchListMain.replaceChildren(searchMainUl);
+            
+            new Promise((resolve) => {
+              const searchItem = response.data
+                .map((item) => {
+                  return `
+                    <li class="playlist-item">
+                      <figure class="playlist-info">
+                        <img src=${item.album.cover_small} alt="앨범 타이틀">
+                        <figcaption class="playlist-item-info">
+                          <span class="playlist-title">${highlightText(
+                            item.title,
+                            inputValue
+                          )}</span>
+                          <span class="playlist-artist">${highlightText(
+                            item.artist.name,
+                            inputValue
+                          )}</span>
+                        </figcaption>
+                      </figure>
+                      <a href="playcontrol/${
+                        item.id
+                      }" class="chart-btn-play" type="button">
+                        <img src="/static/image/icon-play.svg" alt="재생버튼">
+                      </a>
+                      <button class="music-add-btn" type="button"
+                        data-id="${item.id}"
+                        data-title="${item.title}"
+                        data-artist="${item.artist.name}"
+                        data-cover="${item.album.cover_small}"
+                        >
+                        <img src="/static/image/icon-plus.svg" alt="추가버튼">
+                      </button>
+                      </button>
+                    </li>
+                `;
+                })
+                .join("");
 
-            const searchItem = response.data
-              .map((item) => {
-                return `
-              <li class="playlist-item">
-                <figure class="playlist-info">
-                  <img src=${item.album.cover_small} alt="앨범 타이틀">
-                  <figcaption class="playlist-item-info">
-                    <span class="playlist-title">${highlightText(item.title, inputValue)}</span>
-                    <span class="playlist-artist">${highlightText(item.artist.name, inputValue)}</span>
-                  </figcaption>
-                </figure>
-                <a href="playcontrol/${item.id}" class="chart-btn-play" type="button">
-                  <img src="/static/image/icon-play.svg" alt="재생버튼">
-                </a>
-                <button class="music-add-btn" type="button"
-                  data-id="${item.id}"
-                  data-title="${item.title}"
-                  data-artist="${item.artist.name}"
-                  data-cover="${item.album.cover_small}"
-                  >
-                  <img src="/static/image/icon-plus.svg" alt="추가버튼">
-                </button>
-                </button>
-              </li>
-          `;
+              resolve(searchItem);
+            })
+              .then((searchItem) => {
+                searchMainUl.innerHTML = searchItem;
+                return response;
               })
-              .join("");
-            searchMainUl.innerHTML = searchItem;
-            return response;
+              .catch((error) => {
+                throw new Error(error);
+              });
           }
         })
         .then(() => {

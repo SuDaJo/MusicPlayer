@@ -30,11 +30,17 @@
   }
 }
 
+body {
+  height: 100vh;
+  background: linear-gradient(150deg, #FFFBE4 0%, #B8EEEE 100%);
+}
+
 .wrapper {
   max-width: 40rem;
   margin: 0 auto;
   height: 100vh;
   box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px;
+  background-color: white;
 }
 
 /* splash 시작 */
@@ -118,3 +124,13 @@
   animation: toast 1.5s;
 }
 /* Toast UI 끝 */
+
+/* Loading */
+.loading {
+  position: fixed;
+  width: 10rem;
+  height: 100vh;
+  top: 0;
+  left: calc(50% - 5rem);
+  background: url("/static/image/loading.gif") no-repeat center / contain;
+}
