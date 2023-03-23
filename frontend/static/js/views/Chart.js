@@ -23,6 +23,7 @@ export default class Chart extends AbstractView {
     chartTitle.classList.add("sr-only");
     chartHeader.classList.add("chart-header");
     chartTitle.textContent = "차트 화면";
+
     chartWrapper.append(chartTitle, chartHeader);
     wrapper.append(chartWrapper, chartMain);
 
@@ -47,7 +48,7 @@ export default class Chart extends AbstractView {
     const chartMainTitle = document.createElement("h3");
     const chartMainHeader = document.createElement("ol");
     chartMainTitle.classList.add("sr-only");
-    chartMain.append(chartMainTitle, chartMainHeader);
+    chartMain.append(chartMainTitle, chartMainHeader, this.createLoading());
 
     this.setTop20List();
   }
@@ -94,40 +95,54 @@ export default class Chart extends AbstractView {
 
   createChart(musicData) {
     const chartMainHeader = document.querySelector(".chart-main ol");
-
+    const $loadingGif = document.querySelector(".loading");
     let sortMusicData = musicData.sort((a, b) => b.rank - a.rank).slice(0, 20);
 
-    const top20Item = sortMusicData
-      .map((list, idx) => {
-        return `
-        <li class="chart-list-item">
-        ${
-          idx + 1 <= 3 ? `<span class="chart-top-rank">${idx + 1}</span>` : `<span class="chart-rank">${idx + 1}</span>`
+    new Promise((resolve) => {
+      const top20Item = sortMusicData
+        .map((list, idx) => {
+          return `
+          <li class="chart-list-item">
+          ${
+            idx + 1 <= 3
+              ? `<span class="chart-top-rank">${idx + 1}</span>`
+              : `<span class="chart-rank">${idx + 1}</span>`
+          }
+            <figure class="chart-album-info">
+              <img src=${list.album.cover_small} alt="앨범 타이틀">
+              <figcaption class="chart-item-info">
+                <span class="chart-item-title">${list.title}</span>
+                <span class="chart-item-artist">${list.artist.name}</span>
+              </figcaption>
+            </figure>
+            <a href="playcontrol/${list.id}" class="chart-btn-play" type="button">
+              <img src="/static/image/icon-play.svg" alt="재생버튼">
+            </a>
+            <button type="button" class="music-add-btn"
+              data-id="${list.id}"
+              data-title="${list.title}"
+              data-artist="${list.artist.name}"
+              data-cover="${list.album.cover_small}"
+            >
+              <img src="/static/image/icon-plus.svg" alt="추가버튼">
+            </button>
+        </li>
+        `;
+        })
+        .join("");
+
+      resolve(top20Item);
+    })
+      .then((top20Item) => {
+        if ($loadingGif) {
+          $loadingGif.remove();
         }
-          <figure class="chart-album-info">
-            <img src=${list.album.cover_small} alt="앨범 타이틀">
-            <figcaption class="chart-item-info">
-              <span class="chart-item-title">${list.title}</span>
-              <span class="chart-item-artist">${list.artist.name}</span>
-            </figcaption>
-          </figure>
-          <a href="playcontrol/${list.id}" class="chart-btn-play" type="button">
-            <img src="/static/image/icon-play.svg" alt="재생버튼">
-          </a>
-          <button type="button" class="music-add-btn"
-            data-id="${list.id}"
-            data-title="${list.title}"
-            data-artist="${list.artist.name}"
-            data-cover="${list.album.cover_small}"
-          >
-            <img src="/static/image/icon-plus.svg" alt="추가버튼">
-          </button>
-      </li>
-      `;
+        chartMainHeader.innerHTML = top20Item;
+        this.setLocalData(sortMusicData);
       })
-      .join("");
-    chartMainHeader.innerHTML = top20Item;
-    this.setLocalData(sortMusicData);
+      .catch((error) => {
+        throw new Error(error);
+      });
   }
 
   setLocalData() {
