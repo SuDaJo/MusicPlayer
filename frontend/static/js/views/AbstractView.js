@@ -16,6 +16,13 @@ export default class AbstractView {
     return "";
   }
 
+  createLoading() {
+    const loadingGif = document.createElement("div");
+    loadingGif.classList.add("loading");
+
+    return loadingGif;
+  }
+
   setLocalStorage(id, title, coverImg, artist) {
     localStorage.setItem(
       "data",
@@ -23,7 +30,7 @@ export default class AbstractView {
         ...JSON.parse(localStorage.getItem("data") || "[]"),
         {
           id: id,
-          title : title,
+          title: title,
           coverImg: coverImg,
           artist: artist,
         },
@@ -37,5 +44,20 @@ export default class AbstractView {
       const newSetArray = [...new Set(musicList.map(JSON.stringify))].map(JSON.parse);
       localStorage.setItem("data", JSON.stringify(newSetArray));
     }
+  }
+
+  toast() {
+    const $toast = document.querySelector("#toastUi");
+    let removeToast;
+
+    $toast.classList.contains("reveal")
+      ? (clearTimeout(removeToast),
+        (removeToast = setTimeout(function () {
+          $toast.classList.remove("reveal");
+        }, 1500)))
+      : (removeToast = setTimeout(function () {
+          $toast.classList.remove("reveal");
+        }, 1500));
+    $toast.classList.add("reveal");
   }
 }

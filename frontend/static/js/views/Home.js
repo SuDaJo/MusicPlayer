@@ -13,7 +13,6 @@ export default class Home extends AbstractView {
 
   async createMemberData() {
     const response = await fetch("/static/js/json/memberData.json");
-    console.log(response);
     if (response.ok) {
       const memberData = await response.json();
       return memberData;
@@ -58,7 +57,7 @@ export default class Home extends AbstractView {
       .join("");
     advertiseUl.innerHTML += memberList;
 
-    homeWrapper.append(homeTitle, advertise);
+    homeWrapper.append(homeTitle, advertise, this.createLoading());
 
     this.getArtistData();
   }
@@ -71,7 +70,6 @@ export default class Home extends AbstractView {
     artistListGroup.map((artistList) => {
       artistRandomPick.push(artistList[Math.floor(Math.random() * artistList.length)]);
     });
-
     return artistRandomPick;
   }
 
@@ -94,30 +92,34 @@ export default class Home extends AbstractView {
 
     const category = ["이 노래 어때요?", "나만 알고 싶은 노래", "20대 취향저격", "오늘의 인기 가수"];
     const $homeWrapper = document.querySelector(".home-wrapper");
+    const $loadingGif = document.querySelector(".loading")
 
-    const contCategory = data
-      .map((list, idx) => {
+    new Promise((resolve) => {
+      const contCategory = data.map((list, idx) => {
         return `
-      <section class="cont-category">
-        <h3 class="tit-category">${category[idx]}</h3>
-        <div class="cont-album">
-          ${list
-            .map((item) => {
-              return `
-                <a class="cont-album-link" href="/playcontrol/${item.id}">
-                  <img class="cover-album" src=${item.album.cover_medium} alt="앨범커버" />
-                  <p class="album-title">${item.title}</p>
-                  <p>${item.artist.name}</p>
-                </a>
-            `;
-            })
-            .join("")}
-        </div>
-      </section>
-      `;
-      })
-      .join("");
-
-    $homeWrapper.innerHTML += contCategory;
+          <section class="cont-category">
+            <h3 class="tit-category">${category[idx]}</h3>
+            <div class="cont-album">
+              ${list.map((item) => {
+                return `
+                  <a class="cont-album-link" href="/playcontrol/${item.id}">
+                    <img class="cover-album" src=${item.album.cover_medium} alt="앨범커버" />
+                    <p class="album-title">${item.title}</p>
+                    <p>${item.artist.name}</p>
+                  </a>
+                `;
+              }).join("")}
+            </div>
+          </section>
+        `;
+      }).join("");
+    
+      resolve(contCategory);
+    }).then((contCategory) => {
+      $loadingGif.remove();
+      $homeWrapper.innerHTML += contCategory;
+    }).catch((error) => {
+      throw new Error(error);
+    });
   }
 }

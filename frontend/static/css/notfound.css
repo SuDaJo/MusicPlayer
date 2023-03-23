@@ -1,0 +1,15 @@
+.not-found {
+  padding: 2rem;
+}
+
+.not-found-wrapper {
+  height: calc(100vh - 6.4rem);
+  display: flex;
+  align-items: center;
+}
+
+.not-found-image {
+  width: 20rem;
+  height: auto;
+  margin: 0 auto;
+}
