@@ -42,6 +42,12 @@ export default class PlayControl extends AbstractView {
 
         super.setLocalStorage(id, title, coverImg, artist);
 
+        if (!localStorage.getItem("volume")) {
+          localStorage.setItem("volume", 0.05)
+        } else {
+          localStorage.getItem("volume")
+        }
+
         const $playControlWrapper =
           document.querySelector(".play-control-wrap");
 
@@ -63,6 +69,11 @@ export default class PlayControl extends AbstractView {
             </figcaption>
           </figure>
           <div class="controller">
+            <div class="progress-bar-time">
+              <span class="progress-time">00 : 00</span>
+              <span class="duration-time">00 : 00</span>
+            </div>
+            <input type="range" class="progress-bar" value="0" step="any" />
             <div class="controller-btn-wrapper">
               <button class="random-button" type="button">
                 <img src="/static/image/icon-random.svg" alt="랜덤 재생버튼" />
@@ -94,12 +105,12 @@ export default class PlayControl extends AbstractView {
                 />
               </button>
             </div>
-            <input type="range" class="progress-bar" value="0" step="any" />
-            <div class="progress-bar-time">
-              <span class="progress-time">00 : 00</span>
-              <span class="duration-time">00 : 00</span>
             </div>
-          </div>
+            <div class="volume-control-wrapper">
+              <img src="/static/image/icon-mute.svg">
+              <input type="range" class="volume-control" value=${localStorage.getItem("volume") * 1000} />
+              <img src="/static/image/icon-speaker.svg">
+            </div>
         </div>
       `;
       })
@@ -116,9 +127,16 @@ export default class PlayControl extends AbstractView {
     const $audio = document.querySelector(".music-src");
     const $prevBtn = document.querySelector(".prev-play-btn");
     const $nextBtn = document.querySelector(".next-play-btn");
+    const $volumeControl = document.querySelector(".volume-control");
 
     $audio.play();
-    $audio.volume = 0.05;
+
+    if (!localStorage.getItem("volume")) {
+      $audio.volume = 0.05;
+    } else {
+      $audio.volume = localStorage.getItem("volume");
+    }
+
 
     $playButton.addEventListener("click", (e) => {
       e.preventDefault();
@@ -153,6 +171,11 @@ export default class PlayControl extends AbstractView {
     $prevBtn.addEventListener("click", (e) => {
       e.preventDefault();
       this.changeMusic(-1);
+    });
+
+    $volumeControl.addEventListener("input", (e) => {
+      $audio.volume = e.target.value / 1000;
+      localStorage.setItem("volume", e.target.value / 1000)
     });
 
     this.timeUpdate();
