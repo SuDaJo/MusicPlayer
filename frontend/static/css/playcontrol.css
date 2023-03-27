@@ -1,3 +1,15 @@
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
 .play-control-wrap {
   padding: 2rem;
   height: calc(100vh - 9.2rem);
@@ -52,14 +64,24 @@
   gap: 2.6rem;
 }
 
+.controller-btn-wrapper .controller-btns-play img {
+  width: 100%;
+}
+
+.progress-input-wrap {
+  position: relative;
+  margin-top: 0.8rem;
+}
+
 input[type="range"] {
+  position: relative;
   overflow: hidden;
   width: 100%;
-  height: 0.8rem;
+  height: 1.2rem;
   appearance: none;
-  margin: 0.6rem 0;
   background: transparent;
-  border-radius: 0.5rem;
+  border-radius: 2rem;
+  z-index: 1;
 }
 
 input[type="range"]:focus {
@@ -71,7 +93,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   height: 100%;
   cursor: pointer;
   border-radius: 0.5rem;
-  background-color: #d9d9d9;
+  background-color: white;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -83,6 +105,41 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   box-shadow: -100vw 0 0 100vw var(--main-color);
   border-radius: 50%;
+}
+
+.progress-input-effect {
+  width: 100%;
+  height: 1.2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-input-effect::before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #fbff00,
+    #73ff00,
+    #00ff9d,
+    #00ebeb,
+    #1d77ff,
+    #00ebeb,
+    #00ff9d,
+    #73ff00,
+    #fbff00
+  );
+  width: calc(100% + 0.2rem);
+  height: calc(100% + 0.2rem);
+  position: absolute;
+  top: -0.2rem;
+  left: -0.2rem;
+  background-size: 400%;
+  filter: blur(5px);
+  opacity: 0.4;
+  border-radius: 50px;
+  animation: glowing 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .progress-bar-time {
@@ -104,19 +161,28 @@ input[type="range"]::-webkit-slider-thumb {
 
 .volume-control-wrapper {
   display: flex;
-  width: 60%;
-  gap: 2rem;
-  margin-top: 4rem;
+  align-items: center;
+  width: 52%;
+  gap: 1rem;
+  margin-top: 6rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10rem;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 16%) 0px 0px 6px;
 }
 
 .volume-control-wrapper img {
-  width: 2.2rem;
-}
-
-.volume-control[type="range"]::-webkit-slider-thumb {
-  box-shadow: -100vw 0 0 100vw #77d4d0;
+  width: 1.8rem;
 }
 
 .volume-control[type="range"] {
   height: 0.5rem;
 } 
+
+.volume-control[type="range"]::-webkit-slider-thumb {
+  box-shadow: -100vw 0 0 100vw #77d4d0;
+}
+
+.volume-control[type="range"]::-webkit-slider-runnable-track {
+  background-color: #ebebeb;
+}
