@@ -80,14 +80,16 @@ body {
 .home-wrapper::-webkit-scrollbar,
 .chart-main::-webkit-scrollbar,
 .playlist-main::-webkit-scrollbar,
-.searchlist-main::-webkit-scrollbar {
+.searchlist-main::-webkit-scrollbar,
+.playcontrol-wrapper::-webkit-scrollbar {
   width: 0.6rem;
 }
 .cont-album::-webkit-scrollbar-thumb,
 .home-wrapper::-webkit-scrollbar-thumb,
 .chart-main::-webkit-scrollbar-thumb,
 .playlist-main::-webkit-scrollbar-thumb,
-.searchlist-main::-webkit-scrollbar-thumb {
+.searchlist-main::-webkit-scrollbar-thumb,
+.playcontrol-wrapper::-webkit-scrollbar-thumb {
   border-radius: 3px;
   background-color: var(--main-color);
   background-clip: padding-box;
@@ -97,7 +99,8 @@ body {
 .home-wrapper::-webkit-scrollbar-track,
 .chart-main::-webkit-scrollbar-track,
 .playlist-main::-webkit-scrollbar-track,
-.searchlist-main::-webkit-scrollbar-track {
+.searchlist-main::-webkit-scrollbar-track,
+.playcontrol-wrapper::-webkit-scrollbar-track {
   background-color: transparent;
 }
 /* Scroll Bar 디자인 끝 */

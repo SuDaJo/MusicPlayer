@@ -10,9 +10,12 @@
   }
 }
 
+.playcontrol-wrapper {
+  overflow-y: auto;
+}
+
 .play-control-wrap {
   padding: 2rem;
-  height: calc(100vh - 9.2rem);
 }
 
 .play-control {
