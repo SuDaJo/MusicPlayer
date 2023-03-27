@@ -14,6 +14,7 @@ export default class PlayControl extends AbstractView {
   createHtml() {
     const wrapper = document.createElement("main");
     wrapper.classList.add("wrapper");
+    wrapper.classList.add("playcontrol-wrapper");
     this.$target.replaceChildren(wrapper);
 
     const playControlWrapper = document.createElement("section");
