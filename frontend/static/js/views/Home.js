@@ -109,7 +109,11 @@ export default class Home extends AbstractView {
                   </a>
                 `;
               }).join("")}
-            </div>
+              </div>
+              <div class="scroll-btn-wrapper">
+                <button type="button" class="left-scroll-button"></button>
+                <button type="button" class="right-scroll-button"></button>
+              </div>
           </section>
         `;
       }).join("");
