@@ -73,7 +73,10 @@ export default class PlayControl extends AbstractView {
               <span class="progress-time">00 : 00</span>
               <span class="duration-time">00 : 00</span>
             </div>
-            <input type="range" class="progress-bar" value="0" step="any" />
+            <div class="progress-input-wrap">
+              <input type="range" class="progress-bar" value="0" step="any" />
+              <div class="progress-input-effect"></div>
+            </div>
             <div class="controller-btn-wrapper">
               <button class="random-button" type="button">
                 <img src="/static/image/icon-random.svg" alt="랜덤 재생버튼" />

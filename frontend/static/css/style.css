@@ -114,8 +114,8 @@ body {
   font-size: 1.5rem;
   opacity: 0;
   visibility: hidden;
-  background: #fffbe4;
-  border: solid 2px #04bfbf;
+  background: var(--sub-color);
+  border: solid 2px var(--main-color);
   z-index: 10000;
   text-align: center;
 }
