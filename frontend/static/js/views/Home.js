@@ -92,23 +92,26 @@ export default class Home extends AbstractView {
 
     const category = ["이 노래 어때요?", "나만 알고 싶은 노래", "20대 취향저격", "오늘의 인기 가수"];
     const $homeWrapper = document.querySelector(".home-wrapper");
-    const $loadingGif = document.querySelector(".loading")
+    const $loadingGif = document.querySelector(".loading");
 
     new Promise((resolve) => {
-      const contCategory = data.map((list, idx) => {
-        return `
+      const contCategory = data
+        .map((list, idx) => {
+          return `
           <section class="cont-category">
             <h3 class="tit-category">${category[idx]}</h3>
             <div class="cont-album">
-              ${list.map((item) => {
-                return `
+              ${list
+                .map((item) => {
+                  return `
                   <a class="cont-album-link" href="/playcontrol/${item.id}">
                     <img class="cover-album" src=${item.album.cover_medium} alt="앨범커버" />
                     <p class="album-title">${item.title}</p>
                     <p>${item.artist.name}</p>
                   </a>
                 `;
-              }).join("")}
+                })
+                .join("")}
               </div>
               <div class="scroll-btn-wrapper">
                 <button type="button" class="left-scroll-button"></button>
@@ -116,14 +119,41 @@ export default class Home extends AbstractView {
               </div>
           </section>
         `;
-      }).join("");
-    
+        })
+        .join("");
+
       resolve(contCategory);
-    }).then((contCategory) => {
-      $loadingGif.remove();
-      $homeWrapper.innerHTML += contCategory;
-    }).catch((error) => {
-      throw new Error(error);
+    })
+      .then((contCategory) => {
+        $loadingGif.remove();
+        $homeWrapper.innerHTML += contCategory;
+        this.horizontalScroll();
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }
+
+  horizontalScroll() {
+    const $leftBtns = document.querySelectorAll(".left-scroll-button");
+    const $rightBtns = document.querySelectorAll(".right-scroll-button");
+
+    $leftBtns.forEach((item) => {
+      item.addEventListener("click", () => {
+        const contAlbum = item.parentElement.previousElementSibling;
+        if (contAlbum.scrollLeft + contAlbum.offsetWidth >= contAlbum.scrollWidth) {
+          contAlbum.scrollBy({ left: -290, top: 0, behavior: "smooth" });
+        } else {
+          contAlbum.scrollBy({ left: -260, top: 0, behavior: "smooth" });
+        }
+      });
+    });
+
+    $rightBtns.forEach((item) => {
+      item.addEventListener("click", () => {
+        const contAlbum = item.parentElement.previousElementSibling;
+        contAlbum.scrollBy({ left: 260, top: 0, behavior: "smooth" });
+      });
     });
   }
 }

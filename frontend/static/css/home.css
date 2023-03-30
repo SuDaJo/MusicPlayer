@@ -50,6 +50,7 @@
 
 .cont-album-link {
   position: relative;
+  width: 12rem;
 }
 
 .cont-album-link::after {
@@ -70,7 +71,7 @@
 
 .cont-album-link p {
   margin-left: 0.2rem;
-  width: 12rem;
+  width: inherit;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
