@@ -32,7 +32,7 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(150deg, #FFFBE4 0%, #B8EEEE 100%);
+  background: linear-gradient(150deg, #fffbe4 0%, #b8eeee 100%);
 }
 
 .wrapper {
@@ -75,7 +75,7 @@ body {
 
 /* Scroll Bar 디자인 시작*/
 .cont-album::-webkit-scrollbar {
-  height: 0.5rem;
+  height: 0.6rem;
 }
 .home-wrapper::-webkit-scrollbar,
 .chart-main::-webkit-scrollbar,
