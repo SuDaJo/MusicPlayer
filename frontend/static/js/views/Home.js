@@ -113,10 +113,8 @@ export default class Home extends AbstractView {
                 })
                 .join("")}
               </div>
-              <div class="scroll-btn-wrapper">
-                <button type="button" class="left-scroll-button"></button>
-                <button type="button" class="right-scroll-button"></button>
-              </div>
+              <button type="button" class="left-scroll-button"></button>
+              <button type="button" class="right-scroll-button"></button>
           </section>
         `;
         })
@@ -140,7 +138,7 @@ export default class Home extends AbstractView {
 
     $leftBtns.forEach((item) => {
       item.addEventListener("click", () => {
-        const contAlbum = item.parentElement.previousElementSibling;
+        const contAlbum = item.previousElementSibling;
         if (contAlbum.scrollLeft + contAlbum.offsetWidth >= contAlbum.scrollWidth) {
           contAlbum.scrollBy({ left: -290, top: 0, behavior: "smooth" });
         } else {
@@ -151,7 +149,7 @@ export default class Home extends AbstractView {
 
     $rightBtns.forEach((item) => {
       item.addEventListener("click", () => {
-        const contAlbum = item.parentElement.previousElementSibling;
+        const contAlbum = item.previousElementSibling.previousElementSibling;
         contAlbum.scrollBy({ left: 260, top: 0, behavior: "smooth" });
       });
     });
