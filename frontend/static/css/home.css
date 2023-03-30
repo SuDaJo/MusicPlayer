@@ -82,28 +82,28 @@
   font-weight: var(--font-700);
 }
 
-.scroll-btn-wrapper {
+.left-scroll-button,
+.right-scroll-button {
   position: absolute;
-  top: 50%;
-  left: -5%;
-  transform: translateY(-50%);
-  width: 110%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.scroll-btn-wrapper button {
+  top: 49%;
   width: 3rem;
   height: 3rem;
   background: no-repeat center/cover url("/static/image/icon-arrow.png");
 }
 
-.scroll-btn-wrapper button:hover {
+.left-scroll-button:hover,
+.right-scroll-button:hover {
   background: no-repeat center/cover url("/static/image/icon-arrow-hover.png");
 }
 
 .left-scroll-button {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateY(-50%);
+  left: -5%;
+}
+
+.right-scroll-button {
+  transform: translateY(-50%);
+  right: -5%;
 }
 
 .wrapper aside {
