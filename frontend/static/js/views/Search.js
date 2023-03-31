@@ -141,19 +141,11 @@ export default class Search extends AbstractView {
                       <figure class="playlist-info">
                         <img src=${item.album.cover_small} alt="앨범 타이틀">
                         <figcaption class="playlist-item-info">
-                          <span class="playlist-title">${highlightText(
-                            item.title,
-                            inputValue
-                          )}</span>
-                          <span class="playlist-artist">${highlightText(
-                            item.artist.name,
-                            inputValue
-                          )}</span>
+                          <span class="playlist-title">${highlightText(item.title, inputValue)}</span>
+                          <span class="playlist-artist">${highlightText(item.artist.name, inputValue)}</span>
                         </figcaption>
                       </figure>
-                      <a href="playcontrol/${
-                        item.id
-                      }" class="chart-btn-play" type="button">
+                      <a href="playcontrol/${item.id}" class="chart-btn-play to-play-control">
                         <img src="/static/image/icon-play.svg" alt="재생버튼">
                       </a>
                       <button class="music-add-btn" type="button"
@@ -161,9 +153,8 @@ export default class Search extends AbstractView {
                         data-title="${item.title}"
                         data-artist="${item.artist.name}"
                         data-cover="${item.album.cover_small}"
-                        >
+                      >
                         <img src="/static/image/icon-plus.svg" alt="추가버튼">
-                      </button>
                       </button>
                     </li>
                 `;

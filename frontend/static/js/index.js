@@ -57,8 +57,6 @@ const router = async () => {
     await viewHtml.getHtml();
   }
 
-  // await viewHtml.getHtml();
-
   const $navBar = document.querySelector(".nav-bar");
   if (match.route.path.includes("playcontrol") || match.route.path.includes("notfound")) {
     $navBar.style.display = "none";
@@ -66,16 +64,47 @@ const router = async () => {
     $navBar.style.display = "block";
   }
 
-  // $root.innerHTML = await viewHtml.getHtml();
+  let target;
 
-  const $playControl = document.querySelectorAll(".cont-album-link");
-  $playControl.forEach((url) => {
+  if (location.pathname === "/"){
+    target = document.querySelector(".home-wrapper");
+  } else if (location.pathname === "/search") {
+    target = document.querySelector(".searchlist-main");
+  }
+
+  if (target) {
+    const callback = () => {
+      const $playControl = target.querySelectorAll(".to-play-control");
+      $playControl.forEach((url) => {
+        url.addEventListener("click", (e) => {
+          e.preventDefault();
+          navigateTo(e.currentTarget.href);
+        });
+      });
+    };
+
+    const observer = new MutationObserver(callback);
+
+    const config = {
+      attributes: true, // 속성 변화 할때 감지
+      childList: true, // 자식노드 추가/제거 감지
+      subtree: true, // 손자노드까지 추가/제거 감지
+      characterData: true // 데이터 변경전 내용 기록
+    };
+
+    observer.observe(target, config);
+  }
+
+  const $playListControl = document.querySelectorAll(".my-music-link");
+
+  $playListControl.forEach((url) => {
     url.addEventListener("click", (e) => {
       e.preventDefault();
       navigateTo(e.currentTarget.href);
     });
   });
 };
+
 
 window.addEventListener("popstate", router);
 

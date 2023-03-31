@@ -42,7 +42,7 @@ export default class MyplayList extends AbstractView {
         .map((item) => {
           return `
           <li id=${item.id} class="playlist-item">
-            <a href="/playcontrol/${item.id}">
+            <a class="my-music-link" href="/playcontrol/${item.id}">
               <figure class="playlist-info">
               <img src=${item.coverImg} alt="앨범 타이틀">
                 <figcaption class="playlist-item-info">
@@ -52,7 +52,7 @@ export default class MyplayList extends AbstractView {
               </figure>
             </a>
             <button class="btn-delete" type="button">
-              <img class="img-delete" src="./static/image/icon-trash.svg" alt="삭제버튼">
+              <img class="img-delete" src="/static/image/icon-trash.svg" alt="삭제버튼">
             </button>
           </li>
         `;
