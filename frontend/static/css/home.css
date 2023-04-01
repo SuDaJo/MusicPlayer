@@ -28,6 +28,10 @@
   height: calc(100vh - 7.8rem);
 }
 
+.cont-category {
+  position: relative;
+}
+
 .cont-category + .cont-category {
   margin-top: 2.2rem;
 }
@@ -46,6 +50,7 @@
 
 .cont-album-link {
   position: relative;
+  width: 12rem;
 }
 
 .cont-album-link::after {
@@ -66,7 +71,7 @@
 
 .cont-album-link p {
   margin-left: 0.2rem;
-  width: 12rem;
+  width: inherit;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -75,6 +80,30 @@
 .album-title {
   margin: 0.2rem 0;
   font-weight: var(--font-700);
+}
+
+.left-scroll-button,
+.right-scroll-button {
+  position: absolute;
+  top: 49%;
+  width: 3rem;
+  height: 3rem;
+  background: no-repeat center/cover url("/static/image/icon-arrow.png");
+}
+
+.left-scroll-button:hover,
+.right-scroll-button:hover {
+  background: no-repeat center/cover url("/static/image/icon-arrow-hover.png");
+}
+
+.left-scroll-button {
+  transform: rotateY(180deg) translateY(-50%);
+  left: -5%;
+}
+
+.right-scroll-button {
+  transform: translateY(-50%);
+  right: -5%;
 }
 
 .wrapper aside {

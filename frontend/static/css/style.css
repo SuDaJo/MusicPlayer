@@ -32,7 +32,7 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(150deg, #FFFBE4 0%, #B8EEEE 100%);
+  background: linear-gradient(150deg, #fffbe4 0%, #b8eeee 100%);
 }
 
 .wrapper {
@@ -75,19 +75,21 @@ body {
 
 /* Scroll Bar 디자인 시작*/
 .cont-album::-webkit-scrollbar {
-  height: 0.5rem;
+  height: 0.6rem;
 }
 .home-wrapper::-webkit-scrollbar,
 .chart-main::-webkit-scrollbar,
 .playlist-main::-webkit-scrollbar,
-.searchlist-main::-webkit-scrollbar {
+.searchlist-main::-webkit-scrollbar,
+.playcontrol-wrapper::-webkit-scrollbar {
   width: 0.6rem;
 }
 .cont-album::-webkit-scrollbar-thumb,
 .home-wrapper::-webkit-scrollbar-thumb,
 .chart-main::-webkit-scrollbar-thumb,
 .playlist-main::-webkit-scrollbar-thumb,
-.searchlist-main::-webkit-scrollbar-thumb {
+.searchlist-main::-webkit-scrollbar-thumb,
+.playcontrol-wrapper::-webkit-scrollbar-thumb {
   border-radius: 3px;
   background-color: var(--main-color);
   background-clip: padding-box;
@@ -97,7 +99,8 @@ body {
 .home-wrapper::-webkit-scrollbar-track,
 .chart-main::-webkit-scrollbar-track,
 .playlist-main::-webkit-scrollbar-track,
-.searchlist-main::-webkit-scrollbar-track {
+.searchlist-main::-webkit-scrollbar-track,
+.playcontrol-wrapper::-webkit-scrollbar-track {
   background-color: transparent;
 }
 /* Scroll Bar 디자인 끝 */
@@ -114,8 +117,8 @@ body {
   font-size: 1.5rem;
   opacity: 0;
   visibility: hidden;
-  background: #fffbe4;
-  border: solid 2px #04bfbf;
+  background: var(--sub-color);
+  border: solid 2px var(--main-color);
   z-index: 10000;
   text-align: center;
 }
