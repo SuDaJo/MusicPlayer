@@ -19,6 +19,7 @@ export default class PlayControl extends AbstractView {
 
     const playControlWrapper = document.createElement("section");
     playControlWrapper.classList.add("play-control-wrap");
+    playControlWrapper.append(this.createLoading());
     wrapper.appendChild(playControlWrapper);
 
     this.getTrackData(this.params.id);
@@ -49,8 +50,7 @@ export default class PlayControl extends AbstractView {
           localStorage.getItem("volume")
         }
 
-        const $playControlWrapper =
-          document.querySelector(".play-control-wrap");
+        const $playControlWrapper = document.querySelector(".play-control-wrap");
 
         $playControlWrapper.innerHTML = `
         <h2 class="sr-only">재생 화면</h2>
@@ -140,7 +140,6 @@ export default class PlayControl extends AbstractView {
     } else {
       $audio.volume = localStorage.getItem("volume");
     }
-
 
     $playButton.addEventListener("click", (e) => {
       e.preventDefault();
