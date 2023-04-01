@@ -70,6 +70,8 @@ const router = async () => {
     target = document.querySelector(".home-wrapper");
   } else if (location.pathname === "/search") {
     target = document.querySelector(".searchlist-main");
+  } else if (location.pathname === "/chart") {
+    target = document.querySelector(".chart-main");
   }
 
   if (target) {
