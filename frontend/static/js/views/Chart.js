@@ -115,7 +115,7 @@ export default class Chart extends AbstractView {
                 <span class="chart-item-artist">${list.artist.name}</span>
               </figcaption>
             </figure>
-            <a href="playcontrol/${list.id}" class="chart-btn-play" type="button">
+            <a href="playcontrol/${list.id}" class="chart-btn-play to-play-control">
               <img src="/static/image/icon-play.svg" alt="재생버튼">
             </a>
             <button type="button" class="music-add-btn"
