@@ -31,7 +31,8 @@
 [4. 구현 기능](#feature)<br>
 [5. 프로젝트 구조](#structure)<br>
 [6. 트러블 슈팅](#troubleshooting)<br>
-[7. 프로젝트 배포 후 느낀 점](#deploy)
+[7. 프로젝트 진행 중 새로 알게 된 것들](#learn)<br>
+[8. 프로젝트 배포 후 느낀 점](#deploy)
 
 <br/>
 
@@ -158,7 +159,7 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
 
 ## <span id="troubleshooting">🙇‍♀️ 트러블 슈팅</span>
 
-#### 1. 다른 페이지로 이동할 때 마다 요소가 추가됨
+### 1. 다른 페이지로 이동할 때 마다 요소가 추가됨
 
 - 문제 및 원인 : createElement로 요소를 생성하고 appendChild로 요소를 추가하고 있어서 메서드가 실행될 때 마다 요소가 생성, 추가됨
 - 해결 :
@@ -194,18 +195,20 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
       this.$target.replaceChildren(wrapper);
       ```
 
-#### 2. 재생바 드래그 시 정상적으로 드래그 위치 못 잡는 현상
+### 2. 재생바 드래그 시 정상적으로 드래그 위치 못 잡는 현상
 
 - 문제 및 원인 : 음악을 재생할 때 재생바를 드래그 하면 드래그한 위치를 정상적으로 표시하지 않음
 - 해결 : input의 range는 `click`이 아니라 `input` event로 컨트롤 해야한다.
 
   ```javascript
+  // click 이벤트로 했을 때 (드래그 위치 파악 X)
   $progressBar.addEventListener("click", (e) => {
     let progressInputValue = e.target.value;
     let songDuration = $audio.duration;
     $audio.currentTime = (progressInputValue * songDuration) / 100;
   });
 
+  // input 이벤트로 했을 때 (드래그 위치 파악 O)
   $progressBar.addEventListener("input", (e) => {
     let progressInputValue = e.target.value;
     let songDuration = $audio.duration;
@@ -213,15 +216,170 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
   });
   ```
 
-#### 3. 화살표 함수 내부에서 메서드 실행 안되는 현상
+### 3. 화살표 함수 내부에서 메서드 실행 안되는 현상
 
 - 문제 및 원인 : 화살표 함수 내부에서 this가 지칭하는 대상이 달라서 부모 Class의 메서드가 작동하지 않음
 - 해결 : `this.method()`가 아닌 `super.method()`로 부모 Class의 prototype-method를 참조하기
 
-#### 4. 비동기로 DOM 요소 생성 시 event 작동 안함
+  ```javascript
+    setLocalData() {
+      const btn = document.querySelectorAll(".music-add-btn");
+      btn.forEach((button) => {
+        button.addEventListener("click", (event) => {
+          super.toast();
 
-- 문제 및 원인 : 비동기 통신 시 DOM이 최초 렌더링 되고난 후에 변경된 DOM 데이터를 감지하지 못해서 특정 요소의 event를 적용하지 못함
-- 해결 : MutationObserver로 속성과 자식노드, 자손노드에 변경되는 요소가 있는지 감지하기
+          let id = Number(event.currentTarget.dataset.id);
+          let title = event.currentTarget.dataset.title;
+          let coverImg = event.currentTarget.dataset.cover;
+          let artist = event.currentTarget.dataset.artist;
+
+          // 기존에 작성했던 this는 상위 클래스의 setLocalStorage()를 찾지못함.
+          // this.setLocalStorage(id, title, coverImg, artist);
+
+          super.setLocalStorage(id, title, coverImg, artist);
+        });
+      });
+    }
+  ```
+
+  ### 4. 비동기로 DOM 요소 생성 시 event 작동 안함
+
+  - 문제 : anchor 태그의 새로고침을 방지하며 페이지를 이동하기 위해 anchor 태그에 접근하는 과정에서 anchor 태그를 찾지 못하는 문제 발생
+
+  - 원인 : createElement로 모든 요소들을 생성하였는데 비동기 통신으로 인해 요소가 생성되기 전 DOM에 접근하여 해당 요소를 찾지 못함
+
+  - 해결 : 비동기 통신 이후 변경된 DOM 데이터를 감지하기 위해 MutationObserver로 속성과 자식노드, 자손노드에 변경되는 요소가 있는지 감지한 뒤 해당 요소에 접근하여 event를 적용
+
+  ```javascript
+  let target;
+
+  if (location.pathname === "/") {
+    target = document.querySelector(".home-wrapper");
+  } else if (location.pathname === "/search") {
+    target = document.querySelector(".searchlist-main");
+  } else if (location.pathname === "/chart") {
+    target = document.querySelector(".chart-main");
+  }
+
+  if (target) {
+    const callback = () => {
+      const $playControl = target.querySelectorAll(".to-play-control");
+      $playControl.forEach((url) => {
+        url.addEventListener("click", (e) => {
+          e.preventDefault();
+          navigateTo(e.currentTarget.href);
+        });
+      });
+    };
+
+    const observer = new MutationObserver(callback);
+
+    const config = {
+      attributes: true, // 속성 변화 할때 감지
+      childList: true, // 자식노드 추가/제거 감지
+      subtree: true, // 손자노드까지 추가/제거 감지
+      characterData: true, // 데이터 변경전 내용 기록
+    };
+
+    observer.observe(target, config);
+  }
+  ```
+
+<p align="right"><a href="#top">⬆️Top</a></p>
+
+<br/>
+
+## <span id="learn">✏️ 프로젝트 진행 중 새로 알게 된 것들</span>
+
+- Promise 객체를 생성하여 불러온 데이터를 렌더링 하기 전 로딩화면 띄우기
+
+  ```javascript
+  new Promise((resolve) => {
+    const contCategory = data
+      .map((list, idx) => {
+        return `
+          ... 페이지 요소 생성하는 코드 ...
+          `;
+      })
+      .join("");
+
+    resolve(/* 생성되고 난 뒤 넘겨줄 데이터 */);
+  })
+    .then((/* resolve에서 받은 데이터 */) => {
+      // 데이터를 불러오고 난 뒤 실행할 코드
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+  ```
+
+- scroll method 특정 위치로 스크롤 하기
+
+  - [scrollBy MDN 설명 참고](https://developer.mozilla.org/ko/docs/Web/API/Window/scrollBy)
+  - `scrollBy`는 `left`, `top`, `behavior` 프로퍼티를 가짐
+  - `left`는 x축 / `top`은 y축 이동
+  - `behavior`
+
+    - auto(기본값) : 브라우저가 선택
+    - smooth : 부드러운 스크롤 애니메이션
+    - instant : 한 번의 점프로 즉시 실행
+
+  - Home 화면 가로 스크롤 버튼 구현 시 사용
+
+  ```javascript
+  horizontalScroll() {
+    const $leftBtns = document.querySelectorAll(".left-scroll-button");
+    const $rightBtns = document.querySelectorAll(".right-scroll-button");
+
+    $leftBtns.forEach((item) => {
+      item.addEventListener("click", () => {
+        const contAlbum = item.previousElementSibling;
+        if (contAlbum.scrollLeft + contAlbum.offsetWidth >= contAlbum.scrollWidth) {
+
+          contAlbum.scrollBy({ left: -290, top: 0, behavior: "smooth" });
+        } else {
+          contAlbum.scrollBy({ left: -260, top: 0, behavior: "smooth" });
+        }
+      });
+    });
+
+    $rightBtns.forEach((item) => {
+      item.addEventListener("click", () => {
+        const contAlbum = item.previousElementSibling.previousElementSibling;
+        contAlbum.scrollBy({ left: 260, top: 0, behavior: "smooth" });
+      });
+    });
+  }
+  ```
+
+- css filter 속성으로 asset 추가 없이 이미지 컬러 변경하기
+
+  - 내비게이션 아이콘 active 효과 구현
+
+  ```css
+  .nav-list-item.active {
+    filter: invert(63%) sepia(51%) saturate(3249%) hue-rotate(136deg) brightness(93%) contrast(97%);
+  }
+  ```
+
+  ```javascript
+  const menuItems = document.querySelectorAll(".nav-list-item");
+
+  let currentActive;
+
+  menuItems.forEach((item) => {
+    const itemHref = item.querySelector("a").getAttribute("href");
+    if (location.pathname === "/") {
+      if (itemHref === "/") {
+        currentActive = item;
+        currentActive.classList.add("active");
+      }
+    } else if (location.pathname.includes(itemHref) && itemHref.length !== 1) {
+      currentActive = item;
+      currentActive.classList.add("active");
+    }
+  });
+  ```
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
