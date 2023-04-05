@@ -54,8 +54,7 @@
     <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
     <img src="https://img.shields.io/badge/Javascript-efd81d?style=for-the-badge&logo=Javascript&logoColor=white">
 - Back-End
-  - <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=white">
-  - <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
+  - <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=white"><img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
 - Design
   - <a href="https://www.figma.com/file/UkbrdTahmsNb1cGlbkd9QE/MusicPlayer?node-id=0-1&t=bBXfnR0waJMhZf0p-0"><img src="https://img.shields.io/badge/Figma-a259ff?style=for-the-badge&logo=Figma&logoColor=white">🔗</a>
 
@@ -103,8 +102,6 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
 <p align="right"><a href="#top">⬆️Top</a></p>
 
 ## <span id="feature">🛠 구현 기능</span>
-
----
 
 | <center>Splash</center>                                                                                                 | <center>Home</center>                                                                                                   | <center>Chart</center>                                                                                                  |
 | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
@@ -242,13 +239,13 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
     }
   ```
 
-  ### 4. 비동기로 DOM 요소 생성 시 event 작동 안함
+### 4. 비동기로 DOM 요소 생성 시 event 작동 안함
 
-  - 문제 : anchor 태그의 새로고침을 방지하며 페이지를 이동하기 위해 anchor 태그에 접근하는 과정에서 anchor 태그를 찾지 못하는 문제 발생
+- 문제 : anchor 태그의 새로고침을 방지하며 페이지를 이동하기 위해 anchor 태그에 접근하는 과정에서 anchor 태그를 찾지 못하는 문제 발생
 
-  - 원인 : createElement로 모든 요소들을 생성하였는데 비동기 통신으로 인해 요소가 생성되기 전 DOM에 접근하여 해당 요소를 찾지 못함
+- 원인 : createElement로 모든 요소들을 생성하였는데 비동기 통신으로 인해 요소가 생성되기 전 DOM에 접근하여 해당 요소를 찾지 못함
 
-  - 해결 : 비동기 통신 이후 변경된 DOM 데이터를 감지하기 위해 MutationObserver로 속성과 자식노드, 자손노드에 변경되는 요소가 있는지 감지한 뒤 해당 요소에 접근하여 event를 적용
+- 해결 : 비동기 통신 이후 변경된 DOM 데이터를 감지하기 위해 MutationObserver로 속성과 자식노드, 자손노드에 변경되는 요소가 있는지 감지한 뒤 해당 요소에 접근하여 event를 적용
 
   ```javascript
   let target;
@@ -389,8 +386,15 @@ Co-authored-by: IntHyun <wjdtngus1237@naver.com>
 
 ### 🐼 김다정
 
+- 멋사 과정이 끝나고 일단 이력서에 쓸 결과물을 더 만들어야 한다는 생각에 시작한 프로젝트지만 기술적인 것뿐 아니라 소통하는 방법까지 너무 많은 것을 배우고 얻어 가는 시간이었습니다. 프로젝트를 진행하면서 첫 페어 프로그래밍에 초기 세팅 등 매번 고비가 왔지만 어느새 자랑하고 싶은 저의 메인 프로젝트입니다. 어려운 부분이 나올 때마다 모두 적극적으로 나서고 같이 해결하려고 노력한 덕에 순탄하게 잘 마무리하게 된 것 같고 앞으로도 더 열심히 해야겠다는 원동력도 얻었고 자신감도 얻어 가게 되었습니다. :)
+정해진 마감기한이 있지도 않은 데다 하루 2시간, 2달이란 기간이 길다면 길고 짧으면 짧다고 느끼겠지만 포기하지 않고 꾸준히 같이 진행해 준 팀원들 감사하고 너무 고생 많으셨습니다!❤️
+
 ### 💗 정수현
 
+- 프로젝트를 시작하기 전에는 객체지향에 대해 모르는 것이 많은 상태였는데 Class문법을 실제로 사용해보고 특정 메서드를 상위 Class에 적용해 재활용도 해보면서 Class문법이 좀 더 익숙해진 것 같습니다. 또한 이전에는 알지 못했던 css의 filter속성, scrollBy 메서드, 동적으로 DOM을 감지할 수 있는 MutationObserver 등에 대해 배웠고 netlify를 통해 직접 배포를 하고 github Releasese로 버전관리도 해보면서 웹 애플리케이션이 이런식으로 버전관리가 되고 배포가 되는구나에 대해 좀 더 자세하게 알게 된 것 같습니다. 이번 프로젝트를 통해 JavaScript에 대해 더 많이 알게 되었고 이후에도 다양한 프로젝트를 통해 지식을 확장해나가고 싶다는 생각이 들었습니다.
+
 ### 😎 조민지
+
+- 바닐라 자바스크립트로 구현하는 과정이 생각보다 쉽지 않았지만 다정님, 수현님과 함께여서 처음에 생각했던 것보다 더 멋지게 프로젝트를 완성할 수 있었습니다! 구현하면서 막히는 부분이 있을 때 '일단 뭐든 해볼까요?' 라는 마인드로 다같이 우당탕탕 해나가는 과정이 너무 재밌었어요😁 프로젝트를 진행하면서 평소에 어렵다고 생각했던 클래스 문법, 비동기 패턴과 마주하게 되어 걱정이 많았지만 함께 정면돌파로 해내게 되어 너무 뿌듯합니다😎 앞으로 더 멋진 개발자가 될 수다조 삼두마차 여러분 정말 수고하셨습니다💪
 
 <p align="right"><a href="#top">⬆️Top</a></p>
