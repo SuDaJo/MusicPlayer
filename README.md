@@ -58,7 +58,7 @@
 - Design
   - <a href="https://www.figma.com/file/UkbrdTahmsNb1cGlbkd9QE/MusicPlayer?node-id=0-1&t=bBXfnR0waJMhZf0p-0"><img src="https://img.shields.io/badge/Figma-a259ff?style=for-the-badge&logo=Figma&logoColor=white">🔗</a>
 
-### [ 현상관리 및 협업 도구 ]
+### [ 형상관리 및 협업 도구 ]
 
 - <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=GitHub&logoColor=white">
   <img src="https://img.shields.io/badge/Git-e84d31?style=for-the-badge&logo=Git&logoColor=white">
